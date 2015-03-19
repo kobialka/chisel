@@ -1,0 +1,1577 @@
+Archive member included because of file (symbol)
+
+/home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/libgcc.a(_arm_addsubsf3.o)
+                              ./src/bsp/lis3dsh.o (__aeabi_i2f)
+/home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/libgcc.a(_arm_muldivsf3.o)
+                              ./src/bsp/lis3dsh.o (__aeabi_fmul)
+/home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/libgcc.a(_arm_fixsfsi.o)
+                              ./src/bsp/lis3dsh.o (__aeabi_f2iz)
+/home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/libg_s.a(lib_a-errno.o)
+                              ./system/src/newlib/_sbrk.o (__errno)
+/home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/libg_s.a(lib_a-impure.o)
+                              /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/libg_s.a(lib_a-errno.o) (_impure_ptr)
+
+Allocating common symbols
+Common symbol       size              file
+
+errno               0x4               ./system/src/newlib/_syscalls.o
+pFlash              0x1c              ./system/src/stm32f4-hal/stm32f4xx_hal_flash.o
+GPIO_InitStruct     0x14              ./src/lcd/lib_S1D15705_m.o
+sLcdBuffor          0x515             ./src/lcd/lib_S1D15705_m.o
+
+Discarded input sections
+
+ .text          0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal.o
+ .data          0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal.o
+ .bss           0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal.o
+ .text.HAL_MspInit
+                0x00000000        0x2 ./system/src/stm32f4-hal/stm32f4xx_hal.o
+ .text.HAL_MspDeInit
+                0x00000000        0x2 ./system/src/stm32f4-hal/stm32f4xx_hal.o
+ .text.HAL_DeInit
+                0x00000000       0x2c ./system/src/stm32f4-hal/stm32f4xx_hal.o
+ .text.HAL_Delay
+                0x00000000       0x1a ./system/src/stm32f4-hal/stm32f4xx_hal.o
+ .text.HAL_SuspendTick
+                0x00000000       0x10 ./system/src/stm32f4-hal/stm32f4xx_hal.o
+ .text.HAL_ResumeTick
+                0x00000000       0x10 ./system/src/stm32f4-hal/stm32f4xx_hal.o
+ .text.HAL_GetHalVersion
+                0x00000000        0x8 ./system/src/stm32f4-hal/stm32f4xx_hal.o
+ .text.HAL_GetREVID
+                0x00000000        0xc ./system/src/stm32f4-hal/stm32f4xx_hal.o
+ .text.HAL_GetDEVID
+                0x00000000       0x10 ./system/src/stm32f4-hal/stm32f4xx_hal.o
+ .text.HAL_EnableDBGSleepMode
+                0x00000000       0x10 ./system/src/stm32f4-hal/stm32f4xx_hal.o
+ .text.HAL_DisableDBGSleepMode
+                0x00000000       0x10 ./system/src/stm32f4-hal/stm32f4xx_hal.o
+ .text.HAL_EnableDBGStopMode
+                0x00000000       0x10 ./system/src/stm32f4-hal/stm32f4xx_hal.o
+ .text.HAL_DisableDBGStopMode
+                0x00000000       0x10 ./system/src/stm32f4-hal/stm32f4xx_hal.o
+ .text.HAL_EnableDBGStandbyMode
+                0x00000000       0x10 ./system/src/stm32f4-hal/stm32f4xx_hal.o
+ .text.HAL_DisableDBGStandbyMode
+                0x00000000       0x10 ./system/src/stm32f4-hal/stm32f4xx_hal.o
+ .text.HAL_EnableCompensationCell
+                0x00000000        0xc ./system/src/stm32f4-hal/stm32f4xx_hal.o
+ .text.HAL_DisableCompensationCell
+                0x00000000        0xc ./system/src/stm32f4-hal/stm32f4xx_hal.o
+ .text          0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_cortex.o
+ .data          0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_cortex.o
+ .bss           0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_cortex.o
+ .text.HAL_NVIC_DisableIRQ
+                0x00000000       0x1c ./system/src/stm32f4-hal/stm32f4xx_hal_cortex.o
+ .text.HAL_NVIC_SystemReset
+                0x00000000       0x20 ./system/src/stm32f4-hal/stm32f4xx_hal_cortex.o
+ .text.HAL_NVIC_GetPriorityGrouping
+                0x00000000       0x10 ./system/src/stm32f4-hal/stm32f4xx_hal_cortex.o
+ .text.HAL_NVIC_GetPriority
+                0x00000000       0x58 ./system/src/stm32f4-hal/stm32f4xx_hal_cortex.o
+ .text.HAL_NVIC_SetPendingIRQ
+                0x00000000       0x1c ./system/src/stm32f4-hal/stm32f4xx_hal_cortex.o
+ .text.HAL_NVIC_GetPendingIRQ
+                0x00000000       0x24 ./system/src/stm32f4-hal/stm32f4xx_hal_cortex.o
+ .text.HAL_NVIC_ClearPendingIRQ
+                0x00000000       0x1c ./system/src/stm32f4-hal/stm32f4xx_hal_cortex.o
+ .text.HAL_NVIC_GetActive
+                0x00000000       0x24 ./system/src/stm32f4-hal/stm32f4xx_hal_cortex.o
+ .text.HAL_SYSTICK_CLKSourceConfig
+                0x00000000       0x18 ./system/src/stm32f4-hal/stm32f4xx_hal_cortex.o
+ .text.HAL_SYSTICK_Callback
+                0x00000000        0x2 ./system/src/stm32f4-hal/stm32f4xx_hal_cortex.o
+ .text.HAL_SYSTICK_IRQHandler
+                0x00000000        0x8 ./system/src/stm32f4-hal/stm32f4xx_hal_cortex.o
+ .text          0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_flash.o
+ .data          0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_flash.o
+ .bss           0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_flash.o
+ .text.FLASH_Program_Word
+                0x00000000       0x24 ./system/src/stm32f4-hal/stm32f4xx_hal_flash.o
+ .text.FLASH_Program_HalfWord
+                0x00000000       0x24 ./system/src/stm32f4-hal/stm32f4xx_hal_flash.o
+ .text.FLASH_SetErrorCode
+                0x00000000       0x74 ./system/src/stm32f4-hal/stm32f4xx_hal_flash.o
+ .text.HAL_FLASH_Program_IT
+                0x00000000       0x90 ./system/src/stm32f4-hal/stm32f4xx_hal_flash.o
+ .text.HAL_FLASH_EndOfOperationCallback
+                0x00000000        0x2 ./system/src/stm32f4-hal/stm32f4xx_hal_flash.o
+ .text.HAL_FLASH_OperationErrorCallback
+                0x00000000        0x2 ./system/src/stm32f4-hal/stm32f4xx_hal_flash.o
+ .text.HAL_FLASH_IRQHandler
+                0x00000000       0xe4 ./system/src/stm32f4-hal/stm32f4xx_hal_flash.o
+ .text.HAL_FLASH_Unlock
+                0x00000000       0x24 ./system/src/stm32f4-hal/stm32f4xx_hal_flash.o
+ .text.HAL_FLASH_Lock
+                0x00000000       0x14 ./system/src/stm32f4-hal/stm32f4xx_hal_flash.o
+ .text.HAL_FLASH_OB_Unlock
+                0x00000000       0x24 ./system/src/stm32f4-hal/stm32f4xx_hal_flash.o
+ .text.HAL_FLASH_OB_Lock
+                0x00000000       0x14 ./system/src/stm32f4-hal/stm32f4xx_hal_flash.o
+ .text.HAL_FLASH_GetError
+                0x00000000        0xc ./system/src/stm32f4-hal/stm32f4xx_hal_flash.o
+ .text.FLASH_WaitForLastOperation
+                0x00000000       0x3c ./system/src/stm32f4-hal/stm32f4xx_hal_flash.o
+ .text.HAL_FLASH_Program
+                0x00000000       0xa8 ./system/src/stm32f4-hal/stm32f4xx_hal_flash.o
+ .text.HAL_FLASH_OB_Launch
+                0x00000000       0x18 ./system/src/stm32f4-hal/stm32f4xx_hal_flash.o
+ .debug_info    0x00000000      0x710 ./system/src/stm32f4-hal/stm32f4xx_hal_flash.o
+ .debug_abbrev  0x00000000      0x28b ./system/src/stm32f4-hal/stm32f4xx_hal_flash.o
+ .debug_loc     0x00000000      0x38d ./system/src/stm32f4-hal/stm32f4xx_hal_flash.o
+ .debug_aranges
+                0x00000000       0x90 ./system/src/stm32f4-hal/stm32f4xx_hal_flash.o
+ .debug_ranges  0x00000000       0xb0 ./system/src/stm32f4-hal/stm32f4xx_hal_flash.o
+ .debug_line    0x00000000      0x3dc ./system/src/stm32f4-hal/stm32f4xx_hal_flash.o
+ .debug_str     0x00000000      0x5c9 ./system/src/stm32f4-hal/stm32f4xx_hal_flash.o
+ .comment       0x00000000       0x71 ./system/src/stm32f4-hal/stm32f4xx_hal_flash.o
+ .ARM.attributes
+                0x00000000       0x33 ./system/src/stm32f4-hal/stm32f4xx_hal_flash.o
+ .debug_frame   0x00000000      0x134 ./system/src/stm32f4-hal/stm32f4xx_hal_flash.o
+ COMMON         0x00000000       0x1c ./system/src/stm32f4-hal/stm32f4xx_hal_flash.o
+ .text          0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_flash_ex.o
+ .data          0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_flash_ex.o
+ .bss           0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_flash_ex.o
+ .text.FLASH_MassErase.isra.0
+                0x00000000       0x24 ./system/src/stm32f4-hal/stm32f4xx_hal_flash_ex.o
+ .text.HAL_FLASHEx_OBProgram
+                0x00000000       0xb4 ./system/src/stm32f4-hal/stm32f4xx_hal_flash_ex.o
+ .text.HAL_FLASHEx_OBGetConfig
+                0x00000000       0x40 ./system/src/stm32f4-hal/stm32f4xx_hal_flash_ex.o
+ .text.FLASH_Erase_Sector
+                0x00000000       0x58 ./system/src/stm32f4-hal/stm32f4xx_hal_flash_ex.o
+ .text.HAL_FLASHEx_Erase
+                0x00000000       0xa0 ./system/src/stm32f4-hal/stm32f4xx_hal_flash_ex.o
+ .text.HAL_FLASHEx_Erase_IT
+                0x00000000       0x5c ./system/src/stm32f4-hal/stm32f4xx_hal_flash_ex.o
+ .debug_info    0x00000000      0x912 ./system/src/stm32f4-hal/stm32f4xx_hal_flash_ex.o
+ .debug_abbrev  0x00000000      0x2be ./system/src/stm32f4-hal/stm32f4xx_hal_flash_ex.o
+ .debug_loc     0x00000000      0x412 ./system/src/stm32f4-hal/stm32f4xx_hal_flash_ex.o
+ .debug_aranges
+                0x00000000       0x48 ./system/src/stm32f4-hal/stm32f4xx_hal_flash_ex.o
+ .debug_ranges  0x00000000       0xa0 ./system/src/stm32f4-hal/stm32f4xx_hal_flash_ex.o
+ .debug_line    0x00000000      0x39e ./system/src/stm32f4-hal/stm32f4xx_hal_flash_ex.o
+ .debug_str     0x00000000      0x64a ./system/src/stm32f4-hal/stm32f4xx_hal_flash_ex.o
+ .comment       0x00000000       0x71 ./system/src/stm32f4-hal/stm32f4xx_hal_flash_ex.o
+ .ARM.attributes
+                0x00000000       0x33 ./system/src/stm32f4-hal/stm32f4xx_hal_flash_ex.o
+ .debug_frame   0x00000000       0x94 ./system/src/stm32f4-hal/stm32f4xx_hal_flash_ex.o
+ .text          0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_flash_ramfunc.o
+ .data          0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_flash_ramfunc.o
+ .bss           0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_flash_ramfunc.o
+ .debug_info    0x00000000       0x92 ./system/src/stm32f4-hal/stm32f4xx_hal_flash_ramfunc.o
+ .debug_abbrev  0x00000000       0x4b ./system/src/stm32f4-hal/stm32f4xx_hal_flash_ramfunc.o
+ .debug_aranges
+                0x00000000       0x18 ./system/src/stm32f4-hal/stm32f4xx_hal_flash_ramfunc.o
+ .debug_line    0x00000000      0x11f ./system/src/stm32f4-hal/stm32f4xx_hal_flash_ramfunc.o
+ .debug_str     0x00000000      0x1df ./system/src/stm32f4-hal/stm32f4xx_hal_flash_ramfunc.o
+ .comment       0x00000000       0x71 ./system/src/stm32f4-hal/stm32f4xx_hal_flash_ramfunc.o
+ .ARM.attributes
+                0x00000000       0x33 ./system/src/stm32f4-hal/stm32f4xx_hal_flash_ramfunc.o
+ .text          0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_gpio.o
+ .data          0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_gpio.o
+ .bss           0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_gpio.o
+ .text.HAL_GPIO_DeInit
+                0x00000000       0x94 ./system/src/stm32f4-hal/stm32f4xx_hal_gpio.o
+ .text.HAL_GPIO_ReadPin
+                0x00000000        0xc ./system/src/stm32f4-hal/stm32f4xx_hal_gpio.o
+ .text.HAL_GPIO_LockPin
+                0x00000000       0x2a ./system/src/stm32f4-hal/stm32f4xx_hal_gpio.o
+ .text.HAL_GPIO_EXTI_Callback
+                0x00000000        0x2 ./system/src/stm32f4-hal/stm32f4xx_hal_gpio.o
+ .text          0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_iwdg.o
+ .data          0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_iwdg.o
+ .bss           0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_iwdg.o
+ .debug_info    0x00000000       0x92 ./system/src/stm32f4-hal/stm32f4xx_hal_iwdg.o
+ .debug_abbrev  0x00000000       0x4b ./system/src/stm32f4-hal/stm32f4xx_hal_iwdg.o
+ .debug_aranges
+                0x00000000       0x18 ./system/src/stm32f4-hal/stm32f4xx_hal_iwdg.o
+ .debug_line    0x00000000      0x11f ./system/src/stm32f4-hal/stm32f4xx_hal_iwdg.o
+ .debug_str     0x00000000      0x1d6 ./system/src/stm32f4-hal/stm32f4xx_hal_iwdg.o
+ .comment       0x00000000       0x71 ./system/src/stm32f4-hal/stm32f4xx_hal_iwdg.o
+ .ARM.attributes
+                0x00000000       0x33 ./system/src/stm32f4-hal/stm32f4xx_hal_iwdg.o
+ .text          0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_pcd_ex.o
+ .data          0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_pcd_ex.o
+ .bss           0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_pcd_ex.o
+ .debug_info    0x00000000       0x92 ./system/src/stm32f4-hal/stm32f4xx_hal_pcd_ex.o
+ .debug_abbrev  0x00000000       0x4b ./system/src/stm32f4-hal/stm32f4xx_hal_pcd_ex.o
+ .debug_aranges
+                0x00000000       0x18 ./system/src/stm32f4-hal/stm32f4xx_hal_pcd_ex.o
+ .debug_line    0x00000000      0x11f ./system/src/stm32f4-hal/stm32f4xx_hal_pcd_ex.o
+ .debug_str     0x00000000      0x1d8 ./system/src/stm32f4-hal/stm32f4xx_hal_pcd_ex.o
+ .comment       0x00000000       0x71 ./system/src/stm32f4-hal/stm32f4xx_hal_pcd_ex.o
+ .ARM.attributes
+                0x00000000       0x33 ./system/src/stm32f4-hal/stm32f4xx_hal_pcd_ex.o
+ .text          0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_pwr.o
+ .data          0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_pwr.o
+ .bss           0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_pwr.o
+ .text.HAL_PWR_DeInit
+                0x00000000       0x18 ./system/src/stm32f4-hal/stm32f4xx_hal_pwr.o
+ .text.HAL_PWR_EnableBkUpAccess
+                0x00000000        0xc ./system/src/stm32f4-hal/stm32f4xx_hal_pwr.o
+ .text.HAL_PWR_DisableBkUpAccess
+                0x00000000        0xc ./system/src/stm32f4-hal/stm32f4xx_hal_pwr.o
+ .text.HAL_PWR_PVDConfig
+                0x00000000       0x5c ./system/src/stm32f4-hal/stm32f4xx_hal_pwr.o
+ .text.HAL_PWR_EnablePVD
+                0x00000000        0xc ./system/src/stm32f4-hal/stm32f4xx_hal_pwr.o
+ .text.HAL_PWR_DisablePVD
+                0x00000000        0xc ./system/src/stm32f4-hal/stm32f4xx_hal_pwr.o
+ .text.HAL_PWR_EnableWakeUpPin
+                0x00000000        0xc ./system/src/stm32f4-hal/stm32f4xx_hal_pwr.o
+ .text.HAL_PWR_DisableWakeUpPin
+                0x00000000        0xc ./system/src/stm32f4-hal/stm32f4xx_hal_pwr.o
+ .text.HAL_PWR_EnterSLEEPMode
+                0x00000000       0x10 ./system/src/stm32f4-hal/stm32f4xx_hal_pwr.o
+ .text.HAL_PWR_EnterSTOPMode
+                0x00000000       0x34 ./system/src/stm32f4-hal/stm32f4xx_hal_pwr.o
+ .text.HAL_PWR_EnterSTANDBYMode
+                0x00000000       0x20 ./system/src/stm32f4-hal/stm32f4xx_hal_pwr.o
+ .text.HAL_PWR_PVDCallback
+                0x00000000        0x2 ./system/src/stm32f4-hal/stm32f4xx_hal_pwr.o
+ .text.HAL_PWR_PVD_IRQHandler
+                0x00000000       0x1c ./system/src/stm32f4-hal/stm32f4xx_hal_pwr.o
+ .debug_info    0x00000000      0x704 ./system/src/stm32f4-hal/stm32f4xx_hal_pwr.o
+ .debug_abbrev  0x00000000      0x1bc ./system/src/stm32f4-hal/stm32f4xx_hal_pwr.o
+ .debug_loc     0x00000000       0xb1 ./system/src/stm32f4-hal/stm32f4xx_hal_pwr.o
+ .debug_aranges
+                0x00000000       0x80 ./system/src/stm32f4-hal/stm32f4xx_hal_pwr.o
+ .debug_ranges  0x00000000       0x70 ./system/src/stm32f4-hal/stm32f4xx_hal_pwr.o
+ .debug_line    0x00000000      0x2d0 ./system/src/stm32f4-hal/stm32f4xx_hal_pwr.o
+ .debug_str     0x00000000      0x50f ./system/src/stm32f4-hal/stm32f4xx_hal_pwr.o
+ .comment       0x00000000       0x71 ./system/src/stm32f4-hal/stm32f4xx_hal_pwr.o
+ .ARM.attributes
+                0x00000000       0x33 ./system/src/stm32f4-hal/stm32f4xx_hal_pwr.o
+ .debug_frame   0x00000000       0xe8 ./system/src/stm32f4-hal/stm32f4xx_hal_pwr.o
+ .text          0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_pwr_ex.o
+ .data          0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_pwr_ex.o
+ .bss           0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_pwr_ex.o
+ .text.HAL_PWREx_EnableBkUpReg
+                0x00000000       0x34 ./system/src/stm32f4-hal/stm32f4xx_hal_pwr_ex.o
+ .text.HAL_PWREx_DisableBkUpReg
+                0x00000000       0x34 ./system/src/stm32f4-hal/stm32f4xx_hal_pwr_ex.o
+ .text.HAL_PWREx_EnableFlashPowerDown
+                0x00000000        0xc ./system/src/stm32f4-hal/stm32f4xx_hal_pwr_ex.o
+ .text.HAL_PWREx_DisableFlashPowerDown
+                0x00000000        0xc ./system/src/stm32f4-hal/stm32f4xx_hal_pwr_ex.o
+ .debug_info    0x00000000      0x1dd ./system/src/stm32f4-hal/stm32f4xx_hal_pwr_ex.o
+ .debug_abbrev  0x00000000       0xf8 ./system/src/stm32f4-hal/stm32f4xx_hal_pwr_ex.o
+ .debug_loc     0x00000000       0x3e ./system/src/stm32f4-hal/stm32f4xx_hal_pwr_ex.o
+ .debug_aranges
+                0x00000000       0x38 ./system/src/stm32f4-hal/stm32f4xx_hal_pwr_ex.o
+ .debug_ranges  0x00000000       0x28 ./system/src/stm32f4-hal/stm32f4xx_hal_pwr_ex.o
+ .debug_line    0x00000000      0x216 ./system/src/stm32f4-hal/stm32f4xx_hal_pwr_ex.o
+ .debug_str     0x00000000      0x2cb ./system/src/stm32f4-hal/stm32f4xx_hal_pwr_ex.o
+ .comment       0x00000000       0x71 ./system/src/stm32f4-hal/stm32f4xx_hal_pwr_ex.o
+ .ARM.attributes
+                0x00000000       0x33 ./system/src/stm32f4-hal/stm32f4xx_hal_pwr_ex.o
+ .debug_frame   0x00000000       0x60 ./system/src/stm32f4-hal/stm32f4xx_hal_pwr_ex.o
+ .text          0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc.o
+ .data          0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc.o
+ .bss           0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc.o
+ .text.HAL_RCC_DeInit
+                0x00000000       0x4c ./system/src/stm32f4-hal/stm32f4xx_hal_rcc.o
+ .text.HAL_RCC_EnableCSS
+                0x00000000        0xc ./system/src/stm32f4-hal/stm32f4xx_hal_rcc.o
+ .text.HAL_RCC_DisableCSS
+                0x00000000        0xc ./system/src/stm32f4-hal/stm32f4xx_hal_rcc.o
+ .text.HAL_RCC_GetPCLK1Freq
+                0x00000000       0x30 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc.o
+ .text.HAL_RCC_GetPCLK2Freq
+                0x00000000       0x30 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc.o
+ .text.HAL_RCC_GetOscConfig
+                0x00000000       0xe0 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc.o
+ .text.HAL_RCC_GetClockConfig
+                0x00000000       0x3c ./system/src/stm32f4-hal/stm32f4xx_hal_rcc.o
+ .text.HAL_RCC_CCSCallback
+                0x00000000        0x2 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc.o
+ .text.HAL_RCC_NMI_IRQHandler
+                0x00000000       0x20 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc.o
+ .text          0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc_ex.o
+ .data          0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc_ex.o
+ .bss           0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc_ex.o
+ .text.HAL_RCCEx_PeriphCLKConfig
+                0x00000000      0x13c ./system/src/stm32f4-hal/stm32f4xx_hal_rcc_ex.o
+ .text.HAL_RCCEx_GetPeriphCLKConfig
+                0x00000000       0x54 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc_ex.o
+ .debug_info    0x00000000      0x60a ./system/src/stm32f4-hal/stm32f4xx_hal_rcc_ex.o
+ .debug_abbrev  0x00000000      0x1f0 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc_ex.o
+ .debug_loc     0x00000000      0x1b2 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc_ex.o
+ .debug_aranges
+                0x00000000       0x28 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc_ex.o
+ .debug_ranges  0x00000000       0x30 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc_ex.o
+ .debug_line    0x00000000      0x2a4 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc_ex.o
+ .debug_str     0x00000000      0x444 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc_ex.o
+ .comment       0x00000000       0x71 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc_ex.o
+ .ARM.attributes
+                0x00000000       0x33 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc_ex.o
+ .debug_frame   0x00000000       0x44 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc_ex.o
+ .text          0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .data          0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .bss           0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text.HAL_SPI_Transmit
+                0x00000000      0x158 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text.HAL_SPI_Receive
+                0x00000000      0x1d6 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text.HAL_SPI_Transmit_IT
+                0x00000000       0xa0 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text.HAL_SPI_TransmitReceive_IT
+                0x00000000       0xb0 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text.HAL_SPI_Receive_IT
+                0x00000000       0xb8 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text.HAL_SPI_Transmit_DMA
+                0x00000000       0xb8 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text.HAL_SPI_TransmitReceive_DMA
+                0x00000000       0xf4 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text.HAL_SPI_Receive_DMA
+                0x00000000       0xd4 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text.HAL_SPI_DMAPause
+                0x00000000       0x28 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text.HAL_SPI_DMAResume
+                0x00000000       0x28 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text.HAL_SPI_DMAStop
+                0x00000000       0x30 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text.HAL_SPI_TxCpltCallback
+                0x00000000        0x2 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text.HAL_SPI_RxCpltCallback
+                0x00000000        0x2 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text.HAL_SPI_TxRxCpltCallback
+                0x00000000        0x2 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text.HAL_SPI_TxHalfCpltCallback
+                0x00000000        0x2 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text.SPI_DMAHalfTransmitCplt
+                0x00000000        0xa ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text.HAL_SPI_RxHalfCpltCallback
+                0x00000000        0x2 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text.SPI_DMAHalfReceiveCplt
+                0x00000000        0xa ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text.HAL_SPI_TxRxHalfCpltCallback
+                0x00000000        0x2 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text.SPI_DMAHalfTransmitReceiveCplt
+                0x00000000        0xa ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text.HAL_SPI_ErrorCallback
+                0x00000000        0x2 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text.SPI_TxISR
+                0x00000000       0xc2 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text.SPI_RxCloseIRQHandler
+                0x00000000       0xd6 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text.SPI_RxISR
+                0x00000000       0x42 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text.SPI_2LinesRxISR
+                0x00000000       0x2a ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text.SPI_DMAError
+                0x00000000       0x22 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text.SPI_DMATransmitCplt
+                0x00000000       0x72 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text.SPI_DMAReceiveCplt
+                0x00000000       0xba ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text.SPI_DMATransmitReceiveCplt
+                0x00000000       0xca ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text.HAL_SPI_IRQHandler
+                0x00000000       0xb0 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text.HAL_SPI_GetError
+                0x00000000        0x6 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text          0x00000000        0x0 ./system/src/newlib/_cxx.o
+ .data          0x00000000        0x0 ./system/src/newlib/_cxx.o
+ .bss           0x00000000        0x0 ./system/src/newlib/_cxx.o
+ .text._ZN9__gnu_cxx27__verbose_terminate_handlerEv
+                0x00000000        0x6 ./system/src/newlib/_cxx.o
+ .text.__cxa_pure_virtual
+                0x00000000        0x6 ./system/src/newlib/_cxx.o
+ .debug_info    0x00000000      0x4c6 ./system/src/newlib/_cxx.o
+ .debug_abbrev  0x00000000      0x1a4 ./system/src/newlib/_cxx.o
+ .debug_aranges
+                0x00000000       0x28 ./system/src/newlib/_cxx.o
+ .debug_ranges  0x00000000       0x18 ./system/src/newlib/_cxx.o
+ .debug_line    0x00000000      0x1d7 ./system/src/newlib/_cxx.o
+ .debug_str     0x00000000      0x366 ./system/src/newlib/_cxx.o
+ .comment       0x00000000       0x71 ./system/src/newlib/_cxx.o
+ .ARM.attributes
+                0x00000000       0x33 ./system/src/newlib/_cxx.o
+ .debug_frame   0x00000000       0x40 ./system/src/newlib/_cxx.o
+ .text          0x00000000        0x0 ./system/src/newlib/_exit.o
+ .data          0x00000000        0x0 ./system/src/newlib/_exit.o
+ .bss           0x00000000        0x0 ./system/src/newlib/_exit.o
+ .text.abort    0x00000000        0x8 ./system/src/newlib/_exit.o
+ .text          0x00000000        0x0 ./system/src/newlib/_sbrk.o
+ .data          0x00000000        0x0 ./system/src/newlib/_sbrk.o
+ .bss           0x00000000        0x0 ./system/src/newlib/_sbrk.o
+ .text._sbrk    0x00000000       0x40 ./system/src/newlib/_sbrk.o
+ .bss.current_heap_end.4289
+                0x00000000        0x4 ./system/src/newlib/_sbrk.o
+ .debug_info    0x00000000      0x121 ./system/src/newlib/_sbrk.o
+ .debug_abbrev  0x00000000       0xb8 ./system/src/newlib/_sbrk.o
+ .debug_loc     0x00000000       0x6e ./system/src/newlib/_sbrk.o
+ .debug_aranges
+                0x00000000       0x20 ./system/src/newlib/_sbrk.o
+ .debug_ranges  0x00000000       0x10 ./system/src/newlib/_sbrk.o
+ .debug_line    0x00000000       0xcd ./system/src/newlib/_sbrk.o
+ .debug_str     0x00000000      0x210 ./system/src/newlib/_sbrk.o
+ .comment       0x00000000       0x71 ./system/src/newlib/_sbrk.o
+ .ARM.attributes
+                0x00000000       0x33 ./system/src/newlib/_sbrk.o
+ .debug_frame   0x00000000       0x28 ./system/src/newlib/_sbrk.o
+ .text          0x00000000        0x0 ./system/src/newlib/_startup.o
+ .data          0x00000000        0x0 ./system/src/newlib/_startup.o
+ .bss           0x00000000        0x0 ./system/src/newlib/_startup.o
+ .text.__initialize_data
+                0x00000000       0x10 ./system/src/newlib/_startup.o
+ .text.__initialize_bss
+                0x00000000        0xe ./system/src/newlib/_startup.o
+ .text.__run_init_array
+                0x00000000       0x48 ./system/src/newlib/_startup.o
+ .text.__run_fini_array
+                0x00000000       0x28 ./system/src/newlib/_startup.o
+ .text          0x00000000        0x0 ./system/src/newlib/_syscalls.o
+ .data          0x00000000        0x0 ./system/src/newlib/_syscalls.o
+ .bss           0x00000000        0x0 ./system/src/newlib/_syscalls.o
+ .text.raise    0x00000000       0x10 ./system/src/newlib/_syscalls.o
+ .text.kill     0x00000000       0x10 ./system/src/newlib/_syscalls.o
+ .text._chown   0x00000000       0x10 ./system/src/newlib/_syscalls.o
+ .text._close   0x00000000       0x10 ./system/src/newlib/_syscalls.o
+ .text._execve  0x00000000       0x10 ./system/src/newlib/_syscalls.o
+ .text._fork    0x00000000       0x10 ./system/src/newlib/_syscalls.o
+ .text._fstat   0x00000000       0x10 ./system/src/newlib/_syscalls.o
+ .text._getpid  0x00000000       0x10 ./system/src/newlib/_syscalls.o
+ .text._gettimeofday
+                0x00000000       0x10 ./system/src/newlib/_syscalls.o
+ .text._isatty  0x00000000        0xe ./system/src/newlib/_syscalls.o
+ .text._kill    0x00000000       0x10 ./system/src/newlib/_syscalls.o
+ .text._link    0x00000000       0x10 ./system/src/newlib/_syscalls.o
+ .text._lseek   0x00000000       0x10 ./system/src/newlib/_syscalls.o
+ .text._open    0x00000000       0x10 ./system/src/newlib/_syscalls.o
+ .text._read    0x00000000       0x10 ./system/src/newlib/_syscalls.o
+ .text._readlink
+                0x00000000       0x10 ./system/src/newlib/_syscalls.o
+ .text._stat    0x00000000       0x10 ./system/src/newlib/_syscalls.o
+ .text._symlink
+                0x00000000       0x10 ./system/src/newlib/_syscalls.o
+ .text._times   0x00000000       0x10 ./system/src/newlib/_syscalls.o
+ .text._unlink  0x00000000       0x10 ./system/src/newlib/_syscalls.o
+ .text._wait    0x00000000       0x10 ./system/src/newlib/_syscalls.o
+ .text._write   0x00000000       0x10 ./system/src/newlib/_syscalls.o
+ .data.environ  0x00000000        0x4 ./system/src/newlib/_syscalls.o
+ .bss.__env     0x00000000        0x4 ./system/src/newlib/_syscalls.o
+ COMMON         0x00000000        0x4 ./system/src/newlib/_syscalls.o
+ .text          0x00000000        0x0 ./system/src/newlib/assert.o
+ .data          0x00000000        0x0 ./system/src/newlib/assert.o
+ .bss           0x00000000        0x0 ./system/src/newlib/assert.o
+ .text.__assert_func
+                0x00000000        0x6 ./system/src/newlib/assert.o
+ .debug_info    0x00000000      0x10b ./system/src/newlib/assert.o
+ .debug_abbrev  0x00000000       0xa6 ./system/src/newlib/assert.o
+ .debug_loc     0x00000000       0x84 ./system/src/newlib/assert.o
+ .debug_aranges
+                0x00000000       0x20 ./system/src/newlib/assert.o
+ .debug_ranges  0x00000000       0x10 ./system/src/newlib/assert.o
+ .debug_line    0x00000000       0xe2 ./system/src/newlib/assert.o
+ .debug_str     0x00000000      0x1f9 ./system/src/newlib/assert.o
+ .comment       0x00000000       0x71 ./system/src/newlib/assert.o
+ .ARM.attributes
+                0x00000000       0x33 ./system/src/newlib/assert.o
+ .debug_frame   0x00000000       0x28 ./system/src/newlib/assert.o
+ .text          0x00000000        0x0 ./system/src/diag/Trace.o
+ .data          0x00000000        0x0 ./system/src/diag/Trace.o
+ .bss           0x00000000        0x0 ./system/src/diag/Trace.o
+ .debug_line    0x00000000        0x0 ./system/src/diag/Trace.o
+ .debug_str     0x00000000        0x0 ./system/src/diag/Trace.o
+ .comment       0x00000000       0x71 ./system/src/diag/Trace.o
+ .ARM.attributes
+                0x00000000       0x33 ./system/src/diag/Trace.o
+ .text          0x00000000        0x0 ./system/src/diag/trace_impl.o
+ .data          0x00000000        0x0 ./system/src/diag/trace_impl.o
+ .bss           0x00000000        0x0 ./system/src/diag/trace_impl.o
+ .debug_line    0x00000000        0x0 ./system/src/diag/trace_impl.o
+ .debug_str     0x00000000        0x0 ./system/src/diag/trace_impl.o
+ .comment       0x00000000       0x71 ./system/src/diag/trace_impl.o
+ .ARM.attributes
+                0x00000000       0x33 ./system/src/diag/trace_impl.o
+ .text          0x00000000        0x0 ./system/src/cortexm/_initialize_hardware.o
+ .data          0x00000000        0x0 ./system/src/cortexm/_initialize_hardware.o
+ .bss           0x00000000        0x0 ./system/src/cortexm/_initialize_hardware.o
+ .text          0x00000000        0x0 ./system/src/cortexm/_reset_hardware.o
+ .data          0x00000000        0x0 ./system/src/cortexm/_reset_hardware.o
+ .bss           0x00000000        0x0 ./system/src/cortexm/_reset_hardware.o
+ .text          0x00000000        0x0 ./system/src/cortexm/exception_handlers.o
+ .data          0x00000000        0x0 ./system/src/cortexm/exception_handlers.o
+ .bss           0x00000000        0x0 ./system/src/cortexm/exception_handlers.o
+ .text          0x00000000        0x0 ./system/src/cmsis/system_stm32f4xx.o
+ .data          0x00000000        0x0 ./system/src/cmsis/system_stm32f4xx.o
+ .bss           0x00000000        0x0 ./system/src/cmsis/system_stm32f4xx.o
+ .text          0x00000000        0x0 ./system/src/cmsis/vectors_stm32f4xx.o
+ .data          0x00000000        0x0 ./system/src/cmsis/vectors_stm32f4xx.o
+ .bss           0x00000000        0x0 ./system/src/cmsis/vectors_stm32f4xx.o
+ .text          0x00000000        0x0 ./src/lcd/lib_FONT_Table_m.o
+ .data          0x00000000        0x0 ./src/lcd/lib_FONT_Table_m.o
+ .bss           0x00000000        0x0 ./src/lcd/lib_FONT_Table_m.o
+ .text          0x00000000        0x0 ./src/lcd/lib_S1D15705_m.o
+ .data          0x00000000        0x0 ./src/lcd/lib_S1D15705_m.o
+ .bss           0x00000000        0x0 ./src/lcd/lib_S1D15705_m.o
+ .text.LCD_SetColumn
+                0x00000000       0x22 ./src/lcd/lib_S1D15705_m.o
+ .text.LCD_SetPage
+                0x00000000       0x16 ./src/lcd/lib_S1D15705_m.o
+ .text.LCD_BUFF_Wrd
+                0x00000000       0x10 ./src/lcd/lib_S1D15705_m.o
+ .text.LCD_BUFF_Rdd
+                0x00000000       0x10 ./src/lcd/lib_S1D15705_m.o
+ .text.LCD_BUFF_CleanPage
+                0x00000000       0x24 ./src/lcd/lib_S1D15705_m.o
+ .text.LCD_BUFF_Wrv_U16Dec
+                0x00000000       0x78 ./src/lcd/lib_S1D15705_m.o
+ .text.LCD_BUFF_Wrv_U8Dec
+                0x00000000       0x44 ./src/lcd/lib_S1D15705_m.o
+ .text.LCD_BUFF_Wrv_S8Dec
+                0x00000000       0x5c ./src/lcd/lib_S1D15705_m.o
+ .text.LCD_BUFF_Wrv_S32Dec
+                0x00000000      0x104 ./src/lcd/lib_S1D15705_m.o
+ .text.LCD_BUFF_PixelOn
+                0x00000000       0x24 ./src/lcd/lib_S1D15705_m.o
+ .text.LCD_BUFF_PixelOff
+                0x00000000       0x24 ./src/lcd/lib_S1D15705_m.o
+ .text.LCD_BUFF_PixelToggle
+                0x00000000       0x24 ./src/lcd/lib_S1D15705_m.o
+ .text.LCD_BUFF_PlotLine
+                0x00000000       0xec ./src/lcd/lib_S1D15705_m.o
+ .text.LCD_BUFF_PlotLine_NOT_MINE
+                0x00000000       0xe0 ./src/lcd/lib_S1D15705_m.o
+ .text.LCD_TESTF
+                0x00000000        0xe ./src/lcd/lib_S1D15705_m.o
+ .text          0x00000000        0x0 ./src/bsp/lis3dsh.o
+ .data          0x00000000        0x0 ./src/bsp/lis3dsh.o
+ .bss           0x00000000        0x0 ./src/bsp/lis3dsh.o
+ .text.LIS3DSH_ODR_LowpowerCmd
+                0x00000000       0x2e ./src/bsp/lis3dsh.o
+ .text.LIS3DSH_DataRateCmd
+                0x00000000       0x2e ./src/bsp/lis3dsh.o
+ .text.LIS3DSH_FullScaleCmd
+                0x00000000       0x2e ./src/bsp/lis3dsh.o
+ .text          0x00000000        0x0 ./src/bsp/stm32f4_discovery.o
+ .data          0x00000000        0x0 ./src/bsp/stm32f4_discovery.o
+ .bss           0x00000000        0x0 ./src/bsp/stm32f4_discovery.o
+ .text.I2Cx_Init
+                0x00000000       0xa4 ./src/bsp/stm32f4_discovery.o
+ .text.BSP_GetVersion
+                0x00000000        0x6 ./src/bsp/stm32f4_discovery.o
+ .text.BSP_PB_GetState
+                0x00000000       0x14 ./src/bsp/stm32f4_discovery.o
+ .text.AUDIO_IO_Init
+                0x00000000       0x58 ./src/bsp/stm32f4_discovery.o
+ .text.AUDIO_IO_Write
+                0x00000000       0x3c ./src/bsp/stm32f4_discovery.o
+ .text.AUDIO_IO_Read
+                0x00000000       0x40 ./src/bsp/stm32f4_discovery.o
+ .rodata.BUTTON_IRQn
+                0x00000000        0x1 ./src/bsp/stm32f4_discovery.o
+ .rodata.BUTTON_PIN
+                0x00000000        0x2 ./src/bsp/stm32f4_discovery.o
+ .bss.I2cHandle
+                0x00000000       0x38 ./src/bsp/stm32f4_discovery.o
+ .data.I2cxTimeout
+                0x00000000        0x4 ./src/bsp/stm32f4_discovery.o
+ .text          0x00000000        0x0 ./src/bsp/stm32f4_discovery_accelerometer.o
+ .data          0x00000000        0x0 ./src/bsp/stm32f4_discovery_accelerometer.o
+ .bss           0x00000000        0x0 ./src/bsp/stm32f4_discovery_accelerometer.o
+ .text.BSP_ACCELERO_ReadID
+                0x00000000       0x14 ./src/bsp/stm32f4_discovery_accelerometer.o
+ .text.BSP_ACCELERO_Reset
+                0x00000000       0x14 ./src/bsp/stm32f4_discovery_accelerometer.o
+ .text.BSP_ACCELERO_Click_ITConfig
+                0x00000000       0x14 ./src/bsp/stm32f4_discovery_accelerometer.o
+ .text.BSP_ACCELERO_Click_ITClear
+                0x00000000       0x14 ./src/bsp/stm32f4_discovery_accelerometer.o
+ .text          0x00000000        0x0 ./src/main_acc_start_v1.o
+ .data          0x00000000        0x0 ./src/main_acc_start_v1.o
+ .bss           0x00000000        0x0 ./src/main_acc_start_v1.o
+ .text          0x00000000        0x0 ./src/stm32f4xx_hal_msp.o
+ .data          0x00000000        0x0 ./src/stm32f4xx_hal_msp.o
+ .bss           0x00000000        0x0 ./src/stm32f4xx_hal_msp.o
+ .text.HAL_MspDeInit
+                0x00000000        0x2 ./src/stm32f4xx_hal_msp.o
+ .text          0x00000000        0x0 ./src/stm32f4xx_it.o
+ .data          0x00000000        0x0 ./src/stm32f4xx_it.o
+ .bss           0x00000000        0x0 ./src/stm32f4xx_it.o
+ .data          0x00000000        0x0 /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/libgcc.a(_arm_addsubsf3.o)
+ .bss           0x00000000        0x0 /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/libgcc.a(_arm_addsubsf3.o)
+ .data          0x00000000        0x0 /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/libgcc.a(_arm_muldivsf3.o)
+ .bss           0x00000000        0x0 /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/libgcc.a(_arm_muldivsf3.o)
+ .data          0x00000000        0x0 /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/libgcc.a(_arm_fixsfsi.o)
+ .bss           0x00000000        0x0 /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/libgcc.a(_arm_fixsfsi.o)
+ .text          0x00000000        0x0 /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/libg_s.a(lib_a-errno.o)
+ .data          0x00000000        0x0 /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/libg_s.a(lib_a-errno.o)
+ .bss           0x00000000        0x0 /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/libg_s.a(lib_a-errno.o)
+ .text.__errno  0x00000000        0xc /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/libg_s.a(lib_a-errno.o)
+ .ARM.attributes
+                0x00000000       0x2e /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/libg_s.a(lib_a-errno.o)
+ .debug_frame   0x00000000       0x20 /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/libg_s.a(lib_a-errno.o)
+ .text          0x00000000        0x0 /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/libg_s.a(lib_a-impure.o)
+ .data          0x00000000        0x0 /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/libg_s.a(lib_a-impure.o)
+ .bss           0x00000000        0x0 /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/libg_s.a(lib_a-impure.o)
+ .data.impure_data
+                0x00000000       0x60 /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/libg_s.a(lib_a-impure.o)
+ .data._impure_ptr
+                0x00000000        0x4 /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/libg_s.a(lib_a-impure.o)
+ .rodata.str1.1
+                0x00000000        0x2 /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/libg_s.a(lib_a-impure.o)
+ .rodata._global_impure_ptr
+                0x00000000        0x4 /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/libg_s.a(lib_a-impure.o)
+ .ARM.attributes
+                0x00000000       0x2e /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/libg_s.a(lib_a-impure.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+RAM              0x20000000         0x00020000         xrw
+CCMRAM           0x10000000         0x00010000         xrw
+FLASH            0x08000000         0x00100000         xr
+FLASHB1          0x00000000         0x00000000         xr
+EXTMEMB0         0x00000000         0x00000000         xr
+EXTMEMB1         0x00000000         0x00000000         xr
+EXTMEMB2         0x00000000         0x00000000         xr
+EXTMEMB3         0x00000000         0x00000000         xr
+MEMORY_ARRAY     0x20002000         0x00000020         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD ./system/src/stm32f4-hal/stm32f4xx_hal.o
+LOAD ./system/src/stm32f4-hal/stm32f4xx_hal_cortex.o
+LOAD ./system/src/stm32f4-hal/stm32f4xx_hal_flash.o
+LOAD ./system/src/stm32f4-hal/stm32f4xx_hal_flash_ex.o
+LOAD ./system/src/stm32f4-hal/stm32f4xx_hal_flash_ramfunc.o
+LOAD ./system/src/stm32f4-hal/stm32f4xx_hal_gpio.o
+LOAD ./system/src/stm32f4-hal/stm32f4xx_hal_iwdg.o
+LOAD ./system/src/stm32f4-hal/stm32f4xx_hal_pcd_ex.o
+LOAD ./system/src/stm32f4-hal/stm32f4xx_hal_pwr.o
+LOAD ./system/src/stm32f4-hal/stm32f4xx_hal_pwr_ex.o
+LOAD ./system/src/stm32f4-hal/stm32f4xx_hal_rcc.o
+LOAD ./system/src/stm32f4-hal/stm32f4xx_hal_rcc_ex.o
+LOAD ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+LOAD ./system/src/newlib/_cxx.o
+LOAD ./system/src/newlib/_exit.o
+LOAD ./system/src/newlib/_sbrk.o
+LOAD ./system/src/newlib/_startup.o
+LOAD ./system/src/newlib/_syscalls.o
+LOAD ./system/src/newlib/assert.o
+LOAD ./system/src/diag/Trace.o
+LOAD ./system/src/diag/trace_impl.o
+LOAD ./system/src/cortexm/_initialize_hardware.o
+LOAD ./system/src/cortexm/_reset_hardware.o
+LOAD ./system/src/cortexm/exception_handlers.o
+LOAD ./system/src/cmsis/system_stm32f4xx.o
+LOAD ./system/src/cmsis/vectors_stm32f4xx.o
+LOAD ./src/lcd/lib_FONT_Table_m.o
+LOAD ./src/lcd/lib_S1D15705_m.o
+LOAD ./src/bsp/lis3dsh.o
+LOAD ./src/bsp/stm32f4_discovery.o
+LOAD ./src/bsp/stm32f4_discovery_accelerometer.o
+LOAD ./src/main_acc_start_v1.o
+LOAD ./src/stm32f4xx_hal_msp.o
+LOAD ./src/stm32f4xx_it.o
+LOAD /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/libstdc++_s.a
+LOAD /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/libm.a
+START GROUP
+LOAD /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/libgcc.a
+LOAD /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/libg_s.a
+LOAD /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/libc_s.a
+END GROUP
+START GROUP
+LOAD /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/libgcc.a
+LOAD /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/libc_s.a
+END GROUP
+                0x20020000                __stack = (ORIGIN (RAM) + 0x20000)
+                0x20020000                _estack = __stack
+                0x00000400                __Main_Stack_Size = 0x400
+                0x00000400                PROVIDE (_Main_Stack_Size, __Main_Stack_Size)
+                0x2001fc00                __Main_Stack_Limit = (__stack - __Main_Stack_Size)
+                0x2001fc00                PROVIDE (_Main_Stack_Limit, __Main_Stack_Limit)
+                0x00000100                _Minimum_Stack_Size = 0x100
+                0x200005ec                PROVIDE (_Heap_Begin, _end_noinit)
+                0x2001fc00                PROVIDE (_Heap_Limit, (__stack - __Main_Stack_Size))
+
+.isr_vector     0x08000000      0x28e
+ FILL mask 0xff
+                0x08000000                __vectors_start__ = ABSOLUTE (.)
+ *(.isr_vector)
+ .isr_vector    0x08000000      0x188 ./system/src/cmsis/vectors_stm32f4xx.o
+                0x08000000                __isr_vectors
+ *(.cfmconfig)
+ *(.after_vectors .after_vectors.*)
+ .after_vectors
+                0x08000188       0xe8 ./system/src/newlib/_startup.o
+                0x08000188                _start
+ .after_vectors
+                0x08000270       0x1c ./system/src/cortexm/exception_handlers.o
+                0x08000270                Reset_Handler
+ .after_vectors
+                0x0800028c        0x2 ./system/src/cmsis/vectors_stm32f4xx.o
+                0x0800028c                RTC_Alarm_IRQHandler
+                0x0800028c                HASH_RNG_IRQHandler
+                0x0800028c                EXTI2_IRQHandler
+                0x0800028c                TIM8_CC_IRQHandler
+                0x0800028c                TIM1_CC_IRQHandler
+                0x0800028c                DMA2_Stream5_IRQHandler
+                0x0800028c                DMA1_Stream5_IRQHandler
+                0x0800028c                PVD_IRQHandler
+                0x0800028c                SDIO_IRQHandler
+                0x0800028c                TAMP_STAMP_IRQHandler
+                0x0800028c                CAN2_RX1_IRQHandler
+                0x0800028c                EXTI3_IRQHandler
+                0x0800028c                TIM8_TRG_COM_TIM14_IRQHandler
+                0x0800028c                TIM1_UP_TIM10_IRQHandler
+                0x0800028c                TIM8_UP_TIM13_IRQHandler
+                0x0800028c                I2C3_ER_IRQHandler
+                0x0800028c                I2C2_EV_IRQHandler
+                0x0800028c                DMA1_Stream2_IRQHandler
+                0x0800028c                CAN1_RX0_IRQHandler
+                0x0800028c                FPU_IRQHandler
+                0x0800028c                OTG_HS_WKUP_IRQHandler
+                0x0800028c                CAN2_SCE_IRQHandler
+                0x0800028c                DMA2_Stream2_IRQHandler
+                0x0800028c                SPI1_IRQHandler
+                0x0800028c                TIM6_DAC_IRQHandler
+                0x0800028c                TIM1_BRK_TIM9_IRQHandler
+                0x0800028c                DCMI_IRQHandler
+                0x0800028c                CAN2_RX0_IRQHandler
+                0x0800028c                DMA2_Stream3_IRQHandler
+                0x0800028c                USART6_IRQHandler
+                0x0800028c                USART3_IRQHandler
+                0x0800028c                CAN1_RX1_IRQHandler
+                0x0800028c                UART5_IRQHandler
+                0x0800028c                DMA2_Stream0_IRQHandler
+                0x0800028c                TIM4_IRQHandler
+                0x0800028c                I2C1_EV_IRQHandler
+                0x0800028c                DMA1_Stream6_IRQHandler
+                0x0800028c                DMA1_Stream1_IRQHandler
+                0x0800028c                UART4_IRQHandler
+                0x0800028c                TIM3_IRQHandler
+                0x0800028c                RCC_IRQHandler
+                0x0800028c                TIM8_BRK_TIM12_IRQHandler
+                0x0800028c                Default_Handler
+                0x0800028c                EXTI15_10_IRQHandler
+                0x0800028c                ADC_IRQHandler
+                0x0800028c                DMA1_Stream7_IRQHandler
+                0x0800028c                TIM7_IRQHandler
+                0x0800028c                CAN2_TX_IRQHandler
+                0x0800028c                TIM5_IRQHandler
+                0x0800028c                DMA2_Stream7_IRQHandler
+                0x0800028c                I2C3_EV_IRQHandler
+                0x0800028c                EXTI9_5_IRQHandler
+                0x0800028c                RTC_WKUP_IRQHandler
+                0x0800028c                ETH_WKUP_IRQHandler
+                0x0800028c                SPI2_IRQHandler
+                0x0800028c                OTG_HS_EP1_IN_IRQHandler
+                0x0800028c                DMA1_Stream0_IRQHandler
+                0x0800028c                CAN1_TX_IRQHandler
+                0x0800028c                EXTI4_IRQHandler
+                0x0800028c                FSMC_IRQHandler
+                0x0800028c                ETH_IRQHandler
+                0x0800028c                OTG_HS_EP1_OUT_IRQHandler
+                0x0800028c                WWDG_IRQHandler
+                0x0800028c                TIM2_IRQHandler
+                0x0800028c                OTG_FS_WKUP_IRQHandler
+                0x0800028c                TIM1_TRG_COM_TIM11_IRQHandler
+                0x0800028c                OTG_HS_IRQHandler
+                0x0800028c                EXTI1_IRQHandler
+                0x0800028c                USART2_IRQHandler
+                0x0800028c                I2C2_ER_IRQHandler
+                0x0800028c                DMA2_Stream1_IRQHandler
+                0x0800028c                CAN1_SCE_IRQHandler
+                0x0800028c                FLASH_IRQHandler
+                0x0800028c                DMA2_Stream4_IRQHandler
+                0x0800028c                USART1_IRQHandler
+                0x0800028c                OTG_FS_IRQHandler
+                0x0800028c                SPI3_IRQHandler
+                0x0800028c                DMA1_Stream4_IRQHandler
+                0x0800028c                I2C1_ER_IRQHandler
+                0x0800028c                DMA2_Stream6_IRQHandler
+                0x0800028c                DMA1_Stream3_IRQHandler
+
+.inits          0x08000290       0x28
+                0x08000290                __data_regions_array_start = .
+                0x08000290        0x4 LONG 0x800252c LOADADDR (.data)
+                0x08000294        0x4 LONG 0x20000000 ADDR (.data)
+                0x08000298        0x4 LONG 0x20000060 (ADDR (.data) + SIZEOF (.data))
+                0x0800029c        0x4 LONG 0x800252c LOADADDR (.data_CCMRAM)
+                0x080002a0        0x4 LONG 0x10000000 ADDR (.data_CCMRAM)
+                0x080002a4        0x4 LONG 0x10000000 (ADDR (.data_CCMRAM) + SIZEOF (.data_CCMRAM))
+                0x080002a8                __data_regions_array_end = .
+                0x080002a8                __bss_regions_array_start = .
+                0x080002a8        0x4 LONG 0x20000060 ADDR (.bss)
+                0x080002ac        0x4 LONG 0x200005ec (ADDR (.bss) + SIZEOF (.bss))
+                0x080002b0        0x4 LONG 0x10000000 ADDR (.bss_CCMRAM)
+                0x080002b4        0x4 LONG 0x10000000 (ADDR (.bss_CCMRAM) + SIZEOF (.bss_CCMRAM))
+                0x080002b8                __bss_regions_array_end = .
+ *(.init)
+ *(.fini)
+                0x080002b8                . = ALIGN (0x4)
+                0x080002b8                PROVIDE (__preinit_array_start, .)
+ *(.preinit_array_sysinit .preinit_array_sysinit.*)
+ *(.preinit_array_platform .preinit_array_platform.*)
+ *(.preinit_array .preinit_array.*)
+                0x080002b8                PROVIDE (__preinit_array_end, .)
+                0x080002b8                . = ALIGN (0x4)
+                0x080002b8                PROVIDE (__init_array_start, .)
+ *(SORT(.init_array.*))
+ *(.init_array)
+                0x080002b8                PROVIDE (__init_array_end, .)
+                0x080002b8                . = ALIGN (0x4)
+                0x080002b8                PROVIDE (__fini_array_start, .)
+ *(SORT(.fini_array.*))
+ *(.fini_array)
+                0x080002b8                PROVIDE (__fini_array_end, .)
+
+.flashtext
+ *(.flashtext .flashtext.*)
+
+.text           0x080002b8     0x2272
+ *(.text .text.*)
+ .text.HAL_InitTick
+                0x080002b8       0x24 ./system/src/stm32f4-hal/stm32f4xx_hal.o
+                0x080002b8                HAL_InitTick
+ .text.HAL_Init
+                0x080002dc       0x34 ./system/src/stm32f4-hal/stm32f4xx_hal.o
+                0x080002dc                HAL_Init
+ .text.HAL_IncTick
+                0x08000310       0x10 ./system/src/stm32f4-hal/stm32f4xx_hal.o
+                0x08000310                HAL_IncTick
+ .text.HAL_GetTick
+                0x08000320        0xc ./system/src/stm32f4-hal/stm32f4xx_hal.o
+                0x08000320                HAL_GetTick
+ .text.HAL_NVIC_SetPriorityGrouping
+                0x0800032c       0x24 ./system/src/stm32f4-hal/stm32f4xx_hal_cortex.o
+                0x0800032c                HAL_NVIC_SetPriorityGrouping
+ .text.HAL_NVIC_SetPriority
+                0x08000350       0x64 ./system/src/stm32f4-hal/stm32f4xx_hal_cortex.o
+                0x08000350                HAL_NVIC_SetPriority
+ .text.HAL_NVIC_EnableIRQ
+                0x080003b4       0x18 ./system/src/stm32f4-hal/stm32f4xx_hal_cortex.o
+                0x080003b4                HAL_NVIC_EnableIRQ
+ .text.HAL_SYSTICK_Config
+                0x080003cc       0x2c ./system/src/stm32f4-hal/stm32f4xx_hal_cortex.o
+                0x080003cc                HAL_SYSTICK_Config
+ .text.HAL_GPIO_Init
+                0x080003f8      0x1d0 ./system/src/stm32f4-hal/stm32f4xx_hal_gpio.o
+                0x080003f8                HAL_GPIO_Init
+ .text.HAL_GPIO_WritePin
+                0x080005c8        0xa ./system/src/stm32f4-hal/stm32f4xx_hal_gpio.o
+                0x080005c8                HAL_GPIO_WritePin
+ .text.HAL_GPIO_TogglePin
+                0x080005d2        0x8 ./system/src/stm32f4-hal/stm32f4xx_hal_gpio.o
+                0x080005d2                HAL_GPIO_TogglePin
+ *fill*         0x080005da        0x2 
+ .text.HAL_GPIO_EXTI_IRQHandler
+                0x080005dc       0x18 ./system/src/stm32f4-hal/stm32f4xx_hal_gpio.o
+                0x080005dc                HAL_GPIO_EXTI_IRQHandler
+ .text.HAL_RCC_OscConfig
+                0x080005f4      0x300 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc.o
+                0x080005f4                HAL_RCC_OscConfig
+ .text.HAL_RCC_ClockConfig
+                0x080008f4      0x1c4 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc.o
+                0x080008f4                HAL_RCC_ClockConfig
+ .text.HAL_RCC_MCOConfig
+                0x08000ab8       0x7c ./system/src/stm32f4-hal/stm32f4xx_hal_rcc.o
+                0x08000ab8                HAL_RCC_MCOConfig
+ .text.HAL_RCC_GetSysClockFreq
+                0x08000b34       0xa0 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc.o
+                0x08000b34                HAL_RCC_GetSysClockFreq
+ .text.HAL_RCC_GetHCLKFreq
+                0x08000bd4       0x38 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc.o
+                0x08000bd4                HAL_RCC_GetHCLKFreq
+ .text.SPI_WaitOnFlagUntilTimeout
+                0x08000c0c       0x92 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .text.HAL_SPI_MspInit
+                0x08000c9e        0x2 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+                0x08000c9e                HAL_SPI_MspInit
+ .text.HAL_SPI_Init
+                0x08000ca0       0x74 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+                0x08000ca0                HAL_SPI_Init
+ .text.HAL_SPI_MspDeInit
+                0x08000d14        0x2 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+                0x08000d14                HAL_SPI_MspDeInit
+ .text.HAL_SPI_DeInit
+                0x08000d16       0x28 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+                0x08000d16                HAL_SPI_DeInit
+ .text.HAL_SPI_TransmitReceive
+                0x08000d3e      0x2a4 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+                0x08000d3e                HAL_SPI_TransmitReceive
+ .text.HAL_SPI_GetState
+                0x08000fe2        0x6 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+                0x08000fe2                HAL_SPI_GetState
+ .text._exit    0x08000fe8        0x6 ./system/src/newlib/_exit.o
+                0x08000fe8                _exit
+ *fill*         0x08000fee        0x2 
+ .text.__initialize_args
+                0x08000ff0       0x10 ./system/src/newlib/_syscalls.o
+                0x08000ff0                __initialize_args
+ .text.__initialize_hardware_early
+                0x08001000        0x4 ./system/src/cortexm/_initialize_hardware.o
+                0x08001000                __initialize_hardware_early
+ .text.__initialize_hardware
+                0x08001004        0x4 ./system/src/cortexm/_initialize_hardware.o
+                0x08001004                __initialize_hardware
+ .text.__reset_hardware
+                0x08001008       0x20 ./system/src/cortexm/_reset_hardware.o
+                0x08001008                __reset_hardware
+ .text.SystemInit
+                0x08001028       0x40 ./system/src/cmsis/system_stm32f4xx.o
+                0x08001028                SystemInit
+ .text.SystemCoreClockUpdate
+                0x08001068       0x74 ./system/src/cmsis/system_stm32f4xx.o
+                0x08001068                SystemCoreClockUpdate
+ .text.LCD_PortSetup
+                0x080010dc       0x74 ./src/lcd/lib_S1D15705_m.o
+                0x080010dc                LCD_PortSetup
+ .text.LCD_Wrc  0x08001150       0x64 ./src/lcd/lib_S1D15705_m.o
+                0x08001150                LCD_Wrc
+ .text.LCD_SetCursor
+                0x080011b4       0x34 ./src/lcd/lib_S1D15705_m.o
+                0x080011b4                LCD_SetCursor
+ .text.LCD_Wrd  0x080011e8       0x50 ./src/lcd/lib_S1D15705_m.o
+                0x080011e8                LCD_Wrd
+ .text.LCD_Clean
+                0x08001238       0x3c ./src/lcd/lib_S1D15705_m.o
+                0x08001238                LCD_Clean
+ .text.LCD_BUFF_Clean
+                0x08001274       0x24 ./src/lcd/lib_S1D15705_m.o
+                0x08001274                LCD_BUFF_Clean
+ .text.LCD_Init
+                0x08001298       0x4e ./src/lcd/lib_S1D15705_m.o
+                0x08001298                LCD_Init
+ *fill*         0x080012e6        0x2 
+ .text.LCD_Update
+                0x080012e8       0x3c ./src/lcd/lib_S1D15705_m.o
+                0x080012e8                LCD_Update
+ .text.LCD_BUFF_Wrs
+                0x08001324       0x4c ./src/lcd/lib_S1D15705_m.o
+                0x08001324                LCD_BUFF_Wrs
+ .text.LCD_BUFF_Wrv_U32Dec
+                0x08001370       0xf8 ./src/lcd/lib_S1D15705_m.o
+                0x08001370                LCD_BUFF_Wrv_U32Dec
+ .text.LCD_BUFF_Wrv_S16Dec
+                0x08001468       0x94 ./src/lcd/lib_S1D15705_m.o
+                0x08001468                LCD_BUFF_Wrv_S16Dec
+ .text.LIS3DSH_Init
+                0x080014fc       0x32 ./src/bsp/lis3dsh.o
+                0x080014fc                LIS3DSH_Init
+ .text.LIS3DSH_ReadID
+                0x0800152e       0x20 ./src/bsp/lis3dsh.o
+                0x0800152e                LIS3DSH_ReadID
+ .text.LIS3DSH_RebootCmd
+                0x0800154e       0x2c ./src/bsp/lis3dsh.o
+                0x0800154e                LIS3DSH_RebootCmd
+ *fill*         0x0800157a        0x2 
+ .text.LIS3DSH_ReadACC
+                0x0800157c       0xa0 ./src/bsp/lis3dsh.o
+                0x0800157c                LIS3DSH_ReadACC
+ .text.LIS3DSH_InterruptConfig
+                0x0800161c       0x4a ./src/bsp/lis3dsh.o
+                0x0800161c                LIS3DSH_InterruptConfig
+ .text.LIS3DSH_Click_IntConfig
+                0x08001666       0xd8 ./src/bsp/lis3dsh.o
+                0x08001666                LIS3DSH_Click_IntConfig
+ *fill*         0x0800173e        0x2 
+ .text.SPIx_Init
+                0x08001740       0x7c ./src/bsp/stm32f4_discovery.o
+ .text.SPIx_WriteRead
+                0x080017bc       0x40 ./src/bsp/stm32f4_discovery.o
+ .text.BSP_LED_Init
+                0x080017fc       0x5c ./src/bsp/stm32f4_discovery.o
+                0x080017fc                BSP_LED_Init
+ .text.BSP_LED_On
+                0x08001858       0x1c ./src/bsp/stm32f4_discovery.o
+                0x08001858                BSP_LED_On
+ .text.BSP_LED_Off
+                0x08001874       0x1c ./src/bsp/stm32f4_discovery.o
+                0x08001874                BSP_LED_Off
+ .text.BSP_LED_Toggle
+                0x08001890       0x1c ./src/bsp/stm32f4_discovery.o
+                0x08001890                BSP_LED_Toggle
+ .text.BSP_PB_Init
+                0x080018ac       0x68 ./src/bsp/stm32f4_discovery.o
+                0x080018ac                BSP_PB_Init
+ .text.ACCELERO_IO_Init
+                0x08001914       0x40 ./src/bsp/stm32f4_discovery.o
+                0x08001914                ACCELERO_IO_Init
+ .text.ACCELERO_IO_ITConfig
+                0x08001954       0x44 ./src/bsp/stm32f4_discovery.o
+                0x08001954                ACCELERO_IO_ITConfig
+ .text.ACCELERO_IO_Write
+                0x08001998       0x44 ./src/bsp/stm32f4_discovery.o
+                0x08001998                ACCELERO_IO_Write
+ .text.ACCELERO_IO_Read
+                0x080019dc       0x48 ./src/bsp/stm32f4_discovery.o
+                0x080019dc                ACCELERO_IO_Read
+ .text.BSP_ACCELERO_Init
+                0x08001a24       0x28 ./src/bsp/stm32f4_discovery_accelerometer.o
+                0x08001a24                BSP_ACCELERO_Init
+ .text.BSP_ACCELERO_GetXYZ
+                0x08001a4c       0x14 ./src/bsp/stm32f4_discovery_accelerometer.o
+                0x08001a4c                BSP_ACCELERO_GetXYZ
+ .text.startup.main
+                0x08001a60      0x1c8 ./src/main_acc_start_v1.o
+                0x08001a60                main
+ .text.HAL_GPIO_EXTI_Callback
+                0x08001c28       0x7c ./src/main_acc_start_v1.o
+                0x08001c28                HAL_GPIO_EXTI_Callback
+ .text.HAL_MspInit
+                0x08001ca4        0x2 ./src/stm32f4xx_hal_msp.o
+                0x08001ca4                HAL_MspInit
+ .text.NMI_Handler
+                0x08001ca6        0x2 ./src/stm32f4xx_it.o
+                0x08001ca6                NMI_Handler
+ .text.HardFault_Handler
+                0x08001ca8        0x2 ./src/stm32f4xx_it.o
+                0x08001ca8                HardFault_Handler
+ .text.MemManage_Handler
+                0x08001caa        0x2 ./src/stm32f4xx_it.o
+                0x08001caa                MemManage_Handler
+ .text.BusFault_Handler
+                0x08001cac        0x2 ./src/stm32f4xx_it.o
+                0x08001cac                BusFault_Handler
+ .text.UsageFault_Handler
+                0x08001cae        0x2 ./src/stm32f4xx_it.o
+                0x08001cae                UsageFault_Handler
+ .text.SVC_Handler
+                0x08001cb0        0x2 ./src/stm32f4xx_it.o
+                0x08001cb0                SVC_Handler
+ .text.DebugMon_Handler
+                0x08001cb2        0x2 ./src/stm32f4xx_it.o
+                0x08001cb2                DebugMon_Handler
+ .text.PendSV_Handler
+                0x08001cb4        0x2 ./src/stm32f4xx_it.o
+                0x08001cb4                PendSV_Handler
+ .text.SysTick_Handler
+                0x08001cb6       0x22 ./src/stm32f4xx_it.o
+                0x08001cb6                SysTick_Handler
+ .text.EXTI0_IRQHandler
+                0x08001cd8        0x6 ./src/stm32f4xx_it.o
+                0x08001cd8                EXTI0_IRQHandler
+ *fill*         0x08001cde        0x2 
+ .text          0x08001ce0      0x21c /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/libgcc.a(_arm_addsubsf3.o)
+                0x08001ce0                __aeabi_frsub
+                0x08001ce8                __subsf3
+                0x08001ce8                __aeabi_fsub
+                0x08001cec                __aeabi_fadd
+                0x08001cec                __addsf3
+                0x08001e4c                __aeabi_ui2f
+                0x08001e4c                __floatunsisf
+                0x08001e54                __aeabi_i2f
+                0x08001e54                __floatsisf
+                0x08001e70                __floatundisf
+                0x08001e70                __aeabi_ul2f
+                0x08001e80                __floatdisf
+                0x08001e80                __aeabi_l2f
+ .text          0x08001efc      0x2a0 /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/libgcc.a(_arm_muldivsf3.o)
+                0x08001efc                __mulsf3
+                0x08001efc                __aeabi_fmul
+                0x08002064                __divsf3
+                0x08002064                __aeabi_fdiv
+ .text          0x0800219c       0x4c /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/libgcc.a(_arm_fixsfsi.o)
+                0x0800219c                __fixsfsi
+                0x0800219c                __aeabi_f2iz
+ *(.rodata .rodata.* .constdata .constdata.*)
+ .rodata.APBAHBPrescTable
+                0x080021e8       0x10 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc.o
+                0x080021e8                APBAHBPrescTable
+ .rodata.pucFONT_Table_128x5
+                0x080021f8      0x280 ./src/lcd/lib_FONT_Table_m.o
+                0x080021f8                pucFONT_Table_128x5
+ .rodata.str1.1
+                0x08002478       0x18 ./src/lcd/lib_S1D15705_m.o
+                                 0x29 (size before relaxing)
+ .rodata.CSWTCH.22
+                0x08002490       0x64 ./src/bsp/lis3dsh.o
+ .rodata.GPIO_PIN
+                0x080024f4        0x8 ./src/bsp/stm32f4_discovery.o
+                0x080024f4                GPIO_PIN
+ .rodata.str1.1
+                0x080024fc       0x2e ./src/main_acc_start_v1.o
+ *(vtable)
+ *(.eh_frame*)
+ *(.glue_7)
+ .glue_7        0x00000000        0x0 linker stubs
+ *(.glue_7t)
+ .glue_7t       0x00000000        0x0 linker stubs
+
+.vfp11_veneer   0x0800252c        0x0
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+
+.v4_bx          0x0800252c        0x0
+ .v4_bx         0x00000000        0x0 linker stubs
+
+.iplt           0x0800252c        0x0
+ .iplt          0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal.o
+
+.rel.dyn        0x0800252c        0x0
+ .rel.iplt      0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal.o
+
+.ARM.extab
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+                0x0800252c                . = ALIGN (0x4)
+                0x0800252c                __exidx_start = .
+
+.ARM.exidx
+ *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+                0x0800252c                __exidx_end = .
+                0x0800252c                . = ALIGN (0x4)
+                0x0800252c                _etext = .
+                0x0800252c                __etext = .
+
+.data_CCMRAM    0x10000000        0x0 load address 0x0800252c
+ FILL mask 0xff
+ *(.data.CCMRAM .data.CCMRAM.*)
+                0x10000000                . = ALIGN (0x4)
+                0x0800252c                _sidata = LOADADDR (.data)
+
+.data           0x20000000       0x60 load address 0x0800252c
+ FILL mask 0xff
+                0x20000000                _sdata = .
+                0x20000000                __data_start__ = .
+ *(.data_begin .data_begin.*)
+ *(.data .data.*)
+ .data.argv.4461
+                0x20000000        0x8 ./system/src/newlib/_syscalls.o
+ .data.AHBPrescTable
+                0x20000008       0x10 ./system/src/cmsis/system_stm32f4xx.o
+                0x20000008                AHBPrescTable
+ .data.SystemCoreClock
+                0x20000018        0x4 ./system/src/cmsis/system_stm32f4xx.o
+                0x20000018                SystemCoreClock
+ .data.Lis3dshDrv
+                0x2000001c       0x2c ./src/bsp/lis3dsh.o
+                0x2000001c                Lis3dshDrv
+ .data.GPIO_PORT
+                0x20000048       0x10 ./src/bsp/stm32f4_discovery.o
+                0x20000048                GPIO_PORT
+ .data.SpixTimeout
+                0x20000058        0x4 ./src/bsp/stm32f4_discovery.o
+                0x20000058                SpixTimeout
+ .data.BUTTON_PORT
+                0x2000005c        0x4 ./src/bsp/stm32f4_discovery.o
+                0x2000005c                BUTTON_PORT
+ *(.data_end .data_end.*)
+                0x20000060                . = ALIGN (0x4)
+                0x20000060                _edata = .
+                0x20000060                __data_end__ = .
+
+.igot.plt       0x20000060        0x0 load address 0x0800258c
+ .igot.plt      0x00000000        0x0 ./system/src/stm32f4-hal/stm32f4xx_hal.o
+
+.bss_CCMRAM     0x10000000        0x0
+ *(.bss.CCMRAM .bss.CCMRAM.*)
+
+.bss            0x20000060      0x58c
+                0x20000060                __bss_start__ = .
+                0x20000060                _sbss = .
+ *(.bss_begin .bss_begin.*)
+ *(.bss .bss.*)
+ .bss.uwTick    0x20000060        0x4 ./system/src/stm32f4-hal/stm32f4xx_hal.o
+ .bss.name.4460
+                0x20000064        0x1 ./system/src/newlib/_syscalls.o
+ *fill*         0x20000065        0x3 
+ .bss.SpiHandle
+                0x20000068       0x54 ./src/bsp/stm32f4_discovery.o
+ .bss.AcceleroDrv
+                0x200000bc        0x4 ./src/bsp/stm32f4_discovery_accelerometer.o
+ *(COMMON)
+ COMMON         0x200000c0      0x529 ./src/lcd/lib_S1D15705_m.o
+                0x200000c0                GPIO_InitStruct
+                0x200000d4                sLcdBuffor
+ *(.bss_end .bss_end.*)
+                0x200005ec                . = ALIGN (0x4)
+ *fill*         0x200005e9        0x3 
+                0x200005ec                __bss_end__ = .
+                0x200005ec                _ebss = .
+
+.noinit_CCMRAM
+ *(.noinit.CCMRAM .noinit.CCMRAM.*)
+
+.noinit         0x200005ec        0x0
+                0x200005ec                _noinit = .
+ *(.noinit .noinit.*)
+                0x200005ec                . = ALIGN (0x4)
+                0x200005ec                _end_noinit = .
+                0x200005ec                PROVIDE (end, _end_noinit)
+                0x200005ec                PROVIDE (_end, _end_noinit)
+                0x200005ec                PROVIDE (__end, _end_noinit)
+                0x200005ec                PROVIDE (__end__, _end_noinit)
+
+._check_stack   0x200005ec      0x100
+                0x200006ec                . = (. + _Minimum_Stack_Size)
+ *fill*         0x200005ec      0x100 
+
+.b1text
+ *(.b1text)
+ *(.b1rodata)
+ *(.b1rodata.*)
+
+.eb0text
+ *(.eb0text)
+ *(.eb0rodata)
+ *(.eb0rodata.*)
+
+.eb1text
+ *(.eb1text)
+ *(.eb1rodata)
+ *(.eb1rodata.*)
+
+.eb2text
+ *(.eb2text)
+ *(.eb2rodata)
+ *(.eb2rodata.*)
+
+.eb3text
+ *(.eb3text)
+ *(.eb3rodata)
+ *(.eb3rodata.*)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment        0x00000000       0x70
+ *(.comment)
+ .comment       0x00000000       0x70 ./system/src/stm32f4-hal/stm32f4xx_hal.o
+                                 0x71 (size before relaxing)
+ .comment       0x00000000       0x71 ./system/src/stm32f4-hal/stm32f4xx_hal_cortex.o
+ .comment       0x00000000       0x71 ./system/src/stm32f4-hal/stm32f4xx_hal_gpio.o
+ .comment       0x00000000       0x71 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc.o
+ .comment       0x00000000       0x71 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .comment       0x00000000       0x71 ./system/src/newlib/_exit.o
+ .comment       0x00000000       0x71 ./system/src/newlib/_startup.o
+ .comment       0x00000000       0x71 ./system/src/newlib/_syscalls.o
+ .comment       0x00000000       0x71 ./system/src/cortexm/_initialize_hardware.o
+ .comment       0x00000000       0x71 ./system/src/cortexm/_reset_hardware.o
+ .comment       0x00000000       0x71 ./system/src/cortexm/exception_handlers.o
+ .comment       0x00000000       0x71 ./system/src/cmsis/system_stm32f4xx.o
+ .comment       0x00000000       0x71 ./system/src/cmsis/vectors_stm32f4xx.o
+ .comment       0x00000000       0x71 ./src/lcd/lib_FONT_Table_m.o
+ .comment       0x00000000       0x71 ./src/lcd/lib_S1D15705_m.o
+ .comment       0x00000000       0x71 ./src/bsp/lis3dsh.o
+ .comment       0x00000000       0x71 ./src/bsp/stm32f4_discovery.o
+ .comment       0x00000000       0x71 ./src/bsp/stm32f4_discovery_accelerometer.o
+ .comment       0x00000000       0x71 ./src/main_acc_start_v1.o
+ .comment       0x00000000       0x71 ./src/stm32f4xx_hal_msp.o
+ .comment       0x00000000       0x71 ./src/stm32f4xx_it.o
+
+.ARM.attributes
+                0x00000000       0x33
+ .ARM.attributes
+                0x00000000       0x33 ./system/src/stm32f4-hal/stm32f4xx_hal.o
+ .ARM.attributes
+                0x00000033       0x33 ./system/src/stm32f4-hal/stm32f4xx_hal_cortex.o
+ .ARM.attributes
+                0x00000066       0x33 ./system/src/stm32f4-hal/stm32f4xx_hal_gpio.o
+ .ARM.attributes
+                0x00000099       0x33 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc.o
+ .ARM.attributes
+                0x000000cc       0x33 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .ARM.attributes
+                0x000000ff       0x33 ./system/src/newlib/_exit.o
+ .ARM.attributes
+                0x00000132       0x33 ./system/src/newlib/_startup.o
+ .ARM.attributes
+                0x00000165       0x33 ./system/src/newlib/_syscalls.o
+ .ARM.attributes
+                0x00000198       0x33 ./system/src/cortexm/_initialize_hardware.o
+ .ARM.attributes
+                0x000001cb       0x33 ./system/src/cortexm/_reset_hardware.o
+ .ARM.attributes
+                0x000001fe       0x33 ./system/src/cortexm/exception_handlers.o
+ .ARM.attributes
+                0x00000231       0x33 ./system/src/cmsis/system_stm32f4xx.o
+ .ARM.attributes
+                0x00000264       0x33 ./system/src/cmsis/vectors_stm32f4xx.o
+ .ARM.attributes
+                0x00000297       0x33 ./src/lcd/lib_FONT_Table_m.o
+ .ARM.attributes
+                0x000002ca       0x33 ./src/lcd/lib_S1D15705_m.o
+ .ARM.attributes
+                0x000002fd       0x33 ./src/bsp/lis3dsh.o
+ .ARM.attributes
+                0x00000330       0x33 ./src/bsp/stm32f4_discovery.o
+ .ARM.attributes
+                0x00000363       0x33 ./src/bsp/stm32f4_discovery_accelerometer.o
+ .ARM.attributes
+                0x00000396       0x33 ./src/main_acc_start_v1.o
+ .ARM.attributes
+                0x000003c9       0x33 ./src/stm32f4xx_hal_msp.o
+ .ARM.attributes
+                0x000003fc       0x33 ./src/stm32f4xx_it.o
+ .ARM.attributes
+                0x0000042f       0x1e /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/libgcc.a(_arm_addsubsf3.o)
+ .ARM.attributes
+                0x0000044d       0x1e /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/libgcc.a(_arm_muldivsf3.o)
+ .ARM.attributes
+                0x0000046b       0x1e /home/mike/Workspace/Programy/ARMTools/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/libgcc.a(_arm_fixsfsi.o)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x00000000      0x8a8
+ *(.debug_aranges)
+ .debug_aranges
+                0x00000000       0xc0 ./system/src/stm32f4-hal/stm32f4xx_hal.o
+ .debug_aranges
+                0x000000c0       0x90 ./system/src/stm32f4-hal/stm32f4xx_hal_cortex.o
+ .debug_aranges
+                0x00000150       0x58 ./system/src/stm32f4-hal/stm32f4xx_hal_gpio.o
+ .debug_aranges
+                0x000001a8       0x88 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc.o
+ .debug_aranges
+                0x00000230      0x148 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .debug_aranges
+                0x00000378       0x28 ./system/src/newlib/_exit.o
+ .debug_aranges
+                0x000003a0       0x40 ./system/src/newlib/_startup.o
+ .debug_aranges
+                0x000003e0       0xd0 ./system/src/newlib/_syscalls.o
+ .debug_aranges
+                0x000004b0       0x28 ./system/src/cortexm/_initialize_hardware.o
+ .debug_aranges
+                0x000004d8       0x20 ./system/src/cortexm/_reset_hardware.o
+ .debug_aranges
+                0x000004f8       0x68 ./system/src/cortexm/exception_handlers.o
+ .debug_aranges
+                0x00000560       0x28 ./system/src/cmsis/system_stm32f4xx.o
+ .debug_aranges
+                0x00000588       0x20 ./system/src/cmsis/vectors_stm32f4xx.o
+ .debug_aranges
+                0x000005a8       0x18 ./src/lcd/lib_FONT_Table_m.o
+ .debug_aranges
+                0x000005c0       0xe8 ./src/lcd/lib_S1D15705_m.o
+ .debug_aranges
+                0x000006a8       0x60 ./src/bsp/lis3dsh.o
+ .debug_aranges
+                0x00000708       0xa0 ./src/bsp/stm32f4_discovery.o
+ .debug_aranges
+                0x000007a8       0x48 ./src/bsp/stm32f4_discovery_accelerometer.o
+ .debug_aranges
+                0x000007f0       0x28 ./src/main_acc_start_v1.o
+ .debug_aranges
+                0x00000818       0x28 ./src/stm32f4xx_hal_msp.o
+ .debug_aranges
+                0x00000840       0x68 ./src/stm32f4xx_it.o
+
+.debug_pubnames
+ *(.debug_pubnames)
+
+.debug_info     0x00000000     0xa676
+ *(.debug_info .gnu.linkonce.wi.*)
+ .debug_info    0x00000000      0x89e ./system/src/stm32f4-hal/stm32f4xx_hal.o
+ .debug_info    0x0000089e      0xcd4 ./system/src/stm32f4-hal/stm32f4xx_hal_cortex.o
+ .debug_info    0x00001572      0x6e8 ./system/src/stm32f4-hal/stm32f4xx_hal_gpio.o
+ .debug_info    0x00001c5a      0xfed ./system/src/stm32f4-hal/stm32f4xx_hal_rcc.o
+ .debug_info    0x00002c47     0x1563 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .debug_info    0x000041aa      0x100 ./system/src/newlib/_exit.o
+ .debug_info    0x000042aa      0x4af ./system/src/newlib/_startup.o
+ .debug_info    0x00004759      0x8ef ./system/src/newlib/_syscalls.o
+ .debug_info    0x00005048       0xe6 ./system/src/cortexm/_initialize_hardware.o
+ .debug_info    0x0000512e      0x2b2 ./system/src/cortexm/_reset_hardware.o
+ .debug_info    0x000053e0       0xd0 ./system/src/cortexm/exception_handlers.o
+ .debug_info    0x000054b0      0x4a3 ./system/src/cmsis/system_stm32f4xx.o
+ .debug_info    0x00005953       0x8e ./system/src/cmsis/vectors_stm32f4xx.o
+ .debug_info    0x000059e1       0xad ./src/lcd/lib_FONT_Table_m.o
+ .debug_info    0x00005a8e     0x1447 ./src/lcd/lib_S1D15705_m.o
+ .debug_info    0x00006ed5      0x895 ./src/bsp/lis3dsh.o
+ .debug_info    0x0000776a     0x1973 ./src/bsp/stm32f4_discovery.o
+ .debug_info    0x000090dd      0x35b ./src/bsp/stm32f4_discovery_accelerometer.o
+ .debug_info    0x00009438      0xf81 ./src/main_acc_start_v1.o
+ .debug_info    0x0000a3b9       0xbc ./src/stm32f4xx_hal_msp.o
+ .debug_info    0x0000a475      0x201 ./src/stm32f4xx_it.o
+
+.debug_abbrev   0x00000000     0x21d4
+ *(.debug_abbrev)
+ .debug_abbrev  0x00000000      0x1f4 ./system/src/stm32f4-hal/stm32f4xx_hal.o
+ .debug_abbrev  0x000001f4      0x2bb ./system/src/stm32f4-hal/stm32f4xx_hal_cortex.o
+ .debug_abbrev  0x000004af      0x1bf ./system/src/stm32f4-hal/stm32f4xx_hal_gpio.o
+ .debug_abbrev  0x0000066e      0x2fd ./system/src/stm32f4-hal/stm32f4xx_hal_rcc.o
+ .debug_abbrev  0x0000096b      0x2df ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .debug_abbrev  0x00000c4a       0xb8 ./system/src/newlib/_exit.o
+ .debug_abbrev  0x00000d02      0x20a ./system/src/newlib/_startup.o
+ .debug_abbrev  0x00000f0c      0x175 ./system/src/newlib/_syscalls.o
+ .debug_abbrev  0x00001081       0x88 ./system/src/cortexm/_initialize_hardware.o
+ .debug_abbrev  0x00001109       0xe7 ./system/src/cortexm/_reset_hardware.o
+ .debug_abbrev  0x000011f0       0x2c ./system/src/cortexm/exception_handlers.o
+ .debug_abbrev  0x0000121c      0x101 ./system/src/cmsis/system_stm32f4xx.o
+ .debug_abbrev  0x0000131d       0x8f ./system/src/cmsis/vectors_stm32f4xx.o
+ .debug_abbrev  0x000013ac       0x5d ./src/lcd/lib_FONT_Table_m.o
+ .debug_abbrev  0x00001409      0x352 ./src/lcd/lib_S1D15705_m.o
+ .debug_abbrev  0x0000175b      0x1d0 ./src/bsp/lis3dsh.o
+ .debug_abbrev  0x0000192b      0x360 ./src/bsp/stm32f4_discovery.o
+ .debug_abbrev  0x00001c8b      0x163 ./src/bsp/stm32f4_discovery_accelerometer.o
+ .debug_abbrev  0x00001dee      0x266 ./src/main_acc_start_v1.o
+ .debug_abbrev  0x00002054       0x67 ./src/stm32f4xx_hal_msp.o
+ .debug_abbrev  0x000020bb      0x119 ./src/stm32f4xx_it.o
+
+.debug_line     0x00000000     0x3c1a
+ *(.debug_line)
+ .debug_line    0x00000000      0x356 ./system/src/stm32f4-hal/stm32f4xx_hal.o
+ .debug_line    0x00000356      0x332 ./system/src/stm32f4-hal/stm32f4xx_hal_cortex.o
+ .debug_line    0x00000688      0x321 ./system/src/stm32f4-hal/stm32f4xx_hal_gpio.o
+ .debug_line    0x000009a9      0x578 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc.o
+ .debug_line    0x00000f21      0xb53 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .debug_line    0x00001a74      0x14f ./system/src/newlib/_exit.o
+ .debug_line    0x00001bc3      0x11a ./system/src/newlib/_startup.o
+ .debug_line    0x00001cdd      0x359 ./system/src/newlib/_syscalls.o
+ .debug_line    0x00002036      0x186 ./system/src/cortexm/_initialize_hardware.o
+ .debug_line    0x000021bc      0x17e ./system/src/cortexm/_reset_hardware.o
+ .debug_line    0x0000233a       0x6d ./system/src/cortexm/exception_handlers.o
+ .debug_line    0x000023a7      0x19d ./system/src/cmsis/system_stm32f4xx.o
+ .debug_line    0x00002544       0x58 ./system/src/cmsis/vectors_stm32f4xx.o
+ .debug_line    0x0000259c      0x11a ./src/lcd/lib_FONT_Table_m.o
+ .debug_line    0x000026b6      0x56c ./src/lcd/lib_S1D15705_m.o
+ .debug_line    0x00002c22      0x269 ./src/bsp/lis3dsh.o
+ .debug_line    0x00002e8b      0x48c ./src/bsp/stm32f4_discovery.o
+ .debug_line    0x00003317      0x217 ./src/bsp/stm32f4_discovery_accelerometer.o
+ .debug_line    0x0000352e      0x342 ./src/main_acc_start_v1.o
+ .debug_line    0x00003870      0x15d ./src/stm32f4xx_hal_msp.o
+ .debug_line    0x000039cd      0x24d ./src/stm32f4xx_it.o
+
+.debug_frame    0x00000000     0x13f0
+ *(.debug_frame)
+ .debug_frame   0x00000000      0x184 ./system/src/stm32f4-hal/stm32f4xx_hal.o
+ .debug_frame   0x00000184      0x120 ./system/src/stm32f4-hal/stm32f4xx_hal_cortex.o
+ .debug_frame   0x000002a4       0xc0 ./system/src/stm32f4-hal/stm32f4xx_hal_gpio.o
+ .debug_frame   0x00000364      0x144 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc.o
+ .debug_frame   0x000004a8      0x368 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .debug_frame   0x00000810       0x40 ./system/src/newlib/_exit.o
+ .debug_frame   0x00000850       0x84 ./system/src/newlib/_startup.o
+ .debug_frame   0x000008d4      0x230 ./system/src/newlib/_syscalls.o
+ .debug_frame   0x00000b04       0x30 ./system/src/cortexm/_initialize_hardware.o
+ .debug_frame   0x00000b34       0x20 ./system/src/cortexm/_reset_hardware.o
+ .debug_frame   0x00000b54       0xb0 ./system/src/cortexm/exception_handlers.o
+ .debug_frame   0x00000c04       0x30 ./system/src/cmsis/system_stm32f4xx.o
+ .debug_frame   0x00000c34       0x20 ./system/src/cmsis/vectors_stm32f4xx.o
+ .debug_frame   0x00000c54      0x2dc ./src/lcd/lib_S1D15705_m.o
+ .debug_frame   0x00000f30      0x118 ./src/bsp/lis3dsh.o
+ .debug_frame   0x00001048      0x1d4 ./src/bsp/stm32f4_discovery.o
+ .debug_frame   0x0000121c       0xa0 ./src/bsp/stm32f4_discovery_accelerometer.o
+ .debug_frame   0x000012bc       0x4c ./src/main_acc_start_v1.o
+ .debug_frame   0x00001308       0x30 ./src/stm32f4xx_hal_msp.o
+ .debug_frame   0x00001338       0xb8 ./src/stm32f4xx_it.o
+
+.debug_str      0x00000000     0x2db4
+ *(.debug_str)
+ .debug_str     0x00000000      0xa2e ./system/src/stm32f4-hal/stm32f4xx_hal.o
+                                0xa8b (size before relaxing)
+ .debug_str     0x00000a2e      0x295 ./system/src/stm32f4-hal/stm32f4xx_hal_cortex.o
+                                0xaf5 (size before relaxing)
+ .debug_str     0x00000cc3      0x1ce ./system/src/stm32f4-hal/stm32f4xx_hal_gpio.o
+                                0x4f3 (size before relaxing)
+ .debug_str     0x00000e91      0x2dc ./system/src/stm32f4-hal/stm32f4xx_hal_rcc.o
+                                0x6e6 (size before relaxing)
+ .debug_str     0x0000116d      0x856 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+                                0xaf0 (size before relaxing)
+ .debug_str     0x000019c3       0x56 ./system/src/newlib/_exit.o
+                                0x1e3 (size before relaxing)
+ .debug_str     0x00001a19      0x1a9 ./system/src/newlib/_startup.o
+                                0x35e (size before relaxing)
+ .debug_str     0x00001bc2      0x261 ./system/src/newlib/_syscalls.o
+                                0x453 (size before relaxing)
+ .debug_str     0x00001e23       0x4e ./system/src/cortexm/_initialize_hardware.o
+                                0x227 (size before relaxing)
+ .debug_str     0x00001e71       0x28 ./system/src/cortexm/_reset_hardware.o
+                                0x27b (size before relaxing)
+ .debug_str     0x00001e99       0xc9 ./system/src/cortexm/exception_handlers.o
+                                0x1c4 (size before relaxing)
+ .debug_str     0x00001f62       0x31 ./system/src/cmsis/system_stm32f4xx.o
+                                0x39e (size before relaxing)
+ .debug_str     0x00001f93       0x57 ./system/src/cmsis/vectors_stm32f4xx.o
+                                0x168 (size before relaxing)
+ .debug_str     0x00001fea       0x32 ./src/lcd/lib_FONT_Table_m.o
+                                0x1cc (size before relaxing)
+ .debug_str     0x0000201c      0x406 ./src/lcd/lib_S1D15705_m.o
+                                0x7c4 (size before relaxing)
+ .debug_str     0x00002422      0x2ad ./src/bsp/lis3dsh.o
+                                0x4b4 (size before relaxing)
+ .debug_str     0x000026cf      0x4c6 ./src/bsp/stm32f4_discovery.o
+                               0x138d (size before relaxing)
+ .debug_str     0x00002b95      0x166 ./src/bsp/stm32f4_discovery_accelerometer.o
+                                0x3c6 (size before relaxing)
+ .debug_str     0x00002cfb       0x77 ./src/main_acc_start_v1.o
+                                0xc46 (size before relaxing)
+ .debug_str     0x00002d72       0x1b ./src/stm32f4xx_hal_msp.o
+                                0x1dc (size before relaxing)
+ .debug_str     0x00002d8d       0x27 ./src/stm32f4xx_it.o
+                                0x2e6 (size before relaxing)
+
+.debug_loc      0x00000000     0x3f1a
+ *(.debug_loc)
+ .debug_loc     0x00000000       0x68 ./system/src/stm32f4-hal/stm32f4xx_hal.o
+ .debug_loc     0x00000068      0x422 ./system/src/stm32f4-hal/stm32f4xx_hal_cortex.o
+ .debug_loc     0x0000048a      0x3a8 ./system/src/stm32f4-hal/stm32f4xx_hal_gpio.o
+ .debug_loc     0x00000832      0x7d4 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc.o
+ .debug_loc     0x00001006     0x1037 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .debug_loc     0x0000203d       0x21 ./system/src/newlib/_exit.o
+ .debug_loc     0x0000205e      0x3cb ./system/src/newlib/_startup.o
+ .debug_loc     0x00002429      0x549 ./system/src/newlib/_syscalls.o
+ .debug_loc     0x00002972       0xb7 ./system/src/cmsis/system_stm32f4xx.o
+ .debug_loc     0x00002a29      0xe76 ./src/lcd/lib_S1D15705_m.o
+ .debug_loc     0x0000389f      0x14e ./src/bsp/lis3dsh.o
+ .debug_loc     0x000039ed      0x423 ./src/bsp/stm32f4_discovery.o
+ .debug_loc     0x00003e10       0xd0 ./src/bsp/stm32f4_discovery_accelerometer.o
+ .debug_loc     0x00003ee0       0x3a ./src/main_acc_start_v1.o
+
+.debug_macinfo
+ *(.debug_macinfo)
+
+.debug_weaknames
+ *(.debug_weaknames)
+
+.debug_funcnames
+ *(.debug_funcnames)
+
+.debug_typenames
+ *(.debug_typenames)
+
+.debug_varnames
+ *(.debug_varnames)
+OUTPUT(acc_start_v1.elf elf32-littlearm)
+
+.debug_ranges   0x00000000      0x8d8
+ .debug_ranges  0x00000000       0xb0 ./system/src/stm32f4-hal/stm32f4xx_hal.o
+ .debug_ranges  0x000000b0       0xd0 ./system/src/stm32f4-hal/stm32f4xx_hal_cortex.o
+ .debug_ranges  0x00000180       0x48 ./system/src/stm32f4-hal/stm32f4xx_hal_gpio.o
+ .debug_ranges  0x000001c8       0x90 ./system/src/stm32f4-hal/stm32f4xx_hal_rcc.o
+ .debug_ranges  0x00000258      0x138 ./system/src/stm32f4-hal/stm32f4xx_hal_spi.o
+ .debug_ranges  0x00000390       0x18 ./system/src/newlib/_exit.o
+ .debug_ranges  0x000003a8       0x50 ./system/src/newlib/_startup.o
+ .debug_ranges  0x000003f8       0xc0 ./system/src/newlib/_syscalls.o
+ .debug_ranges  0x000004b8       0x18 ./system/src/cortexm/_initialize_hardware.o
+ .debug_ranges  0x000004d0       0x10 ./system/src/cortexm/_reset_hardware.o
+ .debug_ranges  0x000004e0       0x58 ./system/src/cortexm/exception_handlers.o
+ .debug_ranges  0x00000538       0x18 ./system/src/cmsis/system_stm32f4xx.o
+ .debug_ranges  0x00000550       0x10 ./system/src/cmsis/vectors_stm32f4xx.o
+ .debug_ranges  0x00000560      0x158 ./src/lcd/lib_S1D15705_m.o
+ .debug_ranges  0x000006b8       0x50 ./src/bsp/lis3dsh.o
+ .debug_ranges  0x00000708       0xf8 ./src/bsp/stm32f4_discovery.o
+ .debug_ranges  0x00000800       0x38 ./src/bsp/stm32f4_discovery_accelerometer.o
+ .debug_ranges  0x00000838       0x30 ./src/main_acc_start_v1.o
+ .debug_ranges  0x00000868       0x18 ./src/stm32f4xx_hal_msp.o
+ .debug_ranges  0x00000880       0x58 ./src/stm32f4xx_it.o
