@@ -47,7 +47,7 @@
 							<tool id="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler.2043061903" name="Cross ARM GNU Assembler" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler">
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.usepreprocessor.1316722786" name="Use preprocessor" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.usepreprocessor" value="true" valueType="boolean"/>
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.include.paths.1706047319" name="Include paths (-I)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;../include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;../inc&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;../system/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;../system/include/cmsis&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;../system/include/stm32f4-hal&quot;"/>
@@ -63,7 +63,7 @@
 							</tool>
 							<tool id="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.967417721" name="Cross ARM C Compiler" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler">
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.include.paths.121418432" name="Include paths (-I)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.include.paths" useByScannerDiscovery="false" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;../include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;../inc&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;../system/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;../system/include/cmsis&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;../system/include/stm32f4-hal&quot;"/>
@@ -78,7 +78,7 @@
 							</tool>
 							<tool id="ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.compiler.1940665954" name="Cross ARM C++ Compiler" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.compiler">
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.include.paths.1276471359" name="Include paths (-I)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.include.paths" useByScannerDiscovery="false" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;../include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;../inc&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;../system/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;../system/include/cmsis&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;../system/include/stm32f4-hal&quot;"/>
@@ -164,6 +164,7 @@
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+			<storageModule moduleId="ilg.gnuarmeclipse.managedbuild.packs"/>
 		</cconfiguration>
 		<cconfiguration id="ilg.gnuarmeclipse.managedbuild.cross.config.elf.release.359687310">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="ilg.gnuarmeclipse.managedbuild.cross.config.elf.release.359687310" moduleId="org.eclipse.cdt.core.settings" name="Release">
@@ -211,7 +212,7 @@
 							<tool id="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler.480572670" name="Cross ARM GNU Assembler" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler">
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.usepreprocessor.109341270" name="Use preprocessor" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.usepreprocessor" value="true" valueType="boolean"/>
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.include.paths.1111157731" name="Include paths (-I)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;../include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;../inc&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;../system/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;../system/include/cmsis&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;../system/include/stm32f4-hal&quot;"/>
@@ -225,7 +226,7 @@
 							</tool>
 							<tool id="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.98477497" name="Cross ARM C Compiler" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler">
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.include.paths.1853820454" name="Include paths (-I)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.include.paths" useByScannerDiscovery="false" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;../include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;../inc&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;../system/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;../system/include/cmsis&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;../system/include/stm32f4-hal&quot;"/>
@@ -239,7 +240,7 @@
 							</tool>
 							<tool id="ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.compiler.545583954" name="Cross ARM C++ Compiler" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.compiler">
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.include.paths.1147257255" name="Include paths (-I)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.include.paths" useByScannerDiscovery="false" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;../include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;../inc&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;../system/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;../system/include/cmsis&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;../system/include/stm32f4-hal&quot;"/>
@@ -328,15 +329,6 @@
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 		<project id="acc_start_v1.ilg.gnuarmeclipse.managedbuild.cross.target.elf.1728929879" name="Executable" projectType="ilg.gnuarmeclipse.managedbuild.cross.target.elf"/>
 	</storageModule>
-	<storageModule moduleId="scannerConfiguration">
-		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		<scannerConfigBuildInfo instanceId="ilg.gnuarmeclipse.managedbuild.cross.config.elf.release.359687310;ilg.gnuarmeclipse.managedbuild.cross.config.elf.release.359687310.;ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.98477497;ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input.748044582">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="ilg.gnuarmeclipse.managedbuild.cross.config.elf.debug.1561522926;ilg.gnuarmeclipse.managedbuild.cross.config.elf.debug.1561522926.;ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.967417721;ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input.1898479051">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="refreshScope" versionNumber="2">
 		<configuration configurationName="Release">
@@ -347,4 +339,16 @@
 		</configuration>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="ilg.gnuarmeclipse.managedbuild.cross.config.elf.debug.1561522926;ilg.gnuarmeclipse.managedbuild.cross.config.elf.debug.1561522926.;ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.967417721;ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input.1898479051">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="ilg.gnuarmeclipse.managedbuild.cross.config.elf.release.359687310;ilg.gnuarmeclipse.managedbuild.cross.config.elf.release.359687310.;ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.compiler.545583954;ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.compiler.input.1702740861">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="ilg.gnuarmeclipse.managedbuild.cross.config.elf.release.359687310;ilg.gnuarmeclipse.managedbuild.cross.config.elf.release.359687310.;ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.98477497;ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input.748044582">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+	</storageModule>
 </cproject>

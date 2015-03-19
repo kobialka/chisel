@@ -50,38 +50,38 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 SECONDARY_FLASH += \
-acc_start_v1.bin \
+Orientation.bin \
 
 SECONDARY_SIZE += \
-acc_start_v1.siz \
+Orientation.siz \
 
 
 # All Target
-all: acc_start_v1.elf secondary-outputs
+all: Orientation.elf secondary-outputs
 
 # Tool invocations
-acc_start_v1.elf: $(OBJS) $(USER_OBJS)
+Orientation.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: Cross ARM C++ Linker'
-	arm-none-eabi-g++ -mcpu=cortex-m4 -mthumb -mfloat-abi=soft -Os -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall -Wextra  -g -T mem.ld -T libs.ld -T sections.ld -nostartfiles -Xlinker --gc-sections -L"../ldscripts" -Wl,-Map,"acc_start_v1.map" --specs=nano.specs -o "acc_start_v1.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-g++ -mcpu=cortex-m4 -mthumb -mfloat-abi=soft -Os -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall -Wextra  -g -T mem.ld -T libs.ld -T sections.ld -nostartfiles -Xlinker --gc-sections -L"../ldscripts" -Wl,-Map,"Orientation.map" --specs=nano.specs -o "Orientation.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-acc_start_v1.bin: acc_start_v1.elf
+Orientation.bin: Orientation.elf
 	@echo 'Invoking: Cross ARM GNU Create Flash Image'
-	arm-none-eabi-objcopy -O binary "acc_start_v1.elf"  "acc_start_v1.bin"
+	arm-none-eabi-objcopy -O binary "Orientation.elf"  "Orientation.bin"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-acc_start_v1.siz: acc_start_v1.elf
+Orientation.siz: Orientation.elf
 	@echo 'Invoking: Cross ARM GNU Print Size'
-	arm-none-eabi-size --format=berkeley "acc_start_v1.elf"
+	arm-none-eabi-size --format=berkeley "Orientation.elf"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(SECONDARY_SIZE)$(C++_DEPS)$(OBJS)$(C_DEPS)$(ASM_DEPS)$(CC_DEPS)$(SECONDARY_FLASH)$(CPP_DEPS)$(CXX_DEPS)$(C_UPPER_DEPS)$(S_UPPER_DEPS) acc_start_v1.elf
+	-$(RM) $(SECONDARY_SIZE)$(C++_DEPS)$(OBJS)$(C_DEPS)$(ASM_DEPS)$(CC_DEPS)$(SECONDARY_FLASH)$(CPP_DEPS)$(CXX_DEPS)$(C_UPPER_DEPS)$(S_UPPER_DEPS) Orientation.elf
 	-@echo ' '
 
 secondary-outputs: $(SECONDARY_FLASH) $(SECONDARY_SIZE)

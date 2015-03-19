@@ -67,20 +67,19 @@ typedef struct sLcdBuffor_Typedef{
 //|_________________________________________________|
 // _________________________________________________	
 /*	Uzytkownik ma do dyspozycji jedynie funkcje operujace na buforze lcd.	*/
-	void 		LCD_BUFF_Clean(void);								// Czysci BUFOR.
-	void		LCD_BUFF_Clean(void);								// CZYSZCZENIE BUFORA
-	void 		LCD_BUFF_Wrd(uint8_t Column, uint8_t Page, uint8_t Data);								// Bajt do BUFORA. Inkrementuje numer ColNr_u8.
-	void		LCD_BUFF_Wrs(uint8_t Column, uint8_t Page, const uint8_t* String);						// Wypisz string.
-	void		LCD_BUFF_Wrv_U16Dec(uint8_t Column, uint8_t Page, uint16_t Data);						// Wypisz zmienna 16 bitowa w postaci dziesietnej.
-	void		LCD_BUFF_Wrv_U32Dec(uint8_t Column, uint8_t Page, uint32_t Data);						// Wypisz zmienna 32 bitowa w postaci dziesietnej.
-	void		LCD_BUFF_Wrv_U8Dec(uint8_t Column, uint8_t Page, uint8_t);						// Wypisz zmienna 8 bitowa w postaci dziesietnej.
+	void		LCD_BUFF_Clean(void);													// CZYSZCZENIE BUFORA
+	void 		LCD_BUFF_Wrd(uint8_t Column, uint8_t Page, uint8_t Data);				// Bajt do BUFORA. Inkrementuje numer ColNr_u8.
+	void		LCD_BUFF_Wrs(uint8_t Column, uint8_t Page, const uint8_t* String);		// Wypisz string.
+	void		LCD_BUFF_Wrv_U16Dec(uint8_t Column, uint8_t Page, uint16_t Data);		// Wypisz zmienna 16 bitowa w postaci dziesietnej.
+	void		LCD_BUFF_Wrv_U32Dec(uint8_t Column, uint8_t Page, uint32_t Data);		// Wypisz zmienna 32 bitowa w postaci dziesietnej.
+	void		LCD_BUFF_Wrv_U8Dec(uint8_t Column, uint8_t Page, uint8_t);				// Wypisz zmienna 8 bitowa w postaci dziesietnej.
 	void		LCD_BUFF_Wrv_S8Dec(uint8_t arg_ColNr, uint8_t arg_PageNr, int8_t);
 	void		LCD_BUFF_Wrv_S16Dec(uint8_t arg_ColNr, uint8_t arg_PageNr, int16_t);
 	void		LCD_BUFF_Wrv_S32Dec(uint8_t arg_ColNr, uint8_t arg_PageNr, int32_t);
 	uint8_t		LCD_BUFF_Rdd(uint8_t arg_ColNr_u8, uint8_t arg_PageNr_u8);
-	void 		LCD_BUFF_PixelOn(uint8_t arg_ColNr_u8, uint8_t arg_LineNr_u8);					// Zapala piksel. Liczone od 0,0.
-	void 		LCD_BUFF_PixelOff(uint8_t arg_ColNr_u8, uint8_t arg_LineNr_u8);					// Gasi piksel. Liczone od 0,0.
-	void 		LCD_BUFF_PixelToggle(uint8_t arg_ColNr_u8, uint8_t arg_LineNr_u8);				// Przelacza piksel. Liczone od 0,0.
+	void 		LCD_BUFF_PixelOn(uint8_t arg_ColNr_u8, uint8_t arg_LineNr_u8);			// Zapala piksel. Liczone od 0,0.
+	void 		LCD_BUFF_PixelOff(uint8_t arg_ColNr_u8, uint8_t arg_LineNr_u8);			// Gasi piksel. Liczone od 0,0.
+	void 		LCD_BUFF_PixelToggle(uint8_t arg_ColNr_u8, uint8_t arg_LineNr_u8);		// Przelacza piksel. Liczone od 0,0.
 	uint8_t		LCD_BUFF_PlotLine(uint8_t HStart_u8, uint8_t VStart_u8, uint8_t HEnd_u8, uint8_t VEnd_u8);
 	
 	void 		LCD_Clean(void);									// Czysci LCD.
@@ -90,7 +89,7 @@ typedef struct sLcdBuffor_Typedef{
 	uint8_t		LCD_SetCursor( uint8_t, uint8_t);					// Ustawia kolumne i strone w LCD.
 	uint8_t		LCD_SetPage(uint8_t);								// Ustawia zadana strone w LCD. 
 	void		LCD_Update(void);									// Przepisuje BUFOR do LCD
-	void		LCD_UpdateCursor(void);
+//	void		LCD_UpdateCursor(void);
 	void 		LCD_Wrc(uint8_t);									// Rozkaz do LCD. Po Wykonaniu rozkazu jego wartosc zostaje na szynie.
 	void 		LCD_Wrd(uint8_t);									// Bajt do LCD. NIE inkrementuje numer ColNr_u8.
 // _________________________________________________

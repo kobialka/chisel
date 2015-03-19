@@ -33,7 +33,7 @@ static void LED_StartSignal(void);
 static void Error_Handler(void);
 static void EXTILine0_Config(void);
 static void LED_StartSignal(void);
-static void ACC_Init(void);
+//static void ACC_Init(void);
 
 static void GPIO_Init(void){
 	GPIO_InitTypeDef GPIO_InitStruct;
