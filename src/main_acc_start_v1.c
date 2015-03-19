@@ -28,11 +28,13 @@
 
 
 //___________________________________
+//	DEKLARACJE FUNKCJI
 static void SystemClock_Config(void);
 static void LED_StartSignal(void);
 static void Error_Handler(void);
 static void EXTILine0_Config(void);
 static void LED_StartSignal(void);
+static void UART_init(uint32_t BaudRate);
 //static void ACC_Init(void);
 
 static void GPIO_Init(void){
@@ -80,6 +82,7 @@ int main(void){
 	BSP_ACCELERO_Init();
 	LCD_Init();
 	GPIO_Init();
+	UART_Init(9600);
 
 	/* Configure EXTI Line0 (connected to PA0 pin) in interrupt mode */
 	EXTILine0_Config();
@@ -107,6 +110,30 @@ int main(void){
 		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_7, GPIO_PIN_RESET);
 	}
 }
+
+
+
+
+
+void UART_init(uint32_t BaudRate){
+	UART_HandleTypeDef UART_MyHandle;
+	UART_InitTypeDef UART_InitStructure;
+
+	UART_InitStructure.BaudRate 	= BaudRate;					// Zobaczyć czy nie trzeba tego przeliczyć
+	UART_InitStructure.HwFlowCtl	= UART_HWCONTROL_NONE;
+	UART_InitStructure.Mode			= UART_MODE_TX_RX;
+	UART_InitStructure.OverSampling	= UART_OVERSAMPLING_8;
+	UART_InitStructure.Parity		= UART_PARITY_NONE;
+	UART_InitStructure.StopBits		= UART_STOPBITS_1;
+	UART_InitStructure.WordLength	= UART_WORDLENGTH_8B;
+
+	HAL_UART_Init()
+
+
+}
+// HAL_UART_IRQHandler()
+// HAL_UART_TxCpltCallback(),
+// HAL_UART_RxCpltCallback()
 
 //___________________________________
 static void EXTILine0_Config(void){
