@@ -34,7 +34,7 @@ static void LED_StartSignal(void);
 static void Error_Handler(void);
 static void EXTILine0_Config(void);
 static void LED_StartSignal(void);
-static void UART_init(uint32_t BaudRate);
+static void UART_Init(uint32_t BaudRate);
 //static void ACC_Init(void);
 
 static void GPIO_Init(void){
@@ -115,7 +115,8 @@ int main(void){
 
 
 
-void UART_init(uint32_t BaudRate){
+
+void UART_Init(uint32_t BaudRate){
 	UART_HandleTypeDef UART_MyHandle;
 	UART_InitTypeDef UART_InitStructure;
 
@@ -127,7 +128,8 @@ void UART_init(uint32_t BaudRate){
 	UART_InitStructure.StopBits		= UART_STOPBITS_1;
 	UART_InitStructure.WordLength	= UART_WORDLENGTH_8B;
 
-	HAL_UART_Init()
+	UART_MyHandle.Init = UART_InitStructure;
+	HAL_UART_Init(&UART_MyHandle);
 
 
 }
