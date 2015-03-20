@@ -113,9 +113,6 @@ int main(void){
 
 
 
-
-
-
 void UART_Init(uint32_t BaudRate){
 	UART_HandleTypeDef UART_MyHandle;
 	UART_InitTypeDef UART_InitStructure;
@@ -129,8 +126,12 @@ void UART_Init(uint32_t BaudRate){
 	UART_InitStructure.WordLength	= UART_WORDLENGTH_8B;
 
 	UART_MyHandle.Init = UART_InitStructure;
-	HAL_UART_Init(&UART_MyHandle);
 
+	if(HAL_UART_Init(&UART_MyHandle) != HAL_OK){
+		Error_Handler();
+	}
+
+	__UART4_CLK_ENABLE();
 
 }
 // HAL_UART_IRQHandler()
