@@ -422,7 +422,7 @@ void LCD_BUFF_Wrs(uint8_t arg_ColNr_u8, uint8_t arg_PageNr_u8, const uint8_t* ar
 	uint8_t ByteCounter_u8;
 	uint8_t* pLetter_u8 = (uint8_t*)arg_strString_u8;						// wsk przechowuje adres pierwszego elementu argmentu str (tablicy).
 
-	while (*pLetter_u8){													// r�b jezeli wskaznik nie wskazuje na zero.
+	while (*pLetter_u8){													// rób jeżeli wskaznik nie wskazuje na zero.
 		for (ByteCounter_u8 = 0; ByteCounter_u8 < 5; ByteCounter_u8++ ){	// drukuje znak, czyli 5 bajtow.
 			LCD_BUFF_Wrd(arg_ColNr_u8++, arg_PageNr_u8, pucFONT_Table_128x5[*pLetter_u8][ByteCounter_u8]);
 		}

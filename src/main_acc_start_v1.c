@@ -13,23 +13,28 @@
  */
 
 
-/* Includes ------------------------------------------------------------------*/
+/* Pliki nagłówkowe -----------------------------------------------------------*/
 #include "stm32f4xx_hal.h"              // Keil::Device:STM32Cube HAL:Common
 #include "bsp/stm32f4_discovery.h"
 #include "bsp/stm32f4_discovery_accelerometer.h"
 #include "lcd/lib_S1D15705_m.h"
-
 #include <stdint.h>
 
 
-/* Defines	------------------------------------------------------------------*/
-
+/* Definicje stałych ----------------------------------------------------------*/
 #define CYCLES 	(500000UL);
 
 
-//___________________________________
-//	DEKLARACJE FUNKCJI
+
+/* Zmienne globalne ----------------------------------------------------------*/
+int16_t	AccelerationMeas[]={0,0,0};
+UART_HandleTypeDef UART_MyHandle;
+
+
+
+//* Deklaracje funkcji --------------------------------------------------------*/
 static void SystemClock_Config(void);
+static void GPIO_Init(void);
 static void LED_StartSignal(void);
 static void Error_Handler(void);
 static void EXTILine0_Config(void);
@@ -37,49 +42,34 @@ static void LED_StartSignal(void);
 static void UART_Init(uint32_t BaudRate);
 //static void ACC_Init(void);
 
-static void GPIO_Init(void){
-	GPIO_InitTypeDef GPIO_InitStruct;
-	__GPIOC_CLK_ENABLE();
 
-	GPIO_InitStruct.Pin		= GPIO_PIN_7;
-	GPIO_InitStruct.Mode	= GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Pull	= GPIO_NOPULL;
-	GPIO_InitStruct.Speed	= GPIO_SPEED_LOW;
-	HAL_GPIO_Init(GPIOC,&GPIO_InitStruct);
-}
 
-//___________________________________
+
+//*----------------------------------------------------------------------------*/
 int main(void){
-	int16_t	AccelerationMeas[]={0,0,0};
-
-
-	/*	1. HAL_Init();
-		2. HAL_RCC_OscConfig();
-		3. HAL_RCC_ClockConfig();
-		4. Add HAL_IncTick() to SysTick_Handler() ISR to enable polling process when using HAL_Delay(); HAL_NVIC_SetPriority().
-		5. HW initialization: HAL_ppp_Init();
-		6. HW low level initialization: HAL_ppp_MspInit()
-		7. User application code.
+	/*	Podstawowa konfiguracja HAL:
+	 * 1. HAL_Init();
+	 * 2. HAL_RCC_OscConfig();
+	 * 3. HAL_RCC_ClockConfig();
+	 * 4. Add HAL_IncTick() to SysTick_Handler() ISR to enable polling process when using HAL_Delay(); HAL_NVIC_SetPriority().
+	 * 5. HW initialization: HAL_ppp_Init();
+	 * 6. HW low level initialization: HAL_ppp_MspInit()
+	 * 7. User application code.
 	*/
 
-	//___________________________________
 	HAL_Init();
 	SystemClock_Config();
 
-
-	//___________________________________
-	// Wyprowadzenie sygnalow zegarowych na piny zewnetrzne.
-	HAL_RCC_MCOConfig(RCC_MCO2, RCC_MCO2SOURCE_SYSCLK,RCC_MCODIV_1);
-	HAL_RCC_MCOConfig(RCC_MCO1, RCC_MCO1SOURCE_HSI,RCC_MCODIV_1);
-
-
-	//___________________________________
+	// Leds
 	BSP_LED_Init(0);
 	BSP_LED_Init(1);
 	BSP_LED_Init(2);
 	BSP_LED_Init(3);
+	// Pushbutton
 	BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO);
+	// Accelerometer
 	BSP_ACCELERO_Init();
+	// Lcd
 	LCD_Init();
 	GPIO_Init();
 	UART_Init(9600);
@@ -114,7 +104,6 @@ int main(void){
 
 
 void UART_Init(uint32_t BaudRate){
-	UART_HandleTypeDef UART_MyHandle;
 	UART_InitTypeDef UART_InitStructure;
 
 	UART_InitStructure.BaudRate 	= BaudRate;					// Zobaczyć czy nie trzeba tego przeliczyć
@@ -215,6 +204,10 @@ void SystemClock_Config(void){
 	if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK){
 		Error_Handler();
 	}
+
+	// Wyprowadzenie sygnalow zegarowych na piny zewnetrzne.
+	HAL_RCC_MCOConfig(RCC_MCO2, RCC_MCO2SOURCE_SYSCLK,RCC_MCODIV_1);
+	HAL_RCC_MCOConfig(RCC_MCO1, RCC_MCO1SOURCE_HSI,RCC_MCODIV_1);
 }
 
 
@@ -254,6 +247,16 @@ void LED_StartSignal(void)
 
 
 
+static void GPIO_Init(void){
+	GPIO_InitTypeDef GPIO_InitStruct;
+	__GPIOC_CLK_ENABLE();
+
+	GPIO_InitStruct.Pin		= GPIO_PIN_7;
+	GPIO_InitStruct.Mode	= GPIO_MODE_OUTPUT_PP;
+	GPIO_InitStruct.Pull	= GPIO_NOPULL;
+	GPIO_InitStruct.Speed	= GPIO_SPEED_LOW;
+	HAL_GPIO_Init(GPIOC,&GPIO_InitStruct);
+}
 
 
 //___________________________________
