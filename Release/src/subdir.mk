@@ -4,17 +4,17 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../src/main_acc_start_v1.c \
+../src/main_chisel.c \
 ../src/stm32f4xx_hal_msp.c \
 ../src/stm32f4xx_it.c 
 
 OBJS += \
-./src/main_acc_start_v1.o \
+./src/main_chisel.o \
 ./src/stm32f4xx_hal_msp.o \
 ./src/stm32f4xx_it.o 
 
 C_DEPS += \
-./src/main_acc_start_v1.d \
+./src/main_chisel.d \
 ./src/stm32f4xx_hal_msp.d \
 ./src/stm32f4xx_it.d 
 

@@ -23,13 +23,13 @@
 
 /* Definicje stałych ----------------------------------------------------------*/
 #define CYCLES 	(500000UL);
+#define UART_TX_BUFF_SIZE (30)
 
-
-
+//gf
 /* Zmienne globalne ----------------------------------------------------------*/
 int16_t	AccelerationMeas[]={0,0,0};
 UART_HandleTypeDef UART_MyHandle;
-
+uint8_t pUartTxBuff[UART_TX_BUFF_SIZE] = {0,1,2,3,4,5,6,7,8,9};
 
 
 //* Deklaracje funkcji --------------------------------------------------------*/
@@ -60,6 +60,7 @@ int main(void){
 	HAL_Init();
 	SystemClock_Config();
 
+
 	// Leds
 	BSP_LED_Init(0);
 	BSP_LED_Init(1);
@@ -71,7 +72,6 @@ int main(void){
 	BSP_ACCELERO_Init();
 	// Lcd
 	LCD_Init();
-	GPIO_Init();
 	UART_Init(9600);
 
 	/* Configure EXTI Line0 (connected to PA0 pin) in interrupt mode */
@@ -79,10 +79,10 @@ int main(void){
 
 	//___________________________________
 	LED_StartSignal();
-	LCD_BUFF_Wrs(0,0,"ACC: 3-axis measurement");
+	LCD_BUFF_Wrs(0,0,"Chisel");
 	LCD_BUFF_Wrs(84,3,"CMSIS 4.2");
 	LCD_BUFF_Wrs(0,7,"SYSCLK:");
-	LCD_BUFF_Wrs(18*CHAR_WIDTH,7,"MHz");
+	LCD_BUFF_Wrs(18*CHAR_WIDTH,7,"Hz");
 	SystemCoreClockUpdate();
 	LCD_BUFF_Wrv_U32Dec(CHAR_WIDTH*8,7,SystemCoreClock);
 	LCD_Update();
@@ -98,6 +98,8 @@ int main(void){
 		LCD_BUFF_Wrv_S16Dec(0,5,AccelerationMeas[2]);
 		LCD_Update();
 		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_7, GPIO_PIN_RESET);
+		UART_MyHandle.Instance->DR = 0xaf;
+
 	}
 }
 
@@ -115,13 +117,12 @@ void UART_Init(uint32_t BaudRate){
 	UART_InitStructure.WordLength	= UART_WORDLENGTH_8B;
 
 	UART_MyHandle.Init = UART_InitStructure;
+	UART_MyHandle.Instance = UART5;					// Wybrać Moduł UART 4/5.
 
-	if(HAL_UART_Init(&UART_MyHandle) != HAL_OK){
+
+	if(HAL_UART_Init(&UART_MyHandle) != HAL_OK){	// HAL_UART_Init() wywołuje funkcję HAL_UART_MspInit(), która inicjalizje piny (low level initialisation)
 		Error_Handler();
 	}
-
-	__UART4_CLK_ENABLE();
-
 }
 // HAL_UART_IRQHandler()
 // HAL_UART_TxCpltCallback(),
