@@ -32,13 +32,14 @@
 // _________________________________________________
 	#define 	LCD_CONTROL_PORT					(GPIOB)
 	#define		LCD_DATA_PORT						(GPIOD)
+	#define		__LCD_CONTROL_PORT_CLK_ENABLE()		(__GPIOB_CLK_ENABLE())
+	#define		__LCD_DATA_PORT_CLK_ENABLE()		(__GPIOD_CLK_ENABLE())
 	#define 	LCD_WR_pin							(GPIO_PIN_5)
 	#define		LCD_A0_pin							(GPIO_PIN_4)
 	#define		LCD_RESET_pin 						(GPIO_PIN_7)
 	#define		LCD_CS_pin 							(GPIO_PIN_6)
 	#define   	LCD_DATA_PINS_OFFSET				(0)						// Przesuniecie pinow od pinu 0.
-	#define		__LCD_CONTROL_PORT_CLK_ENABLE()		(__GPIOB_CLK_ENABLE())
-	#define		__LCD_DATA_PORT_CLK_ENABLE()		(__GPIOD_CLK_ENABLE())
+
 	
 
 // _________________________________________________

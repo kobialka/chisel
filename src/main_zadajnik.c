@@ -1,4 +1,4 @@
-/* main_clk_start_v3.c */
+/* main_zadajnik.c */
 
 /*	autor:		Michal Kobialka, mmkobialka@gmail.com
  * 	data: 		05.01.2015
@@ -18,13 +18,23 @@
 #include "bsp/stm32f4_discovery.h"
 #include "bsp/stm32f4_discovery_accelerometer.h"
 #include "lcd/lib_S1D15705_m.h"
-
 #include <stdint.h>
+#include "string.h"
 
 
 /* Defines	------------------------------------------------------------------*/
+#define CYCLES 	(500000UL)
+#define TX_BUFF_SIZE 8
+#define RX_BUFF_SIZE 8
 
-#define CYCLES 	(500000UL);
+//___________________________________
+// ZMIENNE GLOBALNE:
+volatile uint8_t pucTxBuffer[10];
+volatile uint8_t pucRxBuffer[10] ={""};
+
+UART_HandleTypeDef huart4;
+HAL_StatusTypeDef HAL_Status;
+uint16_t u16Counter=0;
 
 
 //___________________________________
@@ -33,23 +43,12 @@ static void LED_StartSignal(void);
 static void Error_Handler(void);
 static void EXTILine0_Config(void);
 static void LED_StartSignal(void);
-//static void ACC_Init(void);
-
-static void GPIO_Init(void){
-	GPIO_InitTypeDef GPIO_InitStruct;
-	__GPIOC_CLK_ENABLE();
-
-	GPIO_InitStruct.Pin		= GPIO_PIN_7;
-	GPIO_InitStruct.Mode	= GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Pull	= GPIO_NOPULL;
-	GPIO_InitStruct.Speed	= GPIO_SPEED_LOW;
-	HAL_GPIO_Init(GPIOC,&GPIO_InitStruct);
-}
+static void ACC_Init(void);
+static void GPIO_Init(void);
+static void UART_InitWithIT(uint32_t MyBaudRate);
 
 //___________________________________
 int main(void){
-	int16_t	AccelerationMeas[]={0,0,0};
-
 
 	/*	1. HAL_Init();
 		2. HAL_RCC_OscConfig();
@@ -67,44 +66,48 @@ int main(void){
 
 	//___________________________________
 	// Wyprowadzenie sygnalow zegarowych na piny zewnetrzne.
-	HAL_RCC_MCOConfig(RCC_MCO2, RCC_MCO2SOURCE_SYSCLK,RCC_MCODIV_1);
-	HAL_RCC_MCOConfig(RCC_MCO1, RCC_MCO1SOURCE_HSI,RCC_MCODIV_1);
+	//HAL_RCC_MCOConfig(RCC_MCO2, RCC_MCO2SOURCE_SYSCLK,RCC_MCODIV_1);
+	//HAL_RCC_MCOConfig(RCC_MCO1, RCC_MCO1SOURCE_HSI,RCC_MCODIV_1);
 
 
 	//___________________________________
-	BSP_LED_Init(0);
-	BSP_LED_Init(1);
-	BSP_LED_Init(2);
-	BSP_LED_Init(3);
+	BSP_LED_Init(BLUE);
+	BSP_LED_Init(ORANGE);
+	BSP_LED_Init(GREEN);
+	BSP_LED_Init(RED);
 	BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO);
-	BSP_ACCELERO_Init();
+	//BSP_ACCELERO_Init();
 	LCD_Init();
 	GPIO_Init();
+	EXTILine0_Config();							/* Configure EXTI Line0 (connected to PA0 pin) in interrupt mode */
+	UART_InitWithIT(9600);
 
-	/* Configure EXTI Line0 (connected to PA0 pin) in interrupt mode */
-	EXTILine0_Config();
+
 
 	//___________________________________
 	LED_StartSignal();
-	LCD_BUFF_Wrs(0,0,"ACC: 3-axis measurement");
-	LCD_BUFF_Wrs(84,3,"CMSIS 4.2");
-	LCD_BUFF_Wrs(0,7,"SYSCLK:");
-	LCD_BUFF_Wrs(18*CHAR_WIDTH,7,"MHz");
-	SystemCoreClockUpdate();
-	LCD_BUFF_Wrv_U32Dec(CHAR_WIDTH*8,7,SystemCoreClock);
-	LCD_Update();
+//	LCD_BUFF_Wrs(0,0,"Zadajnik: 3-axis ac");
+//	LCD_BUFF_Wrs(84,3,"CMSIS 4.2");
+//	LCD_BUFF_Wrs(0,7,"SYSCLK:");
+//	LCD_BUFF_Wrs(18*CHAR_WIDTH,7,"MHz");
+//	SystemCoreClockUpdate();
+//	LCD_BUFF_Wrv_U32Dec(CHAR_WIDTH*8,7,SystemCoreClock);
+//	LCD_Update();
+	//__enable_irq();
 
-
+	BSP_LED_On(GREEN);
+//	HAL_UART_Receive_IT(&huart4,huart4.pRxBuffPtr,1);
+	HAL_UART_Receive_IT(&huart4,pucRxBuffer,1);
 
 	//___________________________________
 	while(1){
-		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_7, GPIO_PIN_SET);
-		BSP_ACCELERO_GetXYZ(AccelerationMeas);
-		LCD_BUFF_Wrv_S16Dec(0,3,AccelerationMeas[0]);
-		LCD_BUFF_Wrv_S16Dec(0,4,AccelerationMeas[1]);
-		LCD_BUFF_Wrv_S16Dec(0,5,AccelerationMeas[2]);
-		LCD_Update();
-		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_7, GPIO_PIN_RESET);
+//		HAL_UART_Transmit_IT(&huart4,huart4.pRxBuffPtr,1);
+		LCD_BUFF_Wrv_U16Dec(0,0,u16Counter);
+//		LCD_Update();
+//		HAL_Status = HAL_UART_Receive_IT(&huart4, huart4.pRxBuffPtr,RX_BUFF_SIZE);
+//		HAL_Status = HAL_UART_Receive(&huart4,huart4.pRxBuffPtr,1,10000);
+
+//		HAL_Status = HAL_UART_Transmit(&huart4, huart4.pRxBuffPtr,RX_BUFF_SIZE,10000);
 	}
 }
 
@@ -122,38 +125,42 @@ static void EXTILine0_Config(void){
   HAL_GPIO_Init(GPIOA, &GPIO_InitStructure);
 
   /* Enable and set EXTI Line0 Interrupt to the lowest priority */
-  HAL_NVIC_SetPriority(EXTI0_IRQn, 2, 0);
+  HAL_NVIC_SetPriority(EXTI0_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI0_IRQn);
 }
 
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
-  if(GPIO_Pin == GPIO_PIN_0){
-	  RCC_ClkInitTypeDef RCC_ClkInitStruct;
-	  if(__HAL_RCC_GET_SYSCLK_SOURCE() == RCC_CFGR_SWS_HSE){    	// Czy zrodlem SYSCLK jest HSE?
-		  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_SYSCLK;		// Jezeli zrodlem SYSCLK jest HSE to zmien na PLL.
-		  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
-		  if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK){
-			  /* Initialization Error */
-			  Error_Handler();
-		  }
-		  BSP_LED_Off(BLUE);
-		  BSP_LED_On(ORANGE);
-	  }
-	  else{													// Jezeli zrodlem SYSCLK jest PLL to zmien na HSE.
-		  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_SYSCLK;		// Jezeli zrodlem SYSCLK jest HSE to zmien na PLL.
-		  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSE;
-		  if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK){
-			  /* Initialization Error */
-			  Error_Handler();
-		  }
-		  BSP_LED_On(BLUE);
-		  BSP_LED_Off(ORANGE);
-	  }
-	  SystemCoreClockUpdate();
-	  LCD_BUFF_Wrv_U32Dec(CHAR_WIDTH*8,7,SystemCoreClock);
-	  LCD_Update();
-  }
+
+
+
+static void GPIO_Init(void){
+	GPIO_InitTypeDef GPIO_InitStruct;
+	__GPIOC_CLK_ENABLE();
+
+	GPIO_InitStruct.Pin		= GPIO_PIN_7;
+	GPIO_InitStruct.Mode	= GPIO_MODE_OUTPUT_PP;
+	GPIO_InitStruct.Pull	= GPIO_NOPULL;
+	GPIO_InitStruct.Speed	= GPIO_SPEED_LOW;
+	HAL_GPIO_Init(GPIOC,&GPIO_InitStruct);
 }
+
+
+static void UART_InitWithIT(uint32_t MyBaudRate){
+	huart4.Instance = UART4;
+	huart4.Init.BaudRate = MyBaudRate;
+	huart4.Init.WordLength = UART_WORDLENGTH_8B;
+	huart4.Init.StopBits = UART_STOPBITS_1;
+	huart4.Init.Parity = UART_PARITY_NONE;
+	huart4.Init.Mode = UART_MODE_TX_RX;
+	huart4.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+	huart4.Init.OverSampling = UART_OVERSAMPLING_16;
+
+	huart4.pRxBuffPtr = pucRxBuffer;
+	huart4.pTxBuffPtr = pucTxBuffer;
+	huart4.RxXferSize = RX_BUFF_SIZE;
+	huart4.TxXferSize = TX_BUFF_SIZE;
+	HAL_UART_Init(&huart4);
+}
+
 
 
 //___________________________________

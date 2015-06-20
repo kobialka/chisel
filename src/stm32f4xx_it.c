@@ -42,6 +42,9 @@
 #include "stm32f4xx_it.h"
 #include "bsp/stm32f4_discovery.h"
 
+extern volatile uint8_t pucTxBuffer[];
+extern volatile uint8_t pucRxBuffer[];
+
 #ifdef _RTE_
 #include "RTE_Components.h"             // Component selection
 #endif
@@ -61,6 +64,12 @@
 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
+
+
+/* External variables --------------------------------------------------------*/
+extern UART_HandleTypeDef huart4;
+extern uint16_t u16Counter;
+
 
 /******************************************************************************/
 /*            Cortex-M4 Processor Exceptions Handlers                         */
@@ -167,9 +176,7 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
   HAL_IncTick();
-  if( 0 == (HAL_GetTick()%1000) ){
-	  BSP_LED_Toggle(GREEN);
-  }
+  u16Counter++;
 }
 #endif
 
@@ -182,14 +189,73 @@ void SysTick_Handler(void)
 /*  file (startup_stm32f4xx.s).                                               */
 /******************************************************************************/
 
+//___________________________________
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
+	BSP_LED_Toggle(RED);
+	LCD_Update();
+	HAL_UART_Receive_IT(&huart4,pucRxBuffer,1);
+	CopyString(pucRxBuffer, pucTxBuffer);
+	HAL_UART_Transmit_IT(&huart4,pucTxBuffer,1);
+}
+
+
+//___________________________________
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart){
+
+}
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
+  if(GPIO_Pin == GPIO_PIN_0){
+	  BSP_LED_Toggle(BLUE);
+//	  RCC_ClkInitTypeDef RCC_ClkInitStruct;
+//	  if(__HAL_RCC_GET_SYSCLK_SOURCE() == RCC_CFGR_SWS_HSE){    	// Czy zrodlem SYSCLK jest HSE?
+//		  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_SYSCLK;		// Jezeli zrodlem SYSCLK jest HSE to zmien na PLL.
+//		  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+//		  if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK){
+//			  /* Initialization Error */
+//			  Error_Handler();
+//		  }
+//		  BSP_LED_Off(BLUE);
+//		  BSP_LED_On(ORANGE);
+//	  }
+//	  else{													// Jezeli zrodlem SYSCLK jest PLL to zmien na HSE.
+//		  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_SYSCLK;		// Jezeli zrodlem SYSCLK jest HSE to zmien na PLL.
+//		  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSE;
+//		  if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK){
+//			  /* Initialization Error */
+//			  Error_Handler();
+//		  }
+//		  BSP_LED_On(BLUE);
+//		  BSP_LED_Off(ORANGE);
+//	  }
+//	  SystemCoreClockUpdate();
+//	  LCD_BUFF_Wrv_U32Dec(CHAR_WIDTH*8,7,SystemCoreClock);
+//	  LCD_Update();
+  }
+}
+
+
+
+
 /**
   * @brief  This function handles External line 0 interrupt request.
-  * @param  None
+  * @param  none
   * @retval None
   */
 void EXTI0_IRQHandler(void)
 {
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
+}
+
+
+/**
+  * @brief  This function handles UART 4 interrupt request.
+  * @param  none
+  * @retval None
+  */
+void UART4_IRQHandler(void)
+{
+	HAL_UART_IRQHandler(&huart4);
 }
 
 
