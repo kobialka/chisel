@@ -113,12 +113,14 @@ void HAL_MspDeInit(void)
 
 void HAL_UART_MspInit(UART_HandleTypeDef* huart)
 {
-
   GPIO_InitTypeDef GPIO_InitStruct;
+
   if(huart->Instance==UART4)
   {
      /* Peripheral clock enable */
     __UART4_CLK_ENABLE();
+    __GPIOA_CLK_ENABLE();
+    __GPIOC_CLK_ENABLE();
 
     /**UART4 GPIO Configuration
 	PA1     ------> UART4_RX

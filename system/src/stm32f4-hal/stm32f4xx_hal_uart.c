@@ -1128,6 +1128,7 @@ HAL_StatusTypeDef HAL_UART_DMAStop(UART_HandleTypeDef *huart)
   */
 void HAL_UART_IRQHandler(UART_HandleTypeDef *huart)
 {
+
   uint32_t tmp1 = 0, tmp2 = 0;
 
   tmp1 = __HAL_UART_GET_FLAG(huart, UART_FLAG_PE);

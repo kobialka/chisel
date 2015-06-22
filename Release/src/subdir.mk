@@ -4,22 +4,28 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../src/command_decoder.c \
 ../src/main_zadajnik.c \
 ../src/stm32f4xx_hal_msp.c \
 ../src/stm32f4xx_it.c \
-../src/string.c 
+../src/string.c \
+../src/uart.c 
 
 OBJS += \
+./src/command_decoder.o \
 ./src/main_zadajnik.o \
 ./src/stm32f4xx_hal_msp.o \
 ./src/stm32f4xx_it.o \
-./src/string.o 
+./src/string.o \
+./src/uart.o 
 
 C_DEPS += \
+./src/command_decoder.d \
 ./src/main_zadajnik.d \
 ./src/stm32f4xx_hal_msp.d \
 ./src/stm32f4xx_it.d \
-./src/string.d 
+./src/string.d \
+./src/uart.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

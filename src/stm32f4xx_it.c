@@ -41,10 +41,9 @@
 #include "stm32f4xx_hal.h"
 #include "stm32f4xx_it.h"
 #include "bsp/stm32f4_discovery.h"
+#include "uart.h"
 
-extern volatile uint8_t pucTxBuffer[];
-extern volatile uint8_t pucRxBuffer[];
-
+#include "stm32f4xx_hal_uart.h"
 #ifdef _RTE_
 #include "RTE_Components.h"             // Component selection
 #endif
@@ -189,19 +188,48 @@ void SysTick_Handler(void)
 /*  file (startup_stm32f4xx.s).                                               */
 /******************************************************************************/
 
-//___________________________________
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
-	BSP_LED_Toggle(RED);
-	LCD_Update();
-	HAL_UART_Receive_IT(&huart4,pucRxBuffer,1);
-	CopyString(pucRxBuffer, pucTxBuffer);
-	HAL_UART_Transmit_IT(&huart4,pucTxBuffer,1);
+/**
+  * @brief  This function handles UART 4 interrupt request.
+  * @param  none
+  * @retval None
+  */
+void UART4_IRQHandler(void){
+//	HAL_UART_IRQHandler(&huart4);
+	uint32_t tmp1 = 0, tmp2 = 0;
+
+	/* UART Receiver INT ---------------------------------------------------*/
+	tmp1 = __HAL_UART_GET_FLAG(&huart4, UART_FLAG_RXNE);			// czy flaga jest ustawiona
+	tmp2 = __HAL_UART_GET_IT_SOURCE(&huart4, UART_IT_RXNE);			// czy przerwanie RXNE jest włączone
+	if((tmp1 != RESET) && (tmp2 != RESET)){
+		BSP_LED_Toggle(RED);
+		Reciever_PutCharacterToBuffer(huart4.Instance->DR);
+	}
+	/* UART Transmitter INT ------------------------------------------------*/
+	tmp1 = __HAL_UART_GET_FLAG(&huart4, UART_FLAG_TXE);				// czy flaga jest ustawiona. Flaga TXE jest ustawiona zawsze gdy TDR jest puste, więc zgłaszane będzie przerwanie. Dlatego po wysłaniu ostatniego bajtu wyłączamy przerwanie TXE(IE).
+	tmp2 = __HAL_UART_GET_IT_SOURCE(&huart4, UART_IT_TXE);			// czy przerwanie TXE jest włączone
+	if((tmp1 != RESET) && (tmp2 != RESET)){
+		char cCharacter = Transmiter_GetCharacterFromBuffer ();
+
+		BSP_LED_Toggle(ORANGE);
+		if ( NULL != cCharacter ){
+			huart4.Instance->DR = cCharacter;
+		}
+	}
 }
 
 
-//___________________________________
-void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart){
 
+
+
+
+/**
+  * @brief  This function handles External line 0 interrupt request.
+  * @param  none
+  * @retval None
+  */
+void EXTI0_IRQHandler(void)
+{
+  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
 }
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
@@ -233,32 +261,6 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 //	  LCD_Update();
   }
 }
-
-
-
-
-/**
-  * @brief  This function handles External line 0 interrupt request.
-  * @param  none
-  * @retval None
-  */
-void EXTI0_IRQHandler(void)
-{
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
-}
-
-
-/**
-  * @brief  This function handles UART 4 interrupt request.
-  * @param  none
-  * @retval None
-  */
-void UART4_IRQHandler(void)
-{
-	HAL_UART_IRQHandler(&huart4);
-}
-
-
 /**
   * @brief  This function handles PPP interrupt request.
   * @param  None
