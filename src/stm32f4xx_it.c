@@ -67,7 +67,6 @@
 
 /* External variables --------------------------------------------------------*/
 extern UART_HandleTypeDef huart4;
-extern uint16_t u16Counter;
 
 
 /******************************************************************************/
@@ -175,7 +174,6 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
   HAL_IncTick();
-  u16Counter++;
 }
 #endif
 
@@ -201,7 +199,6 @@ void UART4_IRQHandler(void){
 	tmp1 = __HAL_UART_GET_FLAG(&huart4, UART_FLAG_RXNE);			// czy flaga jest ustawiona
 	tmp2 = __HAL_UART_GET_IT_SOURCE(&huart4, UART_IT_RXNE);			// czy przerwanie RXNE jest włączone
 	if((tmp1 != RESET) && (tmp2 != RESET)){
-		BSP_LED_Toggle(RED);
 		Reciever_PutCharacterToBuffer(huart4.Instance->DR);
 	}
 	/* UART Transmitter INT ------------------------------------------------*/
@@ -210,7 +207,6 @@ void UART4_IRQHandler(void){
 	if((tmp1 != RESET) && (tmp2 != RESET)){
 		char cCharacter = Transmiter_GetCharacterFromBuffer ();
 
-		BSP_LED_Toggle(ORANGE);
 		if ( NULL != cCharacter ){
 			huart4.Instance->DR = cCharacter;
 		}
@@ -234,7 +230,7 @@ void EXTI0_IRQHandler(void)
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
   if(GPIO_Pin == GPIO_PIN_0){
-	  BSP_LED_Toggle(BLUE);
+	  BSP_LED_Toggle(ORANGE);
 //	  RCC_ClkInitTypeDef RCC_ClkInitStruct;
 //	  if(__HAL_RCC_GET_SYSCLK_SOURCE() == RCC_CFGR_SWS_HSE){    	// Czy zrodlem SYSCLK jest HSE?
 //		  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_SYSCLK;		// Jezeli zrodlem SYSCLK jest HSE to zmien na PLL.

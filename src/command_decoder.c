@@ -21,6 +21,9 @@ tKeyword 					asKeywordList[MAX_KEYWORD_NR] = 									// asKeywordList jest tab
 {
 	{CALC,"calc"},
 	{ID,"id"},
+	{LIS3DSH_GETXYZ, "acc_get"},
+	{LIS3DSH_START, "acc_start"},
+	{LIS3DSH_STOP, "acc_stop"},
 };
 
 

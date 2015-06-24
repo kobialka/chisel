@@ -24,34 +24,30 @@
 #include "uart.h"
 
 /* Defines	------------------------------------------------------------------*/
-#define CYCLES 	(500000UL)
-
+#define ACC_XYZ_BUFF_SIZE 3
 
 //___________________________________
 // ZMIENNE GLOBALNE:
 extern	tToken				asToken[MAX_TOKEN_NR];	// tablica tokenów.
 extern unsigned char 		ucTokenNr;		// ilosc nalezionych tokenow.
 
-char 						Hal_RxBuff[1];
-char						Hal_TxBuff[1];
+uint8_t 					Hal_RxBuff[1];
+uint8_t						Hal_TxBuff[1];
+uint8_t						pcMessageBuffer[UART_RECIEVER_SIZE];
+int16_t						pACC_XYZ_BUFF[ACC_XYZ_BUFF_SIZE];
+tToken 						*psToken = asToken;
 UART_HandleTypeDef			huart4;
 HAL_StatusTypeDef 			HAL_Status;
-uint16_t 					u16Counter = 0;
-char 						acMessageBuffer[UART_RECIEVER_SIZE];
-tToken 						*psToken = asToken;
-
-uint8_t						fCalc = 0, fId = 0, fUnknownCommand = 0,fProvideData = 0;
+uint8_t						fCalc = 0, fId = 0, fOk = 0; fUnknownCommand = 0,fProvideData = 0; fAccGotXYZ = 0;
 
 
 
 //___________________________________
 static void SystemClock_Config(void);
 static void LED_StartSignal(void);
-static void Error_Handler(void);
 static void LED_StartSignal(void);
-//static void ACC_Init(void);
 static void GPIO_Init(void);
-
+static void Error_Handler(void);
 
 
 
@@ -72,11 +68,18 @@ int main(void){
 	//HAL_RCC_MCOConfig(RCC_MCO1, RCC_MCO1SOURCE_HSI,RCC_MCODIV_1);
 	LED_StartSignal();
 	BSP_LED_On(GREEN);
+	BSP_ACCELERO_Init();
 
+	LCD_BUFF_Wrs(0,0, "Zadajnik_v0.0.1 ");
+	LCD_BUFF_Wrs(160-9*6,1,"CMSIS 4.2");
+	LCD_BUFF_Wrs(160-11*6,2,"STM32F407VG");
+	LCD_BUFF_Wrs(0,3,"X = ");
+	LCD_BUFF_Wrs(0,4,"Y = ");
+	LCD_BUFF_Wrs(0,5,"Z = ");
+	LCD_BUFF_Wrs(85,5,"1. acc_get");
+	LCD_BUFF_Wrs(85,6,"2. acc_start");
+	LCD_BUFF_Wrs(85,7,"2. acc_stop");
 
-
-    /* Enable the UART Data Register not empty Interrupt */
-    __HAL_UART_ENABLE_IT(&huart4, UART_IT_RXNE);
 
 //     UART4->DR = 0xaf;  // DZIAŁA
 //	huart4.Instance->DR = 0xaf;
@@ -88,6 +91,10 @@ int main(void){
 			if(1 == fId){
 				Transmiter_SendString("id stm32f407VG\n");
 				fId = 0;
+			}
+			else if(1 == fOk){
+				Transmiter_SendString("OK\n");
+				fOk = 0;
 			}
 			else if(1 == fCalc){
 				char pcTempString[17] = "calc ";
@@ -108,8 +115,8 @@ int main(void){
 			}
 		}
 		if(eReciever_GetStatus() == READY){
-			Reciever_GetStringCopy(acMessageBuffer);
-			DecodeMsg(acMessageBuffer);
+			Reciever_GetStringCopy(pcMessageBuffer);
+			DecodeMsg(pcMessageBuffer);
 
 			if((0 != ucTokenNr) && (KEYWORD == psToken->eType) ){
 				switch(psToken->uValue.eKeyword){
@@ -124,6 +131,20 @@ int main(void){
 					case ID:
 						fId = 1;
 						break;
+					case LIS3DSH_GETXYZ:
+						BSP_LED_On(BLUE);
+						BSP_ACCELERO_GetXYZ(pACC_XYZ_BUFF);
+						HAL_Delay(100);
+						BSP_LED_Off(BLUE);
+						LCD_BUFF_Wrv_S16Dec(0,3,pACC_XYZ_BUFF[0]);
+						LCD_BUFF_Wrv_S16Dec(0,4,pACC_XYZ_BUFF[1]);
+						LCD_BUFF_Wrv_S16Dec(0,5,pACC_XYZ_BUFF[2]);
+						LCD_Update();
+						fOk = 1;
+						break;
+					default:
+						BSP_LED_Toggle(ORANGE);
+					    break;
 				}
 			}
 			else {
@@ -178,31 +199,26 @@ void SystemClock_Config(void){
 void LED_StartSignal(void)
 {
 
-	uint32_t TempVar1;
+	uint32_t u32WaitTime_ms = 150;
 
 	BSP_LED_On(GREEN);
-	TempVar1 = CYCLES;
-	while(--TempVar1);
+	HAL_Delay(u32WaitTime_ms);
 	BSP_LED_Off(GREEN);
 
 	BSP_LED_On(ORANGE);
-	TempVar1 = CYCLES;
-	while(--TempVar1);
+	HAL_Delay(u32WaitTime_ms);
 	BSP_LED_Off(ORANGE);
 
 	BSP_LED_On(RED);
-	TempVar1 = CYCLES;
-	while(--TempVar1);
+	HAL_Delay(u32WaitTime_ms);
 	BSP_LED_Off(RED);
 
 	BSP_LED_On(BLUE);
-	TempVar1 = CYCLES;
-	while(--TempVar1);
+	HAL_Delay(u32WaitTime_ms);
 	BSP_LED_Off(BLUE);
 
 	BSP_LED_On(GREEN);
-	TempVar1 = CYCLES;
-	while(--TempVar1);
+	HAL_Delay(u32WaitTime_ms);
 	BSP_LED_Off(GREEN);
 }
 
@@ -210,7 +226,8 @@ void LED_StartSignal(void)
 //___________________________________
 static void Error_Handler(void)
 {
-  /* Turn LED5 (RED) on */
+
+	BSP_LED_Off(GREEN);
 	BSP_LED_On(RED);
 	while(1){
 	}

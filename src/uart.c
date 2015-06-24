@@ -44,20 +44,6 @@ void UART_InitWithInt(uint32_t MyBaudRate){
 	huart4.RxXferSize = 1;
 	huart4.TxXferSize = 1;
 	HAL_UART_Init(&huart4);
-
-	/* SR */
-
-	/* DR */
-
-	/* BRR */
-
-	/* CR1 */
-
-	/* CR2 */
-
-	/* CR3 */
-
-	/* GTPR */
 }
 
 

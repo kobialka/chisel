@@ -143,6 +143,9 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
   /* Peripheral interrupt init*/
 	HAL_NVIC_SetPriority(UART4_IRQn, 0, 0);
 	HAL_NVIC_EnableIRQ(UART4_IRQn);
+
+    /* Enable the UART Data Register not empty Interrupt */
+    __HAL_UART_ENABLE_IT(&huart4, UART_IT_RXNE);
   }
 }
 
