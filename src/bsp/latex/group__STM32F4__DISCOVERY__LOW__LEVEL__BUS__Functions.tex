@@ -1,0 +1,194 @@
+\hypertarget{group__STM32F4__DISCOVERY__LOW__LEVEL__BUS__Functions}{\section{S\-T\-M32\-F4\-\_\-\-D\-I\-S\-C\-O\-V\-E\-R\-Y\-\_\-\-L\-O\-W\-\_\-\-L\-E\-V\-E\-L\-\_\-\-B\-U\-S\-\_\-\-Functions}
+\label{group__STM32F4__DISCOVERY__LOW__LEVEL__BUS__Functions}\index{S\-T\-M32\-F4\-\_\-\-D\-I\-S\-C\-O\-V\-E\-R\-Y\-\_\-\-L\-O\-W\-\_\-\-L\-E\-V\-E\-L\-\_\-\-B\-U\-S\-\_\-\-Functions@{S\-T\-M32\-F4\-\_\-\-D\-I\-S\-C\-O\-V\-E\-R\-Y\-\_\-\-L\-O\-W\-\_\-\-L\-E\-V\-E\-L\-\_\-\-B\-U\-S\-\_\-\-Functions}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__STM32F4__DISCOVERY__LOW__LEVEL__BUS__Functions_gaeb312e0ba50244c3008de6441167f181}{A\-C\-C\-E\-L\-E\-R\-O\-\_\-\-I\-O\-\_\-\-Init} (void)
+\begin{DoxyCompactList}\small\item\em Configures the Accelerometer S\-P\-I interface. \end{DoxyCompactList}\item 
+void \hyperlink{group__STM32F4__DISCOVERY__LOW__LEVEL__BUS__Functions_gacb0cf2419ee11c6c47c694e80f1e217b}{A\-C\-C\-E\-L\-E\-R\-O\-\_\-\-I\-O\-\_\-\-I\-T\-Config} (void)
+\begin{DoxyCompactList}\small\item\em Configures the Accelerometer I\-N\-T2. E\-X\-T\-I0 is already used by user button so I\-N\-T1 is not configured here. \end{DoxyCompactList}\item 
+void \hyperlink{group__STM32F4__DISCOVERY__LOW__LEVEL__BUS__Functions_gaeedea8061d4abde8cd304b454334ae42}{A\-C\-C\-E\-L\-E\-R\-O\-\_\-\-I\-O\-\_\-\-Write} (uint8\-\_\-t $\ast$p\-Buffer, uint8\-\_\-t Write\-Addr, uint16\-\_\-t Num\-Byte\-To\-Write)
+\begin{DoxyCompactList}\small\item\em Writes one byte to the Accelerometer. \end{DoxyCompactList}\item 
+void \hyperlink{group__STM32F4__DISCOVERY__LOW__LEVEL__BUS__Functions_ga78371d00a01f2a0cdd613306e4c4e58f}{A\-C\-C\-E\-L\-E\-R\-O\-\_\-\-I\-O\-\_\-\-Read} (uint8\-\_\-t $\ast$p\-Buffer, uint8\-\_\-t Read\-Addr, uint16\-\_\-t Num\-Byte\-To\-Read)
+\begin{DoxyCompactList}\small\item\em Reads a block of data from the Accelerometer. \end{DoxyCompactList}\item 
+void \hyperlink{group__STM32F4__DISCOVERY__LOW__LEVEL__BUS__Functions_gace44c34a627a0fb28c61366b9ca80b78}{A\-U\-D\-I\-O\-\_\-\-I\-O\-\_\-\-Init} (void)
+\begin{DoxyCompactList}\small\item\em Initializes Audio low level. \end{DoxyCompactList}\item 
+void \hyperlink{group__STM32F4__DISCOVERY__LOW__LEVEL__BUS__Functions_ga269d6aa92989351e75f6d58378e3b9ba}{A\-U\-D\-I\-O\-\_\-\-I\-O\-\_\-\-Write} (uint8\-\_\-t Addr, uint8\-\_\-t Reg, uint8\-\_\-t Value)
+\begin{DoxyCompactList}\small\item\em Writes a single data. \end{DoxyCompactList}\item 
+uint8\-\_\-t \hyperlink{group__STM32F4__DISCOVERY__LOW__LEVEL__BUS__Functions_gaf8740cdd8dfc7929d23d52d6fcf0901f}{A\-U\-D\-I\-O\-\_\-\-I\-O\-\_\-\-Read} (uint8\-\_\-t Addr, uint8\-\_\-t Reg)
+\begin{DoxyCompactList}\small\item\em Reads a single data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+\subsection{Function Documentation}
+\hypertarget{group__STM32F4__DISCOVERY__LOW__LEVEL__BUS__Functions_gaeb312e0ba50244c3008de6441167f181}{\index{S\-T\-M32\-F4\-\_\-\-D\-I\-S\-C\-O\-V\-E\-R\-Y\-\_\-\-L\-O\-W\-\_\-\-L\-E\-V\-E\-L\-\_\-\-B\-U\-S\-\_\-\-Functions@{S\-T\-M32\-F4\-\_\-\-D\-I\-S\-C\-O\-V\-E\-R\-Y\-\_\-\-L\-O\-W\-\_\-\-L\-E\-V\-E\-L\-\_\-\-B\-U\-S\-\_\-\-Functions}!A\-C\-C\-E\-L\-E\-R\-O\-\_\-\-I\-O\-\_\-\-Init@{A\-C\-C\-E\-L\-E\-R\-O\-\_\-\-I\-O\-\_\-\-Init}}
+\index{A\-C\-C\-E\-L\-E\-R\-O\-\_\-\-I\-O\-\_\-\-Init@{A\-C\-C\-E\-L\-E\-R\-O\-\_\-\-I\-O\-\_\-\-Init}!STM32F4_DISCOVERY_LOW_LEVEL_BUS_Functions@{S\-T\-M32\-F4\-\_\-\-D\-I\-S\-C\-O\-V\-E\-R\-Y\-\_\-\-L\-O\-W\-\_\-\-L\-E\-V\-E\-L\-\_\-\-B\-U\-S\-\_\-\-Functions}}
+\subsubsection[{A\-C\-C\-E\-L\-E\-R\-O\-\_\-\-I\-O\-\_\-\-Init}]{\setlength{\rightskip}{0pt plus 5cm}void A\-C\-C\-E\-L\-E\-R\-O\-\_\-\-I\-O\-\_\-\-Init (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{group__STM32F4__DISCOVERY__LOW__LEVEL__BUS__Functions_gaeb312e0ba50244c3008de6441167f181}
+
+
+Configures the Accelerometer S\-P\-I interface. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\hypertarget{group__STM32F4__DISCOVERY__LOW__LEVEL__BUS__Functions_gacb0cf2419ee11c6c47c694e80f1e217b}{\index{S\-T\-M32\-F4\-\_\-\-D\-I\-S\-C\-O\-V\-E\-R\-Y\-\_\-\-L\-O\-W\-\_\-\-L\-E\-V\-E\-L\-\_\-\-B\-U\-S\-\_\-\-Functions@{S\-T\-M32\-F4\-\_\-\-D\-I\-S\-C\-O\-V\-E\-R\-Y\-\_\-\-L\-O\-W\-\_\-\-L\-E\-V\-E\-L\-\_\-\-B\-U\-S\-\_\-\-Functions}!A\-C\-C\-E\-L\-E\-R\-O\-\_\-\-I\-O\-\_\-\-I\-T\-Config@{A\-C\-C\-E\-L\-E\-R\-O\-\_\-\-I\-O\-\_\-\-I\-T\-Config}}
+\index{A\-C\-C\-E\-L\-E\-R\-O\-\_\-\-I\-O\-\_\-\-I\-T\-Config@{A\-C\-C\-E\-L\-E\-R\-O\-\_\-\-I\-O\-\_\-\-I\-T\-Config}!STM32F4_DISCOVERY_LOW_LEVEL_BUS_Functions@{S\-T\-M32\-F4\-\_\-\-D\-I\-S\-C\-O\-V\-E\-R\-Y\-\_\-\-L\-O\-W\-\_\-\-L\-E\-V\-E\-L\-\_\-\-B\-U\-S\-\_\-\-Functions}}
+\subsubsection[{A\-C\-C\-E\-L\-E\-R\-O\-\_\-\-I\-O\-\_\-\-I\-T\-Config}]{\setlength{\rightskip}{0pt plus 5cm}void A\-C\-C\-E\-L\-E\-R\-O\-\_\-\-I\-O\-\_\-\-I\-T\-Config (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{group__STM32F4__DISCOVERY__LOW__LEVEL__BUS__Functions_gacb0cf2419ee11c6c47c694e80f1e217b}
+
+
+Configures the Accelerometer I\-N\-T2. E\-X\-T\-I0 is already used by user button so I\-N\-T1 is not configured here. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\hypertarget{group__STM32F4__DISCOVERY__LOW__LEVEL__BUS__Functions_ga78371d00a01f2a0cdd613306e4c4e58f}{\index{S\-T\-M32\-F4\-\_\-\-D\-I\-S\-C\-O\-V\-E\-R\-Y\-\_\-\-L\-O\-W\-\_\-\-L\-E\-V\-E\-L\-\_\-\-B\-U\-S\-\_\-\-Functions@{S\-T\-M32\-F4\-\_\-\-D\-I\-S\-C\-O\-V\-E\-R\-Y\-\_\-\-L\-O\-W\-\_\-\-L\-E\-V\-E\-L\-\_\-\-B\-U\-S\-\_\-\-Functions}!A\-C\-C\-E\-L\-E\-R\-O\-\_\-\-I\-O\-\_\-\-Read@{A\-C\-C\-E\-L\-E\-R\-O\-\_\-\-I\-O\-\_\-\-Read}}
+\index{A\-C\-C\-E\-L\-E\-R\-O\-\_\-\-I\-O\-\_\-\-Read@{A\-C\-C\-E\-L\-E\-R\-O\-\_\-\-I\-O\-\_\-\-Read}!STM32F4_DISCOVERY_LOW_LEVEL_BUS_Functions@{S\-T\-M32\-F4\-\_\-\-D\-I\-S\-C\-O\-V\-E\-R\-Y\-\_\-\-L\-O\-W\-\_\-\-L\-E\-V\-E\-L\-\_\-\-B\-U\-S\-\_\-\-Functions}}
+\subsubsection[{A\-C\-C\-E\-L\-E\-R\-O\-\_\-\-I\-O\-\_\-\-Read}]{\setlength{\rightskip}{0pt plus 5cm}void A\-C\-C\-E\-L\-E\-R\-O\-\_\-\-I\-O\-\_\-\-Read (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t $\ast$}]{p\-Buffer, }
+\item[{uint8\-\_\-t}]{Read\-Addr, }
+\item[{uint16\-\_\-t}]{Num\-Byte\-To\-Read}
+\end{DoxyParamCaption}
+)}}\label{group__STM32F4__DISCOVERY__LOW__LEVEL__BUS__Functions_ga78371d00a01f2a0cdd613306e4c4e58f}
+
+
+Reads a block of data from the Accelerometer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\-Buffer} & pointer to the buffer that receives the data read from the Accelerometer. \\
+\hline
+{\em Read\-Addr} & Accelerometer's internal address to read from. \\
+\hline
+{\em Num\-Byte\-To\-Read} & number of bytes to read from the Accelerometer. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\hypertarget{group__STM32F4__DISCOVERY__LOW__LEVEL__BUS__Functions_gaeedea8061d4abde8cd304b454334ae42}{\index{S\-T\-M32\-F4\-\_\-\-D\-I\-S\-C\-O\-V\-E\-R\-Y\-\_\-\-L\-O\-W\-\_\-\-L\-E\-V\-E\-L\-\_\-\-B\-U\-S\-\_\-\-Functions@{S\-T\-M32\-F4\-\_\-\-D\-I\-S\-C\-O\-V\-E\-R\-Y\-\_\-\-L\-O\-W\-\_\-\-L\-E\-V\-E\-L\-\_\-\-B\-U\-S\-\_\-\-Functions}!A\-C\-C\-E\-L\-E\-R\-O\-\_\-\-I\-O\-\_\-\-Write@{A\-C\-C\-E\-L\-E\-R\-O\-\_\-\-I\-O\-\_\-\-Write}}
+\index{A\-C\-C\-E\-L\-E\-R\-O\-\_\-\-I\-O\-\_\-\-Write@{A\-C\-C\-E\-L\-E\-R\-O\-\_\-\-I\-O\-\_\-\-Write}!STM32F4_DISCOVERY_LOW_LEVEL_BUS_Functions@{S\-T\-M32\-F4\-\_\-\-D\-I\-S\-C\-O\-V\-E\-R\-Y\-\_\-\-L\-O\-W\-\_\-\-L\-E\-V\-E\-L\-\_\-\-B\-U\-S\-\_\-\-Functions}}
+\subsubsection[{A\-C\-C\-E\-L\-E\-R\-O\-\_\-\-I\-O\-\_\-\-Write}]{\setlength{\rightskip}{0pt plus 5cm}void A\-C\-C\-E\-L\-E\-R\-O\-\_\-\-I\-O\-\_\-\-Write (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t $\ast$}]{p\-Buffer, }
+\item[{uint8\-\_\-t}]{Write\-Addr, }
+\item[{uint16\-\_\-t}]{Num\-Byte\-To\-Write}
+\end{DoxyParamCaption}
+)}}\label{group__STM32F4__DISCOVERY__LOW__LEVEL__BUS__Functions_gaeedea8061d4abde8cd304b454334ae42}
+
+
+Writes one byte to the Accelerometer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\-Buffer} & pointer to the buffer containing the data to be written to the Accelerometer. \\
+\hline
+{\em Write\-Addr} & Accelerometer's internal address to write to. \\
+\hline
+{\em Num\-Byte\-To\-Write} & Number of bytes to write. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\hypertarget{group__STM32F4__DISCOVERY__LOW__LEVEL__BUS__Functions_gace44c34a627a0fb28c61366b9ca80b78}{\index{S\-T\-M32\-F4\-\_\-\-D\-I\-S\-C\-O\-V\-E\-R\-Y\-\_\-\-L\-O\-W\-\_\-\-L\-E\-V\-E\-L\-\_\-\-B\-U\-S\-\_\-\-Functions@{S\-T\-M32\-F4\-\_\-\-D\-I\-S\-C\-O\-V\-E\-R\-Y\-\_\-\-L\-O\-W\-\_\-\-L\-E\-V\-E\-L\-\_\-\-B\-U\-S\-\_\-\-Functions}!A\-U\-D\-I\-O\-\_\-\-I\-O\-\_\-\-Init@{A\-U\-D\-I\-O\-\_\-\-I\-O\-\_\-\-Init}}
+\index{A\-U\-D\-I\-O\-\_\-\-I\-O\-\_\-\-Init@{A\-U\-D\-I\-O\-\_\-\-I\-O\-\_\-\-Init}!STM32F4_DISCOVERY_LOW_LEVEL_BUS_Functions@{S\-T\-M32\-F4\-\_\-\-D\-I\-S\-C\-O\-V\-E\-R\-Y\-\_\-\-L\-O\-W\-\_\-\-L\-E\-V\-E\-L\-\_\-\-B\-U\-S\-\_\-\-Functions}}
+\subsubsection[{A\-U\-D\-I\-O\-\_\-\-I\-O\-\_\-\-Init}]{\setlength{\rightskip}{0pt plus 5cm}void A\-U\-D\-I\-O\-\_\-\-I\-O\-\_\-\-Init (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{group__STM32F4__DISCOVERY__LOW__LEVEL__BUS__Functions_gace44c34a627a0fb28c61366b9ca80b78}
+
+
+Initializes Audio low level. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\hypertarget{group__STM32F4__DISCOVERY__LOW__LEVEL__BUS__Functions_gaf8740cdd8dfc7929d23d52d6fcf0901f}{\index{S\-T\-M32\-F4\-\_\-\-D\-I\-S\-C\-O\-V\-E\-R\-Y\-\_\-\-L\-O\-W\-\_\-\-L\-E\-V\-E\-L\-\_\-\-B\-U\-S\-\_\-\-Functions@{S\-T\-M32\-F4\-\_\-\-D\-I\-S\-C\-O\-V\-E\-R\-Y\-\_\-\-L\-O\-W\-\_\-\-L\-E\-V\-E\-L\-\_\-\-B\-U\-S\-\_\-\-Functions}!A\-U\-D\-I\-O\-\_\-\-I\-O\-\_\-\-Read@{A\-U\-D\-I\-O\-\_\-\-I\-O\-\_\-\-Read}}
+\index{A\-U\-D\-I\-O\-\_\-\-I\-O\-\_\-\-Read@{A\-U\-D\-I\-O\-\_\-\-I\-O\-\_\-\-Read}!STM32F4_DISCOVERY_LOW_LEVEL_BUS_Functions@{S\-T\-M32\-F4\-\_\-\-D\-I\-S\-C\-O\-V\-E\-R\-Y\-\_\-\-L\-O\-W\-\_\-\-L\-E\-V\-E\-L\-\_\-\-B\-U\-S\-\_\-\-Functions}}
+\subsubsection[{A\-U\-D\-I\-O\-\_\-\-I\-O\-\_\-\-Read}]{\setlength{\rightskip}{0pt plus 5cm}uint8\-\_\-t A\-U\-D\-I\-O\-\_\-\-I\-O\-\_\-\-Read (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t}]{Addr, }
+\item[{uint8\-\_\-t}]{Reg}
+\end{DoxyParamCaption}
+)}}\label{group__STM32F4__DISCOVERY__LOW__LEVEL__BUS__Functions_gaf8740cdd8dfc7929d23d52d6fcf0901f}
+
+
+Reads a single data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Addr} & I2\-C address \\
+\hline
+{\em Reg} & Reg address \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Data} & to be read \\
+\hline
+\end{DoxyRetVals}
+\hypertarget{group__STM32F4__DISCOVERY__LOW__LEVEL__BUS__Functions_ga269d6aa92989351e75f6d58378e3b9ba}{\index{S\-T\-M32\-F4\-\_\-\-D\-I\-S\-C\-O\-V\-E\-R\-Y\-\_\-\-L\-O\-W\-\_\-\-L\-E\-V\-E\-L\-\_\-\-B\-U\-S\-\_\-\-Functions@{S\-T\-M32\-F4\-\_\-\-D\-I\-S\-C\-O\-V\-E\-R\-Y\-\_\-\-L\-O\-W\-\_\-\-L\-E\-V\-E\-L\-\_\-\-B\-U\-S\-\_\-\-Functions}!A\-U\-D\-I\-O\-\_\-\-I\-O\-\_\-\-Write@{A\-U\-D\-I\-O\-\_\-\-I\-O\-\_\-\-Write}}
+\index{A\-U\-D\-I\-O\-\_\-\-I\-O\-\_\-\-Write@{A\-U\-D\-I\-O\-\_\-\-I\-O\-\_\-\-Write}!STM32F4_DISCOVERY_LOW_LEVEL_BUS_Functions@{S\-T\-M32\-F4\-\_\-\-D\-I\-S\-C\-O\-V\-E\-R\-Y\-\_\-\-L\-O\-W\-\_\-\-L\-E\-V\-E\-L\-\_\-\-B\-U\-S\-\_\-\-Functions}}
+\subsubsection[{A\-U\-D\-I\-O\-\_\-\-I\-O\-\_\-\-Write}]{\setlength{\rightskip}{0pt plus 5cm}void A\-U\-D\-I\-O\-\_\-\-I\-O\-\_\-\-Write (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t}]{Addr, }
+\item[{uint8\-\_\-t}]{Reg, }
+\item[{uint8\-\_\-t}]{Value}
+\end{DoxyParamCaption}
+)}}\label{group__STM32F4__DISCOVERY__LOW__LEVEL__BUS__Functions_ga269d6aa92989351e75f6d58378e3b9ba}
+
+
+Writes a single data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Addr} & I2\-C address \\
+\hline
+{\em Reg} & Reg address \\
+\hline
+{\em Value} & Data to be written \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}

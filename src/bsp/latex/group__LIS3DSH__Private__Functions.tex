@@ -1,0 +1,225 @@
+\hypertarget{group__LIS3DSH__Private__Functions}{\section{L\-I\-S3\-D\-S\-H\-\_\-\-Private\-\_\-\-Functions}
+\label{group__LIS3DSH__Private__Functions}\index{L\-I\-S3\-D\-S\-H\-\_\-\-Private\-\_\-\-Functions@{L\-I\-S3\-D\-S\-H\-\_\-\-Private\-\_\-\-Functions}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__LIS3DSH__Private__Functions_ga39a50faf3ec718fd4782fd951e6db26b}{L\-I\-S3\-D\-S\-H\-\_\-\-Init} (uint16\-\_\-t Init\-Struct)
+\begin{DoxyCompactList}\small\item\em Set L\-I\-S3\-D\-S\-H Initialization. \end{DoxyCompactList}\item 
+uint8\-\_\-t \hyperlink{group__LIS3DSH__Private__Functions_ga47e1a458eddb3143569fe0e995f0513f}{L\-I\-S3\-D\-S\-H\-\_\-\-Read\-I\-D} (void)
+\begin{DoxyCompactList}\small\item\em Read L\-I\-S3\-D\-S\-H device I\-D. \end{DoxyCompactList}\item 
+void \hyperlink{group__LIS3DSH__Private__Functions_gaf1053e873f761ba33cdefd61ddba03eb}{L\-I\-S3\-D\-S\-H\-\_\-\-Interrupt\-Config} (L\-I\-S3\-D\-S\-H\-\_\-\-Interrupt\-Config\-Type\-Def $\ast$L\-I\-S3\-D\-S\-H\-\_\-\-Int\-Config\-Struct)
+\begin{DoxyCompactList}\small\item\em Set L\-I\-S3\-D\-S\-H Interrupt configuration. \end{DoxyCompactList}\item 
+void \hyperlink{group__LIS3DSH__Private__Functions_ga0bf34901c622846b07db03299bb9a3a1}{L\-I\-S3\-D\-S\-H\-\_\-\-Click\-\_\-\-Int\-Config} (void)
+\begin{DoxyCompactList}\small\item\em Set L\-I\-S3\-D\-S\-H for click detection. \end{DoxyCompactList}\item 
+void \hyperlink{group__LIS3DSH__Private__Functions_gaee0eec1d1444f4da48efeec019481270}{L\-I\-S3\-D\-S\-H\-\_\-\-O\-D\-R\-\_\-\-Lowpower\-Cmd} (uint8\-\_\-t O\-D\-R\-\_\-\-Low\-Power\-Mode)
+\begin{DoxyCompactList}\small\item\em Change the lowpower mode for L\-I\-S3\-D\-S\-H. \end{DoxyCompactList}\item 
+void \hyperlink{group__LIS3DSH__Private__Functions_gaae93269b63a9b48c433998121680ac81}{L\-I\-S3\-D\-S\-H\-\_\-\-Data\-Rate\-Cmd} (uint8\-\_\-t Data\-Rate\-Value)
+\begin{DoxyCompactList}\small\item\em Data Rate command. \end{DoxyCompactList}\item 
+void \hyperlink{group__LIS3DSH__Private__Functions_gadd43f8eeb1cf176968daea8b60f19224}{L\-I\-S3\-D\-S\-H\-\_\-\-Full\-Scale\-Cmd} (uint8\-\_\-t F\-S\-\_\-value)
+\begin{DoxyCompactList}\small\item\em Change the Full Scale of L\-I\-S3\-D\-S\-H. \end{DoxyCompactList}\item 
+void \hyperlink{group__LIS3DSH__Private__Functions_gaf404d817cf34093ac2cb46dcffcab4ed}{L\-I\-S3\-D\-S\-H\-\_\-\-Reboot\-Cmd} (void)
+\begin{DoxyCompactList}\small\item\em Reboot memory content of L\-I\-S3\-D\-S\-H. \end{DoxyCompactList}\item 
+void \hyperlink{group__LIS3DSH__Private__Functions_ga8e33fb97929654753950b3799ed9b5f5}{L\-I\-S3\-D\-S\-H\-\_\-\-Read\-A\-C\-C} (int16\-\_\-t $\ast$p\-Data)
+\begin{DoxyCompactList}\small\item\em Read L\-I\-S3\-D\-S\-H output register, and calculate the acceleration A\-C\-C\mbox{[}mg\mbox{]}=S\-E\-N\-S\-I\-T\-I\-V\-I\-T\-Y$\ast$ (out\-\_\-h$\ast$256+out\-\_\-l)/16 (12 bit representation). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+\subsection{Function Documentation}
+\hypertarget{group__LIS3DSH__Private__Functions_ga0bf34901c622846b07db03299bb9a3a1}{\index{L\-I\-S3\-D\-S\-H\-\_\-\-Private\-\_\-\-Functions@{L\-I\-S3\-D\-S\-H\-\_\-\-Private\-\_\-\-Functions}!L\-I\-S3\-D\-S\-H\-\_\-\-Click\-\_\-\-Int\-Config@{L\-I\-S3\-D\-S\-H\-\_\-\-Click\-\_\-\-Int\-Config}}
+\index{L\-I\-S3\-D\-S\-H\-\_\-\-Click\-\_\-\-Int\-Config@{L\-I\-S3\-D\-S\-H\-\_\-\-Click\-\_\-\-Int\-Config}!LIS3DSH_Private_Functions@{L\-I\-S3\-D\-S\-H\-\_\-\-Private\-\_\-\-Functions}}
+\subsubsection[{L\-I\-S3\-D\-S\-H\-\_\-\-Click\-\_\-\-Int\-Config}]{\setlength{\rightskip}{0pt plus 5cm}void L\-I\-S3\-D\-S\-H\-\_\-\-Click\-\_\-\-Int\-Config (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{group__LIS3DSH__Private__Functions_ga0bf34901c622846b07db03299bb9a3a1}
+
+
+Set L\-I\-S3\-D\-S\-H for click detection. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\hypertarget{group__LIS3DSH__Private__Functions_gaae93269b63a9b48c433998121680ac81}{\index{L\-I\-S3\-D\-S\-H\-\_\-\-Private\-\_\-\-Functions@{L\-I\-S3\-D\-S\-H\-\_\-\-Private\-\_\-\-Functions}!L\-I\-S3\-D\-S\-H\-\_\-\-Data\-Rate\-Cmd@{L\-I\-S3\-D\-S\-H\-\_\-\-Data\-Rate\-Cmd}}
+\index{L\-I\-S3\-D\-S\-H\-\_\-\-Data\-Rate\-Cmd@{L\-I\-S3\-D\-S\-H\-\_\-\-Data\-Rate\-Cmd}!LIS3DSH_Private_Functions@{L\-I\-S3\-D\-S\-H\-\_\-\-Private\-\_\-\-Functions}}
+\subsubsection[{L\-I\-S3\-D\-S\-H\-\_\-\-Data\-Rate\-Cmd}]{\setlength{\rightskip}{0pt plus 5cm}void L\-I\-S3\-D\-S\-H\-\_\-\-Data\-Rate\-Cmd (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t}]{Data\-Rate\-Value}
+\end{DoxyParamCaption}
+)}}\label{group__LIS3DSH__Private__Functions_gaae93269b63a9b48c433998121680ac81}
+
+
+Data Rate command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Data\-Rate\-Value} & Data rate value. This parameter can be one of the following values\-: \begin{DoxyItemize}
+\item L\-I\-S3\-D\-S\-H\-\_\-\-D\-A\-T\-A\-R\-A\-T\-E\-\_\-3\-\_\-125\-: 3.\-125 Hz output data rate \item L\-I\-S3\-D\-S\-H\-\_\-\-D\-A\-T\-A\-R\-A\-T\-E\-\_\-6\-\_\-25\-: 6.\-25 Hz output data rate \item L\-I\-S3\-D\-S\-H\-\_\-\-D\-A\-T\-A\-R\-A\-T\-E\-\_\-12\-\_\-5\-: 12.\-5 Hz output data rate \item L\-I\-S3\-D\-S\-H\-\_\-\-D\-A\-T\-A\-R\-A\-T\-E\-\_\-25\-: 25 Hz output data rate \item L\-I\-S3\-D\-S\-H\-\_\-\-D\-A\-T\-A\-R\-A\-T\-E\-\_\-50\-: 50 Hz output data rate \item L\-I\-S3\-D\-S\-H\-\_\-\-D\-A\-T\-A\-R\-A\-T\-E\-\_\-100\-: 100 Hz output data rate \item L\-I\-S3\-D\-S\-H\-\_\-\-D\-A\-T\-A\-R\-A\-T\-E\-\_\-400\-: 400 Hz output data rate \item L\-I\-S3\-D\-S\-H\-\_\-\-D\-A\-T\-A\-R\-A\-T\-E\-\_\-800\-: 800 Hz output data rate \item L\-I\-S3\-D\-S\-H\-\_\-\-D\-A\-T\-A\-R\-A\-T\-E\-\_\-1600\-: 1600 Hz output data rate \end{DoxyItemize}
+\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\hypertarget{group__LIS3DSH__Private__Functions_gadd43f8eeb1cf176968daea8b60f19224}{\index{L\-I\-S3\-D\-S\-H\-\_\-\-Private\-\_\-\-Functions@{L\-I\-S3\-D\-S\-H\-\_\-\-Private\-\_\-\-Functions}!L\-I\-S3\-D\-S\-H\-\_\-\-Full\-Scale\-Cmd@{L\-I\-S3\-D\-S\-H\-\_\-\-Full\-Scale\-Cmd}}
+\index{L\-I\-S3\-D\-S\-H\-\_\-\-Full\-Scale\-Cmd@{L\-I\-S3\-D\-S\-H\-\_\-\-Full\-Scale\-Cmd}!LIS3DSH_Private_Functions@{L\-I\-S3\-D\-S\-H\-\_\-\-Private\-\_\-\-Functions}}
+\subsubsection[{L\-I\-S3\-D\-S\-H\-\_\-\-Full\-Scale\-Cmd}]{\setlength{\rightskip}{0pt plus 5cm}void L\-I\-S3\-D\-S\-H\-\_\-\-Full\-Scale\-Cmd (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t}]{F\-S\-\_\-value}
+\end{DoxyParamCaption}
+)}}\label{group__LIS3DSH__Private__Functions_gadd43f8eeb1cf176968daea8b60f19224}
+
+
+Change the Full Scale of L\-I\-S3\-D\-S\-H. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em F\-S\-\_\-value} & new full scale value. This parameter can be one of the following values\-: \begin{DoxyItemize}
+\item L\-I\-S3\-D\-S\-H\-\_\-\-F\-U\-L\-L\-S\-C\-A\-L\-E\-\_\-2\-: +-\/2g \item L\-I\-S3\-D\-S\-H\-\_\-\-F\-U\-L\-L\-S\-C\-A\-L\-E\-\_\-4\-: +-\/4g \item L\-I\-S3\-D\-S\-H\-\_\-\-F\-U\-L\-L\-S\-C\-A\-L\-E\-\_\-6\-: +-\/6g \item L\-I\-S3\-D\-S\-H\-\_\-\-F\-U\-L\-L\-S\-C\-A\-L\-E\-\_\-8\-: +-\/8g \item L\-I\-S3\-D\-S\-H\-\_\-\-F\-U\-L\-L\-S\-C\-A\-L\-E\-\_\-16\-: +-\/16g \end{DoxyItemize}
+\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\hypertarget{group__LIS3DSH__Private__Functions_ga39a50faf3ec718fd4782fd951e6db26b}{\index{L\-I\-S3\-D\-S\-H\-\_\-\-Private\-\_\-\-Functions@{L\-I\-S3\-D\-S\-H\-\_\-\-Private\-\_\-\-Functions}!L\-I\-S3\-D\-S\-H\-\_\-\-Init@{L\-I\-S3\-D\-S\-H\-\_\-\-Init}}
+\index{L\-I\-S3\-D\-S\-H\-\_\-\-Init@{L\-I\-S3\-D\-S\-H\-\_\-\-Init}!LIS3DSH_Private_Functions@{L\-I\-S3\-D\-S\-H\-\_\-\-Private\-\_\-\-Functions}}
+\subsubsection[{L\-I\-S3\-D\-S\-H\-\_\-\-Init}]{\setlength{\rightskip}{0pt plus 5cm}void L\-I\-S3\-D\-S\-H\-\_\-\-Init (
+\begin{DoxyParamCaption}
+\item[{uint16\-\_\-t}]{Init\-Struct}
+\end{DoxyParamCaption}
+)}}\label{group__LIS3DSH__Private__Functions_ga39a50faf3ec718fd4782fd951e6db26b}
+
+
+Set L\-I\-S3\-D\-S\-H Initialization. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Init\-Struct} & contains mask of different init parameters \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\hypertarget{group__LIS3DSH__Private__Functions_gaf1053e873f761ba33cdefd61ddba03eb}{\index{L\-I\-S3\-D\-S\-H\-\_\-\-Private\-\_\-\-Functions@{L\-I\-S3\-D\-S\-H\-\_\-\-Private\-\_\-\-Functions}!L\-I\-S3\-D\-S\-H\-\_\-\-Interrupt\-Config@{L\-I\-S3\-D\-S\-H\-\_\-\-Interrupt\-Config}}
+\index{L\-I\-S3\-D\-S\-H\-\_\-\-Interrupt\-Config@{L\-I\-S3\-D\-S\-H\-\_\-\-Interrupt\-Config}!LIS3DSH_Private_Functions@{L\-I\-S3\-D\-S\-H\-\_\-\-Private\-\_\-\-Functions}}
+\subsubsection[{L\-I\-S3\-D\-S\-H\-\_\-\-Interrupt\-Config}]{\setlength{\rightskip}{0pt plus 5cm}void L\-I\-S3\-D\-S\-H\-\_\-\-Interrupt\-Config (
+\begin{DoxyParamCaption}
+\item[{L\-I\-S3\-D\-S\-H\-\_\-\-Interrupt\-Config\-Type\-Def $\ast$}]{L\-I\-S3\-D\-S\-H\-\_\-\-Int\-Config\-Struct}
+\end{DoxyParamCaption}
+)}}\label{group__LIS3DSH__Private__Functions_gaf1053e873f761ba33cdefd61ddba03eb}
+
+
+Set L\-I\-S3\-D\-S\-H Interrupt configuration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em L\-I\-S3\-D\-S\-H\-\_\-\-Interrupt\-Config\-\_\-\-Type\-Def} & pointer to a L\-I\-S3\-D\-S\-H\-\_\-\-Interrupt\-Config\-\_\-\-Type\-Def structure that contains the configuration setting for the L\-I\-S3\-D\-S\-H Interrupt. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\hypertarget{group__LIS3DSH__Private__Functions_gaee0eec1d1444f4da48efeec019481270}{\index{L\-I\-S3\-D\-S\-H\-\_\-\-Private\-\_\-\-Functions@{L\-I\-S3\-D\-S\-H\-\_\-\-Private\-\_\-\-Functions}!L\-I\-S3\-D\-S\-H\-\_\-\-O\-D\-R\-\_\-\-Lowpower\-Cmd@{L\-I\-S3\-D\-S\-H\-\_\-\-O\-D\-R\-\_\-\-Lowpower\-Cmd}}
+\index{L\-I\-S3\-D\-S\-H\-\_\-\-O\-D\-R\-\_\-\-Lowpower\-Cmd@{L\-I\-S3\-D\-S\-H\-\_\-\-O\-D\-R\-\_\-\-Lowpower\-Cmd}!LIS3DSH_Private_Functions@{L\-I\-S3\-D\-S\-H\-\_\-\-Private\-\_\-\-Functions}}
+\subsubsection[{L\-I\-S3\-D\-S\-H\-\_\-\-O\-D\-R\-\_\-\-Lowpower\-Cmd}]{\setlength{\rightskip}{0pt plus 5cm}void L\-I\-S3\-D\-S\-H\-\_\-\-O\-D\-R\-\_\-\-Lowpower\-Cmd (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t}]{O\-D\-R\-\_\-\-Low\-Power\-Mode}
+\end{DoxyParamCaption}
+)}}\label{group__LIS3DSH__Private__Functions_gaee0eec1d1444f4da48efeec019481270}
+
+
+Change the lowpower mode for L\-I\-S3\-D\-S\-H. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Low\-Power\-Mode} & new state for the lowpower mode. This parameter can be one of the following values\-: \begin{DoxyItemize}
+\item L\-I\-S3\-D\-S\-H\-\_\-\-D\-A\-T\-A\-R\-A\-T\-E\-\_\-\-P\-O\-W\-E\-R\-D\-O\-W\-N\-: Power down mode \item L\-I\-S3\-D\-S\-H\-\_\-\-D\-A\-T\-A\-R\-A\-T\-E\-\_\-3\-\_\-125\-: Normal mode. O\-D\-R\-: 3.\-125 Hz \item L\-I\-S3\-D\-S\-H\-\_\-\-D\-A\-T\-A\-R\-A\-T\-E\-\_\-6\-\_\-25\-: Normal mode. O\-D\-R\-: 6.\-25 Hz \item L\-I\-S3\-D\-S\-H\-\_\-\-D\-A\-T\-A\-R\-A\-T\-E\-\_\-12\-\_\-5\-: Normal mode. O\-D\-R\-: 12.\-5 Hz \item L\-I\-S3\-D\-S\-H\-\_\-\-D\-A\-T\-A\-R\-A\-T\-E\-\_\-25\-: Normal mode. O\-D\-R\-: 25 Hz \item L\-I\-S3\-D\-S\-H\-\_\-\-D\-A\-T\-A\-R\-A\-T\-E\-\_\-50\-: Normal mode. O\-D\-R\-: 50 Hz \item L\-I\-S3\-D\-S\-H\-\_\-\-D\-A\-T\-A\-R\-A\-T\-E\-\_\-100\-: Normal mode. O\-D\-R\-: 100 Hz \item L\-I\-S3\-D\-S\-H\-\_\-\-D\-A\-T\-A\-R\-A\-T\-E\-\_\-400\-: Normal mode. O\-D\-R\-: 400 Hz \item L\-I\-S3\-D\-S\-H\-\_\-\-D\-A\-T\-A\-R\-A\-T\-E\-\_\-800\-: Normal mode. O\-D\-R\-: 800 Hz \item L\-I\-S3\-D\-S\-H\-\_\-\-D\-A\-T\-A\-R\-A\-T\-E\-\_\-1600\-: Normal mode. O\-D\-R\-: 1600 Hz \end{DoxyItemize}
+\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\hypertarget{group__LIS3DSH__Private__Functions_ga8e33fb97929654753950b3799ed9b5f5}{\index{L\-I\-S3\-D\-S\-H\-\_\-\-Private\-\_\-\-Functions@{L\-I\-S3\-D\-S\-H\-\_\-\-Private\-\_\-\-Functions}!L\-I\-S3\-D\-S\-H\-\_\-\-Read\-A\-C\-C@{L\-I\-S3\-D\-S\-H\-\_\-\-Read\-A\-C\-C}}
+\index{L\-I\-S3\-D\-S\-H\-\_\-\-Read\-A\-C\-C@{L\-I\-S3\-D\-S\-H\-\_\-\-Read\-A\-C\-C}!LIS3DSH_Private_Functions@{L\-I\-S3\-D\-S\-H\-\_\-\-Private\-\_\-\-Functions}}
+\subsubsection[{L\-I\-S3\-D\-S\-H\-\_\-\-Read\-A\-C\-C}]{\setlength{\rightskip}{0pt plus 5cm}void L\-I\-S3\-D\-S\-H\-\_\-\-Read\-A\-C\-C (
+\begin{DoxyParamCaption}
+\item[{int16\-\_\-t $\ast$}]{p\-Data}
+\end{DoxyParamCaption}
+)}}\label{group__LIS3DSH__Private__Functions_ga8e33fb97929654753950b3799ed9b5f5}
+
+
+Read L\-I\-S3\-D\-S\-H output register, and calculate the acceleration A\-C\-C\mbox{[}mg\mbox{]}=S\-E\-N\-S\-I\-T\-I\-V\-I\-T\-Y$\ast$ (out\-\_\-h$\ast$256+out\-\_\-l)/16 (12 bit representation). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pointer} & on floating buffer. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\hypertarget{group__LIS3DSH__Private__Functions_ga47e1a458eddb3143569fe0e995f0513f}{\index{L\-I\-S3\-D\-S\-H\-\_\-\-Private\-\_\-\-Functions@{L\-I\-S3\-D\-S\-H\-\_\-\-Private\-\_\-\-Functions}!L\-I\-S3\-D\-S\-H\-\_\-\-Read\-I\-D@{L\-I\-S3\-D\-S\-H\-\_\-\-Read\-I\-D}}
+\index{L\-I\-S3\-D\-S\-H\-\_\-\-Read\-I\-D@{L\-I\-S3\-D\-S\-H\-\_\-\-Read\-I\-D}!LIS3DSH_Private_Functions@{L\-I\-S3\-D\-S\-H\-\_\-\-Private\-\_\-\-Functions}}
+\subsubsection[{L\-I\-S3\-D\-S\-H\-\_\-\-Read\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}uint8\-\_\-t L\-I\-S3\-D\-S\-H\-\_\-\-Read\-I\-D (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{group__LIS3DSH__Private__Functions_ga47e1a458eddb3143569fe0e995f0513f}
+
+
+Read L\-I\-S3\-D\-S\-H device I\-D. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em The} & Device I\-D (two bytes). \\
+\hline
+\end{DoxyRetVals}
+\hypertarget{group__LIS3DSH__Private__Functions_gaf404d817cf34093ac2cb46dcffcab4ed}{\index{L\-I\-S3\-D\-S\-H\-\_\-\-Private\-\_\-\-Functions@{L\-I\-S3\-D\-S\-H\-\_\-\-Private\-\_\-\-Functions}!L\-I\-S3\-D\-S\-H\-\_\-\-Reboot\-Cmd@{L\-I\-S3\-D\-S\-H\-\_\-\-Reboot\-Cmd}}
+\index{L\-I\-S3\-D\-S\-H\-\_\-\-Reboot\-Cmd@{L\-I\-S3\-D\-S\-H\-\_\-\-Reboot\-Cmd}!LIS3DSH_Private_Functions@{L\-I\-S3\-D\-S\-H\-\_\-\-Private\-\_\-\-Functions}}
+\subsubsection[{L\-I\-S3\-D\-S\-H\-\_\-\-Reboot\-Cmd}]{\setlength{\rightskip}{0pt plus 5cm}void L\-I\-S3\-D\-S\-H\-\_\-\-Reboot\-Cmd (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{group__LIS3DSH__Private__Functions_gaf404d817cf34093ac2cb46dcffcab4ed}
+
+
+Reboot memory content of L\-I\-S3\-D\-S\-H. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}

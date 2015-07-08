@@ -109,6 +109,25 @@ void HAL_MspDeInit(void)
   */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+/* Init the low level hardware : GPIO, CLOCK, NVIC */
+
+
+void HAL_TIM_Base_MspInit(TIM_HandleTypeDef *htim){
+	if(htim->Instance == TIM6){
+		/* Enable timer6 clock */
+		__TIM6_CLK_ENABLE();
+		/* Peripheral interrupt init*/
+		HAL_NVIC_SetPriority(TIM6_DAC_IRQn, 0, 0);
+		HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);
+	    __HAL_TIM_ENABLE_IT(htim,TIM_IT_UPDATE);
+	}
+
+}
+
+void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef *htim){
+	__TIM6_CLK_DISABLE();
+    HAL_NVIC_DisableIRQ(UART4_IRQn);
+}
 
 
 void HAL_UART_MspInit(UART_HandleTypeDef* huart)

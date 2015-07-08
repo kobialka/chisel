@@ -309,7 +309,6 @@ uint32_t BSP_PB_GetState(Button_TypeDef Button)
 *******************************************************************************/
 
 /******************************* SPI Routines *********************************/
-
 /**
   * @brief  SPIx Bus initialization
   * @param  None
@@ -321,7 +320,7 @@ static void SPIx_Init(void)
   {
     /* SPI configuration -----------------------------------------------------*/
     SpiHandle.Instance = DISCOVERY_SPIx;
-    SpiHandle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16;
+    SpiHandle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_64;
     SpiHandle.Init.Direction = SPI_DIRECTION_2LINES;
     SpiHandle.Init.CLKPhase = SPI_PHASE_1EDGE;
     SpiHandle.Init.CLKPolarity = SPI_POLARITY_LOW;
@@ -337,6 +336,33 @@ static void SPIx_Init(void)
     HAL_SPI_Init(&SpiHandle);
   }
 }
+///**
+//  * @brief  SPIx Bus initialization
+//  * @param  None
+//  * @retval None
+//  */
+//static void SPIx_Init(void)
+//{
+//  if(HAL_SPI_GetState(&SpiHandle) == HAL_SPI_STATE_RESET)
+//  {
+//    /* SPI configuration -----------------------------------------------------*/
+//    SpiHandle.Instance = DISCOVERY_SPIx;
+//    SpiHandle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16;
+//    SpiHandle.Init.Direction = SPI_DIRECTION_2LINES;
+//    SpiHandle.Init.CLKPhase = SPI_PHASE_1EDGE;
+//    SpiHandle.Init.CLKPolarity = SPI_POLARITY_LOW;
+//    SpiHandle.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLED;
+//    SpiHandle.Init.CRCPolynomial = 7;
+//    SpiHandle.Init.DataSize = SPI_DATASIZE_8BIT;
+//    SpiHandle.Init.FirstBit = SPI_FIRSTBIT_MSB;
+//    SpiHandle.Init.NSS = SPI_NSS_SOFT;
+//    SpiHandle.Init.TIMode = SPI_TIMODE_DISABLED;
+//    SpiHandle.Init.Mode = SPI_MODE_MASTER;
+//
+//    SPIx_MspInit();
+//    HAL_SPI_Init(&SpiHandle);
+//  }
+//}
 
 /**
   * @brief  Sends a Byte through the SPI interface and return the Byte received 

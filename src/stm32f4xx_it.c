@@ -40,7 +40,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
 #include "stm32f4xx_it.h"
-#include "bsp/stm32f4_discovery.h"
+#include "stm32f4_discovery.h"
+#include "stm32f4_discovery_accelerometer.h"
 #include "uart.h"
 
 #include "stm32f4xx_hal_uart.h"
@@ -66,9 +67,9 @@
 
 
 /* External variables --------------------------------------------------------*/
-extern UART_HandleTypeDef huart4;
-
-
+extern UART_HandleTypeDef		 huart4;
+extern TIM_HandleTypeDef 		hTimer6;
+extern volatile int16_t			pACC_XYZ_BUFF[];
 /******************************************************************************/
 /*            Cortex-M4 Processor Exceptions Handlers                         */
 /******************************************************************************/
@@ -214,7 +215,10 @@ void UART4_IRQHandler(void){
 }
 
 
-
+void TIM6_DAC_IRQHandler(void){
+	BSP_LED_Toggle(ORANGE);
+	__HAL_TIM_CLEAR_FLAG(&hTimer6,TIM_IT_UPDATE);
+}
 
 
 
@@ -225,12 +229,19 @@ void UART4_IRQHandler(void){
   */
 void EXTI0_IRQHandler(void)
 {
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
+	__HAL_GPIO_EXTI_CLEAR_IT(ACCELERO_INT1_PIN);
+	BSP_ACCELERO_GetXYZ(pACC_XYZ_BUFF);
+	LCD_BUFF_Wrv_S16Dec(18,3,pACC_XYZ_BUFF[0]);
+	LCD_BUFF_Wrv_S16Dec(18,4,pACC_XYZ_BUFF[1]);
+	LCD_BUFF_Wrv_S16Dec(18,5,pACC_XYZ_BUFF[2]);
+	LCD_Update();
+
+	BSP_LED_Toggle(BLUE);
 }
 
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
-  if(GPIO_Pin == GPIO_PIN_0){
-	  BSP_LED_Toggle(ORANGE);
+//void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
+//  if(GPIO_Pin == GPIO_PIN_0){
+
 //	  RCC_ClkInitTypeDef RCC_ClkInitStruct;
 //	  if(__HAL_RCC_GET_SYSCLK_SOURCE() == RCC_CFGR_SWS_HSE){    	// Czy zrodlem SYSCLK jest HSE?
 //		  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_SYSCLK;		// Jezeli zrodlem SYSCLK jest HSE to zmien na PLL.
@@ -255,8 +266,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 //	  SystemCoreClockUpdate();
 //	  LCD_BUFF_Wrv_U32Dec(CHAR_WIDTH*8,7,SystemCoreClock);
 //	  LCD_Update();
-  }
-}
+//  }
+//}
 /**
   * @brief  This function handles PPP interrupt request.
   * @param  None
