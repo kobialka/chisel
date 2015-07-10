@@ -2,7 +2,6 @@
 
 /*	autor:		Michal Kobialka, mmkobialka@gmail.com
  * 	data: 		05.01.2015
- *
  *	Program napisany w celu zapoznania sie z obsluga przerwan i NVIC. W procedurze obslugi przerwania
  *	EXTI0 zmieniane jest zrodlo sygnaly SYSCLK zamiennie z HSE (8MHz) na PLL (24MHz). Wartosci sa wyswietlane
  *	na LCD oraz zapalane sa odpowiednie diody: HSE - niebieska, PLL - zielona.
@@ -25,25 +24,32 @@
 #include "uart.h"
 
 /* Defines	------------------------------------------------------------------*/
+#define	NAME_str		"Zadajnik_v0.0.3"
 #define ACC_XYZ_BUFF_SIZE 3
 
 
 //___________________________________
 // ZMIENNE GLOBALNE:
-extern	tToken						asToken[MAX_TOKEN_NR];	// tablica tokenów.
-extern unsigned char 				ucTokenNr;		// ilosc nalezionych tokenow.
+extern	tToken				asToken[MAX_TOKEN_NR];	// tablica tokenów.
+extern unsigned char		ucTokenNr;		// ilosc nalezionych tokenow.
 
-uint8_t 							Hal_RxBuff[1];
-uint8_t								Hal_TxBuff[1];
-uint8_t								pcMessageBuffer[UART_RECIEVER_SIZE];
-volatile int16_t					pACC_XYZ_BUFF[ACC_XYZ_BUFF_SIZE];
-tToken 								*psToken = asToken;
+uint8_t 					Hal_RxBuff[1];
+uint8_t						Hal_TxBuff[1];
+uint8_t						pcMessageBuffer[UART_RECIEVER_SIZE];
+volatile int16_t			pACC_XYZ_BUFF[ACC_XYZ_BUFF_SIZE];
+tToken 						*psToken = asToken;
 
-UART_HandleTypeDef					huart4;
-TIM_HandleTypeDef					hTimer6;
-HAL_StatusTypeDef 					HAL_Status;
+UART_HandleTypeDef			huart4;
+TIM_HandleTypeDef			hTimer6;
+HAL_StatusTypeDef 			HAL_Status;
 
-uint8_t						fCalc = 0, fId = 0, fOk = 0, fUnknownCommand = 0,fProvideData = 0, fAccGotXYZ = 0;
+uint8_t						fCalc 				= 0;
+uint8_t						fId 				= 0;
+uint8_t						fOk					= 0;
+uint8_t						fUnknownCommand 	= 0;
+uint8_t						fProvideData 		= 0;
+uint8_t						fAccGotXYZ 			= 0;
+uint8_t						fTest				= 0;
 
 
 
@@ -82,7 +88,7 @@ int main(void){
 	LED_StartSignal();
 	BSP_LED_On(GREEN);
 
-	LCD_BUFF_Wrs(0,0, "Zadajnik_v0.0.1 ");
+	LCD_BUFF_Wrs(0,0, NAME_str);
 	LCD_BUFF_Wrs(160-9*6,1,"CMSIS 4.2");
 	LCD_BUFF_Wrs(160-11*6,2,"STM32F407VG");
 
@@ -143,21 +149,25 @@ static void TIMER6_Base_Init(void){
 static void ACC_Init(void){
 
 	GPIO_InitTypeDef GPIO_InitStructure;
-	uint8_t AccControlDataTemp[1] = {0};
+	uint8_t AccControlDataTemp = 0;
 
 	BSP_ACCELERO_Init();			// Data rate - 25[Hz]; BW filter - 40[Hz]
 
 	/* Enable LIS3DSH 'Data ready' interrupt (INT1), INT1 active HIGH, INT1 pulsed */
-	ACCELERO_IO_Read(AccControlDataTemp,LIS3DSH_CTRL3_ADDR,1);
-	AccControlDataTemp[0] |= LIS3DSH_CTRL3_DR_EN_BIT | LIS3DSH_CTRL3_IEL_BIT | LIS3DSH_CTRL3_INT1_EN_BIT | LIS3DSH_CTRL3_IEA_BIT;
-	ACCELERO_IO_Write((uint8_t*)AccControlDataTemp, LIS3DSH_CTRL_REG3_ADDR, 1);
+	ACCELERO_IO_Read(&AccControlDataTemp,LIS3DSH_CTRL3_ADDR,1);
 
+	AccControlDataTemp |= 	LIS3DSH_CTRL3_DR_EN_BIT 	| \
+								LIS3DSH_CTRL3_IEL_BIT 		| \
+								LIS3DSH_CTRL3_INT1_EN_BIT 	|
+								LIS3DSH_CTRL3_IEA_BIT;
+
+	ACCELERO_IO_Write(&AccControlDataTemp, LIS3DSH_CTRL_REG3_ADDR, 1);
 
 	/* LIS3DSH enable 'block data update', won't updatedata regs if not read */
-	AccControlDataTemp[0] = 0;
-	ACCELERO_IO_Read(AccControlDataTemp,LIS3DSH_CTRL4_ADDR,1);
-	AccControlDataTemp[0] |= LIS3DSH_CTRL4_BDU_BIT;
-	ACCELERO_IO_Write((uint8_t*)AccControlDataTemp,LIS3DSH_CTRL4_ADDR,1);
+	AccControlDataTemp = 0;
+	ACCELERO_IO_Read(&AccControlDataTemp,LIS3DSH_CTRL4_ADDR,1);
+	AccControlDataTemp |= LIS3DSH_CTRL4_BDU_BIT;
+	ACCELERO_IO_Write(&AccControlDataTemp,LIS3DSH_CTRL4_ADDR,1);
 
 	/* Enable INT1 GPIO clock and configure GPIO PIN PE.00 to detect Interrupts */
 	ACCELERO_INT_GPIO_CLK_ENABLE();
@@ -170,7 +180,7 @@ static void ACC_Init(void){
 
 	/* Enable and set EXTI0 Accelerometer INT1 to the lowest priority */
 	HAL_NVIC_SetPriority(EXTI0_IRQn, 0, 0);
-	HAL_NVIC_EnableIRQ(EXTI0_IRQn);
+//	HAL_NVIC_EnableIRQ(EXTI0_IRQn);
 }
 
 
@@ -219,30 +229,6 @@ void SystemClock_Config(void){
 }
 
 
-//___________________________________
-void LED_StartSignal(void){
-	uint32_t u32WaitTime_ms = 50;
-
-	BSP_LED_On(GREEN);
-	HAL_Delay(u32WaitTime_ms);
-	BSP_LED_Off(GREEN);
-
-	BSP_LED_On(ORANGE);
-	HAL_Delay(u32WaitTime_ms);
-	BSP_LED_Off(ORANGE);
-
-	BSP_LED_On(RED);
-	HAL_Delay(u32WaitTime_ms);
-	BSP_LED_Off(RED);
-
-	BSP_LED_On(BLUE);
-	HAL_Delay(u32WaitTime_ms);
-	BSP_LED_Off(BLUE);
-
-	BSP_LED_On(GREEN);
-	HAL_Delay(u32WaitTime_ms);
-	BSP_LED_Off(GREEN);
-}
 
 
 void SendPendingString(void){
@@ -272,6 +258,9 @@ void SendPendingString(void){
 			Transmiter_SendString("unknown command\n");
 			fUnknownCommand = 0;
 		}
+		else if(1 == fTest){
+
+		}
 	}
 }
 
@@ -300,8 +289,23 @@ void ExecuteCommand(void){
 					LCD_Update();
 					fOk = 1;
 					break;
+
+				case LIS3DSH_START:
+					HAL_NVIC_EnableIRQ(EXTI0_IRQn);
+					fOk = 1;
+					break;
+
+				case LIS3DSH_STOP:
+					HAL_NVIC_DisableIRQ(EXTI0_IRQn);
+					fOk = 1;
+					break;
+
+				case TEST:
+					fTest = 1;
+					break;
+
 				default:
-					BSP_LED_Toggle(ORANGE);
+					Error_Handler();
 				    break;
 			}
 		}
@@ -310,6 +314,32 @@ void ExecuteCommand(void){
 		}
 }
 
+
+
+//___________________________________
+void LED_StartSignal(void){
+	uint32_t u32WaitTime_ms = 50;
+
+	BSP_LED_On(GREEN);
+	HAL_Delay(u32WaitTime_ms);
+	BSP_LED_Off(GREEN);
+
+	BSP_LED_On(ORANGE);
+	HAL_Delay(u32WaitTime_ms);
+	BSP_LED_Off(ORANGE);
+
+	BSP_LED_On(RED);
+	HAL_Delay(u32WaitTime_ms);
+	BSP_LED_Off(RED);
+
+	BSP_LED_On(BLUE);
+	HAL_Delay(u32WaitTime_ms);
+	BSP_LED_Off(BLUE);
+
+	BSP_LED_On(GREEN);
+	HAL_Delay(u32WaitTime_ms);
+	BSP_LED_Off(GREEN);
+}
 
 //___________________________________
 static void Error_Handler(void){

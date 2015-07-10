@@ -19,7 +19,7 @@
 // =======================================================================================================
 // typy zmiennych
 
-typedef enum		tKeywordCode{CALC, ID, LIS3DSH_GETXYZ, LIS3DSH_START, LIS3DSH_STOP} tKeywordCode;
+typedef enum		tKeywordCode{CALC, ID, LIS3DSH_GETXYZ, LIS3DSH_START, LIS3DSH_STOP, TEST} tKeywordCode;
 typedef struct		tKeyword
 {
 	tKeywordCode	eCode;

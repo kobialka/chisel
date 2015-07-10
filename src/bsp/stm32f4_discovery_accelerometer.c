@@ -111,7 +111,7 @@ uint8_t BSP_ACCELERO_Init(void)
     AcceleroDrv = &Lis3dshDrv;
 
     /* Set configuration of LIS3DSH MEMS Accelerometer **********************/
-    l1s3dsh_InitStruct.Output_DataRate = LIS3DSH_DATARATE_25;
+    l1s3dsh_InitStruct.Output_DataRate = LIS3DSH_DATARATE_12_5;
     l1s3dsh_InitStruct.Axes_Enable = LIS3DSH_XYZ_ENABLE;
     l1s3dsh_InitStruct.SPI_Wire = LIS3DSH_SERIALINTERFACE_4WIRE;
     l1s3dsh_InitStruct.Self_Test = LIS3DSH_SELFTEST_NORMAL;
