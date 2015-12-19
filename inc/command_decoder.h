@@ -5,6 +5,12 @@
  *      Author: mike
  */
 
+
+/* Includes ------------------------------------------------------------------*/
+#include <stdint.h>
+
+
+
 #ifndef COMMAND_DECODER_H_
 #define COMMAND_DECODER_H_
 
@@ -32,7 +38,7 @@ typedef enum		tTokenType{KEYWORD, NUMBER, STRING}tTokenType;
 typedef union 		tTokenValue
 {
 	tKeywordCode	eKeyword; 						// jezeli KEYWORD
-	unsigned int	uiNumber; 						// jezeli NUMBER
+	uint32_t		u32_Number; 						// jezeli NUMBER
 	char *			pcString; 						// jezeli STRING
 }tTokenValue;
 

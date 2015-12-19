@@ -11,7 +11,7 @@
 
 #define TERMINATOR				13
 #define UART_RECIEVER_SIZE		20
-#define UART_TRANSMITER_SIZE 	20
+#define UART_TRANSMITER_SIZE 	40
 
 
 
@@ -29,8 +29,8 @@ typedef struct tsRecieverBuffer
 
 typedef struct TransmiterBuffer{
 	char cData[UART_TRANSMITER_SIZE]; 								// Lancuch, ktory ma byc wyslany
-	enum eTransmiterStatus eStatus;							// Status bufora
-	unsigned char fLastCharacter;								// Czy pobrano ostatni znak, czyli NULL'a. Flaga.
+	enum eTransmiterStatus eStatus;									// Status bufora
+	unsigned char fLastCharacter;									// Czy pobrano ostatni znak, czyli NULL'a. Flaga.
 	unsigned char cCharCtr;											// Do iteracji po lancuchu znakowym.
 } tsTransmiterBuffer;
 

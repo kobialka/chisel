@@ -120,7 +120,7 @@ void DecodeTokens(void)
 	for(ucTokenCounter = 0; ucTokenCounter < ucTokenNr; ucTokenCounter++)
 	{
  		peKeyword = &(psOneToken->uValue.eKeyword);
- 		puiHexStringValue = &(psOneToken->uValue.uiNumber);
+ 		puiHexStringValue = &(psOneToken->uValue.u32_Number);
 
 		if(OK == eStringToKeyword(psOneToken->uValue.pcString, peKeyword) )
 		{

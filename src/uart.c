@@ -119,7 +119,7 @@ void Transmiter_SendString( char cString[])
 	sTransmiterBuffer.fLastCharacter = 0;
 	sTransmiterBuffer.cCharCtr = 0;
 	huart4.Instance->DR = Transmiter_GetCharacterFromBuffer();
-	__HAL_UART_ENABLE_IT(&huart4,UART_IT_TXE);		// Po nadaniu ostatniego znaku wyłączamy przerwanie.
+	__HAL_UART_ENABLE_IT(&huart4,UART_IT_TXE);						// Włączamy przerwanie. Wyłączymy je po nadaniu ostatniego znaku.
 }
 
 // =======================================================================================================

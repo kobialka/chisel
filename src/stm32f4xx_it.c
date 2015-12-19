@@ -70,6 +70,10 @@
 extern UART_HandleTypeDef		 huart4;
 extern TIM_HandleTypeDef 		hTimer6;
 extern volatile int16_t			pACC_XYZ_BUFF[];
+
+/* Variables -----------------------------------------------------------------*/
+volatile  uint32_t u32_SampleCounter;						// nieoptymalizowana, zachowuje wartość.
+
 /******************************************************************************/
 /*            Cortex-M4 Processor Exceptions Handlers                         */
 /******************************************************************************/
@@ -199,6 +203,7 @@ void UART4_IRQHandler(void){
 	/* UART Receiver INT ---------------------------------------------------*/
 	tmp1 = __HAL_UART_GET_FLAG(&huart4, UART_FLAG_RXNE);			// czy flaga jest ustawiona
 	tmp2 = __HAL_UART_GET_IT_SOURCE(&huart4, UART_IT_RXNE);			// czy przerwanie RXNE jest włączone
+
 	if((tmp1 != RESET) && (tmp2 != RESET)){
 		Reciever_PutCharacterToBuffer(huart4.Instance->DR);
 	}
@@ -208,7 +213,7 @@ void UART4_IRQHandler(void){
 	if((tmp1 != RESET) && (tmp2 != RESET)){
 		char cCharacter = Transmiter_GetCharacterFromBuffer ();
 
-		if ( NULL != cCharacter ){
+		if ( 0 != cCharacter ){
 			huart4.Instance->DR = cCharacter;
 		}
 	}
@@ -216,7 +221,7 @@ void UART4_IRQHandler(void){
 
 
 void TIM6_DAC_IRQHandler(void){
-	BSP_LED_Toggle(ORANGE);
+	BSP_LED_Toggle(BLUE);
 	__HAL_TIM_CLEAR_FLAG(&hTimer6,TIM_IT_UPDATE);
 }
 
@@ -227,47 +232,11 @@ void TIM6_DAC_IRQHandler(void){
   * @param  none
   * @retval None
   */
-void EXTI0_IRQHandler(void)
-{
+void EXTI0_IRQHandler(void){
 	__HAL_GPIO_EXTI_CLEAR_IT(ACCELERO_INT1_PIN);
 	BSP_ACCELERO_GetXYZ(pACC_XYZ_BUFF);
-	LCD_BUFF_Wrv_S16Dec(18,3,pACC_XYZ_BUFF[0]);
-	LCD_BUFF_Wrv_S16Dec(18,4,pACC_XYZ_BUFF[1]);
-	LCD_BUFF_Wrv_S16Dec(18,5,pACC_XYZ_BUFF[2]);
-	LCD_Update();
-
-	BSP_LED_Toggle(BLUE);
 }
 
-//void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
-//  if(GPIO_Pin == GPIO_PIN_0){
-
-//	  RCC_ClkInitTypeDef RCC_ClkInitStruct;
-//	  if(__HAL_RCC_GET_SYSCLK_SOURCE() == RCC_CFGR_SWS_HSE){    	// Czy zrodlem SYSCLK jest HSE?
-//		  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_SYSCLK;		// Jezeli zrodlem SYSCLK jest HSE to zmien na PLL.
-//		  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
-//		  if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK){
-//			  /* Initialization Error */
-//			  Error_Handler();
-//		  }
-//		  BSP_LED_Off(BLUE);
-//		  BSP_LED_On(ORANGE);
-//	  }
-//	  else{													// Jezeli zrodlem SYSCLK jest PLL to zmien na HSE.
-//		  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_SYSCLK;		// Jezeli zrodlem SYSCLK jest HSE to zmien na PLL.
-//		  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSE;
-//		  if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK){
-//			  /* Initialization Error */
-//			  Error_Handler();
-//		  }
-//		  BSP_LED_On(BLUE);
-//		  BSP_LED_Off(ORANGE);
-//	  }
-//	  SystemCoreClockUpdate();
-//	  LCD_BUFF_Wrv_U32Dec(CHAR_WIDTH*8,7,SystemCoreClock);
-//	  LCD_Update();
-//  }
-//}
 /**
   * @brief  This function handles PPP interrupt request.
   * @param  None

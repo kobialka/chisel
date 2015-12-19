@@ -1,12 +1,9 @@
 /* main_zadajnik.c */
 
 /*	autor:		Michal Kobialka, mmkobialka@gmail.com
- * 	data: 		05.01.2015
- *	Program napisany w celu zapoznania sie z obsluga przerwan i NVIC. W procedurze obslugi przerwania
- *	EXTI0 zmieniane jest zrodlo sygnaly SYSCLK zamiennie z HSE (8MHz) na PLL (24MHz). Wartosci sa wyswietlane
- *	na LCD oraz zapalane sa odpowiednie diody: HSE - niebieska, PLL - zielona.
+ * 	data: 		23.07.2015
  *
- *	Program odczytuje dane z akcelerometru umieszczonego na PCB
+ *		Program powinien umożliwiać wykonanie rejestracji z czujników o określonej długości (liczba próbek?, milisekundy?)
  *
  *
  */
@@ -18,13 +15,13 @@
 #include "lib_LIS3DSH.h"
 #include "stm32f4_discovery.h"
 #include "stm32f4_discovery_accelerometer.h"
-#include "lib_S1D15705_m.h"
+//#include "lib_S1D15705_m.h"
 #include "string.h"
 #include "command_decoder.h"
 #include "uart.h"
 
 /* Defines	------------------------------------------------------------------*/
-#define	NAME_str		"Zadajnik_v0.0.3"
+#define	NAME_str				"Zadajnik_v0.0.4"
 #define ACC_XYZ_BUFF_SIZE 3
 
 
@@ -36,7 +33,7 @@ extern unsigned char		ucTokenNr;		// ilosc nalezionych tokenow.
 uint8_t 					Hal_RxBuff[1];
 uint8_t						Hal_TxBuff[1];
 uint8_t						pcMessageBuffer[UART_RECIEVER_SIZE];
-volatile int16_t			pACC_XYZ_BUFF[ACC_XYZ_BUFF_SIZE];
+int16_t						pACC_XYZ_BUFF[ACC_XYZ_BUFF_SIZE];
 tToken 						*psToken = asToken;
 
 UART_HandleTypeDef			huart4;
@@ -67,51 +64,26 @@ static void ExecuteCommand(void);
 
 
 
+
 // =======================================================================================================
 int main(void){
 
+	// 110, 150, 300, 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200, 230400, 460800, 921600
 	//___________________________________
 	HAL_Init();
 	SystemClock_Config();
 	SystemCoreClockUpdate();
-
-	//___________________________________
-	LCD_Init();
-	LCD_BUFF_Wrv_U32Dec(CHAR_WIDTH*8,7,SystemCoreClock);
-	LCD_Update();
 	LED_Init();
 	ACC_Init();
-	UART_InitWithInt(9600);
+	UART_InitWithInt(19200);
 	TIMER6_Base_Init();
-//	BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
 	//___________________________________
 	LED_StartSignal();
 	BSP_LED_On(GREEN);
 
-	LCD_BUFF_Wrs(0,0, NAME_str);
-	LCD_BUFF_Wrs(160-9*6,1,"CMSIS 4.2");
-	LCD_BUFF_Wrs(160-11*6,2,"STM32F407VG");
-
-//	LCD_BUFF_Wrs(85,5,"1. acc_get");
-//	LCD_BUFF_Wrs(85,6,"2. acc_start");
-//	LCD_BUFF_Wrs(85,7,"2. acc_stop");
-	LCD_Update();
-
-//	LCD_BUFF_Wrs(0,3,"X = ");
-//	LCD_BUFF_Wrs(0,4,"Y = ");
-//	LCD_BUFF_Wrs(0,5,"Z = ");
-
-
-//  UART4->DR = 0xaf;  // DZIAŁA
-//	huart4.Instance->DR = 0xaf;
 
 	//___________________________________
 	while(1){
-//		LCD_BUFF_Wrv_S16Dec(18,3,pACC_XYZ_BUFF[0]);
-//		LCD_BUFF_Wrv_S16Dec(18,4,pACC_XYZ_BUFF[1]);
-//		LCD_BUFF_Wrv_S16Dec(18,5,pACC_XYZ_BUFF[2]);
-//		LCD_Update();
-
 		SendPendingString();
 		if(eReciever_GetStatus() == READY){
 			Reciever_GetStringCopy(pcMessageBuffer);
@@ -121,23 +93,123 @@ int main(void){
 	}
 }
 // =======================================================================================================
+
+
+
+void SendPendingString(void){
+	if(eTransmiter_GetStatus() == FREE){
+		if(1 == fId){
+			Transmiter_SendString("stm32f407VG\n");
+			fId = 0;
+		}
+		else if(1 == fOk){
+			Transmiter_SendString("OK\n");
+			fOk = 0;
+		}
+		else if(1 == fCalc){
+			char pcTempString[17] = "calc ";
+			uint16_t uiTempVar = (psToken+1)->uValue.u32_Number* 2;
+
+			AppendUIntToString(uiTempVar,pcTempString);
+			AppendString(" \n",pcTempString);
+			Transmiter_SendString(pcTempString);
+			fCalc = 0;
+		}
+		else if(1 == fProvideData){
+			Transmiter_SendString("provide correct number\n");
+			fProvideData = 0;
+		}
+		else if(1 == fUnknownCommand ){
+			Transmiter_SendString("unknown command\n");
+			fUnknownCommand = 0;
+		}
+		else if(1 == fTest){
+			char pcTempString[50] = "";
+
+			AppendIntToString(pACC_XYZ_BUFF[0],pcTempString);
+			AppendString(";",pcTempString);
+			AppendIntToString(pACC_XYZ_BUFF[1],pcTempString);
+			AppendString(";",pcTempString);
+			AppendIntToString(pACC_XYZ_BUFF[2],pcTempString);
+			AppendString(";",pcTempString);
+			Transmiter_SendString(pcTempString);
+			fTest = 0;
+		}
+	}
+}
+
+void ExecuteCommand(void){
+	uint8_t u8_TempAccReg;
+
+
+	if((0 != ucTokenNr) && (KEYWORD == psToken->eType) ){
+			switch(psToken->uValue.eKeyword){
+				case CALC:
+					if( NUMBER == (psToken+1)->eType ){
+						fCalc = 1;
+					}
+					else {
+						fProvideData = 1;
+					}
+					break;
+				case ID:
+					fId = 1;
+					break;
+				case LIS3DSH_GETXYZ:
+					BSP_ACCELERO_GetXYZ(pACC_XYZ_BUFF);
+					BSP_LED_Toggle(ORANGE);
+					fTest = 1;
+					break;
+
+				case LIS3DSH_START:
+					HAL_NVIC_EnableIRQ(EXTI0_IRQn);
+					ACCELERO_IO_Read(&u8_TempAccReg, LIS3DSH_CTRL3_ADDR, 1);
+					u8_TempAccReg |= LIS3DSH_CTRL3_INT1_EN_BIT;					// enable Data Ready Int1
+					ACCELERO_IO_Write(&u8_TempAccReg, LIS3DSH_CTRL3_ADDR, 1);
+					ACCELERO_IO_Read(&u8_TempAccReg, LIS3DSH_CTRL4_ADDR, 1);
+					u8_TempAccReg |= LIS3DSH_CTRL4_XYZ_ENABLE_BIT;				// turn on xyz axis.
+					ACCELERO_IO_Write(&u8_TempAccReg, LIS3DSH_CTRL4_ADDR, 1);
+					fOk = 1;
+					break;
+
+				case LIS3DSH_STOP:
+					ACCELERO_IO_Read(&u8_TempAccReg, LIS3DSH_CTRL4_ADDR, 1);
+					u8_TempAccReg &= ~(LIS3DSH_CTRL4_XYZ_ENABLE_BIT);				// turn off xyz axis.
+					ACCELERO_IO_Write(&u8_TempAccReg, LIS3DSH_CTRL4_ADDR, 1);
+					ACCELERO_IO_Read(&u8_TempAccReg, LIS3DSH_CTRL3_ADDR, 1);
+					u8_TempAccReg &= ~(LIS3DSH_CTRL3_INT1_EN_BIT);					// disable Data Ready Int1
+					ACCELERO_IO_Write(&u8_TempAccReg, LIS3DSH_CTRL3_ADDR, 1);
+					HAL_NVIC_DisableIRQ(EXTI0_IRQn);
+					fOk = 1;
+					break;
+
+				case TEST:
+					BSP_ACCELERO_GetXYZ(pACC_XYZ_BUFF);
+					fTest = 1;
+					break;
+
+				default:
+					Error_Handler();
+				    break;
+			}
+		}
+		else {
+			fUnknownCommand = 1;
+		}
+}
+
+
+
+
+
 static void TIMER6_Base_Init(void){
 	TIM_Base_InitTypeDef 	Timer6_InitStruct;
-//	TIM_ClockConfigTypeDef	Timer6_ClockConfigStruct;
-
-	SystemCoreClockUpdate();
 
 	Timer6_InitStruct.ClockDivision 	= TIM_CLOCKDIVISION_DIV1;
 	Timer6_InitStruct.CounterMode   	= TIM_COUNTERMODE_UP;
 	Timer6_InitStruct.Prescaler			= 16800;		// 168000000/16800 = 10000
 	Timer6_InitStruct.Period			= 5000;
 	Timer6_InitStruct.RepetitionCounter	= 0;
-
-//	Timer6_ClockConfigStruct.ClockSource 	= TIM_CLOCKSOURCE_INTERNAL;
-//	Timer6_ClockConfigStruct.ClockPolarity	= TIM_CLOCKPOLARITY_RISING;
-//	Timer6_ClockConfigStruct.ClockPrescaler	= TIM_CLOCKPRESCALER_DIV1;
-//	Timer6_ClockConfigStruct.ClockFilter 	= 0;
-//	HAL_TIM_ConfigClockSource(hTimer6, Timer6_ClockConfigStruct);
 
 	hTimer6.Init 		= Timer6_InitStruct;
 	hTimer6.Instance	= TIM6;
@@ -147,43 +219,37 @@ static void TIMER6_Base_Init(void){
 }
 
 static void ACC_Init(void){
-
 	GPIO_InitTypeDef GPIO_InitStructure;
 	uint8_t AccControlDataTemp = 0;
 
-	BSP_ACCELERO_Init();			// Data rate - 25[Hz]; BW filter - 40[Hz]
-
-	/* Enable LIS3DSH 'Data ready' interrupt (INT1), INT1 active HIGH, INT1 pulsed */
+	BSP_ACCELERO_Init();			// Data rate - 12.5[Hz]; BW filter - 40[Hz]
 	ACCELERO_IO_Read(&AccControlDataTemp,LIS3DSH_CTRL3_ADDR,1);
 
-	AccControlDataTemp |= 	LIS3DSH_CTRL3_DR_EN_BIT 	| \
-								LIS3DSH_CTRL3_IEL_BIT 		| \
-								LIS3DSH_CTRL3_INT1_EN_BIT 	|
-								LIS3DSH_CTRL3_IEA_BIT;
+	//  ===  Disable interrupts from ACC.
+	AccControlDataTemp &= 	~(LIS3DSH_CTRL3_DR_EN_BIT	| \
+							  LIS3DSH_CTRL3_INT1_EN_BIT | \
+							  LIS3DSH_CTRL3_INT2_EN_BIT);
 
 	ACCELERO_IO_Write(&AccControlDataTemp, LIS3DSH_CTRL_REG3_ADDR, 1);
 
-	/* LIS3DSH enable 'block data update', won't updatedata regs if not read */
-	AccControlDataTemp = 0;
+	//  ===  Set updating data all the time
 	ACCELERO_IO_Read(&AccControlDataTemp,LIS3DSH_CTRL4_ADDR,1);
-	AccControlDataTemp |= LIS3DSH_CTRL4_BDU_BIT;
+	AccControlDataTemp &= ~LIS3DSH_CTRL4_BDU_BIT;
 	ACCELERO_IO_Write(&AccControlDataTemp,LIS3DSH_CTRL4_ADDR,1);
 
 	/* Enable INT1 GPIO clock and configure GPIO PIN PE.00 to detect Interrupts */
+	/*
 	ACCELERO_INT_GPIO_CLK_ENABLE();
 	GPIO_InitStructure.Pin = GPIO_PIN_0;
 	GPIO_InitStructure.Mode = GPIO_MODE_IT_RISING;
 	GPIO_InitStructure.Speed = GPIO_SPEED_FAST;
 	GPIO_InitStructure.Pull = GPIO_NOPULL;
 	HAL_GPIO_Init(GPIOE, &GPIO_InitStructure);
-
+	*/
 
 	/* Enable and set EXTI0 Accelerometer INT1 to the lowest priority */
-	HAL_NVIC_SetPriority(EXTI0_IRQn, 0, 0);
-//	HAL_NVIC_EnableIRQ(EXTI0_IRQn);
+	//HAL_NVIC_SetPriority(EXTI0_IRQn, 0, 0);
 }
-
-
 
 static void LED_Init(void){
 	BSP_LED_Init(BLUE);
@@ -227,94 +293,6 @@ void SystemClock_Config(void){
 	//HAL_RCC_MCOConfig(RCC_MCO1, RCC_MCO1SOURCE_HSI,RCC_MCODIV_1);
 
 }
-
-
-
-
-void SendPendingString(void){
-	if(eTransmiter_GetStatus() == FREE){
-		if(1 == fId){
-			Transmiter_SendString("id stm32f407VG\n");
-			fId = 0;
-		}
-		else if(1 == fOk){
-			Transmiter_SendString("OK\n");
-			fOk = 0;
-		}
-		else if(1 == fCalc){
-			char pcTempString[17] = "calc ";
-			unsigned int uiTempVar = (psToken+1)->uValue.uiNumber * 2;
-
-			AppendUIntToString(uiTempVar,pcTempString);
-			AppendString(" \n",pcTempString);
-			Transmiter_SendString(pcTempString);
-			fCalc = 0;
-		}
-		else if(1 == fProvideData){
-			Transmiter_SendString("provide correct number\n");
-			fProvideData = 0;
-		}
-		else if(1 == fUnknownCommand ){
-			Transmiter_SendString("unknown command\n");
-			fUnknownCommand = 0;
-		}
-		else if(1 == fTest){
-
-		}
-	}
-}
-
-void ExecuteCommand(void){
-	if((0 != ucTokenNr) && (KEYWORD == psToken->eType) ){
-			switch(psToken->uValue.eKeyword){
-				case CALC:
-					if( NUMBER == (psToken+1)->eType ){
-						fCalc = 1;
-					}
-					else {
-						fProvideData = 1;
-					}
-					break;
-				case ID:
-					fId = 1;
-					break;
-				case LIS3DSH_GETXYZ:
-					BSP_LED_On(BLUE);
-					BSP_ACCELERO_GetXYZ(pACC_XYZ_BUFF);
-					HAL_Delay(100);
-					BSP_LED_Off(BLUE);
-					LCD_BUFF_Wrv_S16Dec(18,3,pACC_XYZ_BUFF[0]);
-					LCD_BUFF_Wrv_S16Dec(18,4,pACC_XYZ_BUFF[1]);
-					LCD_BUFF_Wrv_S16Dec(18,5,pACC_XYZ_BUFF[2]);
-					LCD_Update();
-					fOk = 1;
-					break;
-
-				case LIS3DSH_START:
-					HAL_NVIC_EnableIRQ(EXTI0_IRQn);
-					fOk = 1;
-					break;
-
-				case LIS3DSH_STOP:
-					HAL_NVIC_DisableIRQ(EXTI0_IRQn);
-					fOk = 1;
-					break;
-
-				case TEST:
-					fTest = 1;
-					break;
-
-				default:
-					Error_Handler();
-				    break;
-			}
-		}
-		else {
-			fUnknownCommand = 1;
-		}
-}
-
-
 
 //___________________________________
 void LED_StartSignal(void){

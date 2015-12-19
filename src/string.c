@@ -64,26 +64,59 @@ void ReplaceCharactersInString(char pcString[], char cOldChar, char cNewChar)
 }
 
 
+
+
+//---------------------------------------------------------------------------------------
+void IntToHexStr (int16_t Value_i16, char pcStr[])
+{
+	uint8_t TetraCounter_u8;
+	uint8_t ValueBuff_u8;
+
+	pcStr[1] = 'x';
+	pcStr[0] = '0';
+	pcStr[6] = NULL;
+
+	for (TetraCounter_u8 = 0; TetraCounter_u8 < 4; TetraCounter_u8++)
+	{
+		ValueBuff_u8 = ( (Value_i16 >> (TetraCounter_u8*4)) & TetraMask_bm );
+		if (ValueBuff_u8 > 9)
+		{
+			pcStr[5 - TetraCounter_u8] = ValueBuff_u8 + ('A' - 10);
+		}
+		else
+		{
+			pcStr[5 - TetraCounter_u8] = ValueBuff_u8 + '0';
+		}
+	}
+
+}
+
+
+
 //---------------------------------------------------------------------------------------
 void UIntToHexStr (unsigned int uiValue, char pcStr[])
 {
 	unsigned char uiTetraCounter;
 	unsigned char uiValueBuff;
 	
-	for (uiTetraCounter = 0; uiTetraCounter < 8; uiTetraCounter++)
+	pcStr[1] = 'x';
+	pcStr[0] = '0';
+	pcStr[6] = NULL;
+
+	for (uiTetraCounter = 0; uiTetraCounter < 4; uiTetraCounter++)
 	{
 		uiValueBuff = ( (uiValue >> (uiTetraCounter*4)) & TetraMask_bm );
 		if (uiValueBuff > 9)
 		{
-			pcStr[9 - uiTetraCounter] = uiValueBuff + ('A' - 10);
+			pcStr[5 - uiTetraCounter] = uiValueBuff + ('A' - 10);
 		}
 		else
 		{
-			pcStr[9 - uiTetraCounter] = uiValueBuff + '0';
+			pcStr[5 - uiTetraCounter] = uiValueBuff + '0';
 		}
 	}
-	pcStr[1] = 'x';
-	pcStr[0] = '0';
+
+
 }
 
 //---------------------------------------------------------------------------------------
@@ -151,6 +184,16 @@ tResult eHexStringToUInt(char pcStr[], unsigned int *puiValue)
 }
 
 
+
+
+//---------------------------------------------------------------------------------------
+void AppendIntToString(unsigned int uiValue, char pcDestinationStr[])
+{
+	unsigned char ucCharacterCounter;
+
+	for (ucCharacterCounter = 0; pcDestinationStr[ucCharacterCounter] != NULL; ucCharacterCounter++){};
+	IntToHexStr((uiValue), pcDestinationStr + ucCharacterCounter);
+}
 
 
 //---------------------------------------------------------------------------------------
