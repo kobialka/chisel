@@ -18,6 +18,7 @@ void IntToHexStr (int16_t uiValue, char pcStr[]);
 void UIntToHexStr (unsigned int uiValue, char pcStr[]);
 void UCharToHexStr (unsigned char uValue, char pcStr[]);
 tResult eHexStringToUInt(char pcStr[], unsigned int *puiValue);
+void AppendHexIntToString(unsigned int uiValue, char pcDestinationStr[]);
 void AppendIntToString(unsigned int uiValue, char pcDestinationStr[]);
 void AppendUIntToString(unsigned int uiValue, char pcDestinationStr[]);
 

@@ -10,6 +10,7 @@
 
 
 #define TERMINATOR				13
+//#define TERMINATOR				10
 #define UART_RECIEVER_SIZE		20
 #define UART_TRANSMITER_SIZE 	40
 

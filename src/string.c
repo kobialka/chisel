@@ -187,7 +187,7 @@ tResult eHexStringToUInt(char pcStr[], unsigned int *puiValue)
 
 
 //---------------------------------------------------------------------------------------
-void AppendIntToString(unsigned int uiValue, char pcDestinationStr[])
+void AppendHexIntToString(unsigned int uiValue, char pcDestinationStr[])
 {
 	unsigned char ucCharacterCounter;
 
@@ -195,6 +195,16 @@ void AppendIntToString(unsigned int uiValue, char pcDestinationStr[])
 	IntToHexStr((uiValue), pcDestinationStr + ucCharacterCounter);
 }
 
+
+//---------------------------------------------------------------------------------------
+void AppendIntToString(unsigned int uiValue, char pcDestinationStr[])
+{
+	unsigned char ucCharacterCounter;
+
+	for (ucCharacterCounter = 0; pcDestinationStr[ucCharacterCounter] != NULL; ucCharacterCounter++){};
+
+	//IntToStr((uiValue), pcDestinationStr + ucCharacterCounter);
+}
 
 //---------------------------------------------------------------------------------------
 void AppendUIntToString(unsigned int uiValue, char pcDestinationStr[])

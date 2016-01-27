@@ -183,3 +183,38 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
   }
 
 }
+
+void HAL_SPI_MspInit(SPI_HandleTypeDef *hspi){
+
+	if(hspi->Instance==SPI3) {
+		GPIO_InitTypeDef   GPIO_InitStructure;
+
+		/* Włącz taktowanie dla używanych pinów. */
+		__GPIOA_CLK_ENABLE();
+		__GPIOB_CLK_ENABLE();
+		__SPI3_CLK_ENABLE();
+
+	  	/* Configure GPIO PIN for use SPI3 */
+	  	GPIO_InitStructure.Pin = (GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5);
+	  	GPIO_InitStructure.Mode = GPIO_MODE_OUTPUT_PP;
+	  	GPIO_InitStructure.Pull  = GPIO_NOPULL;
+	  	GPIO_InitStructure.Speed = GPIO_SPEED_MEDIUM;
+	  	GPIO_InitStructure.Alternate = GPIO_AF6_SPI3;
+	  	HAL_GPIO_Init(GPIOB, &GPIO_InitStructure);
+
+	  	GPIO_InitStructure.Pin = GPIO_PIN_4;
+		GPIO_InitStructure.Mode = GPIO_MODE_OUTPUT_PP;
+		GPIO_InitStructure.Pull  = GPIO_NOPULL;        // GPIO_PULLUP ??
+		GPIO_InitStructure.Speed = GPIO_SPEED_MEDIUM;
+		GPIO_InitStructure.Alternate = GPIO_AF6_SPI3;
+		HAL_GPIO_Init(GPIOA, &GPIO_InitStructure);
+	}
+}
+
+void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi){
+
+	if(hspi->Instance==SPI1) {
+
+	}
+
+}

@@ -19,6 +19,9 @@
 #include "string.h"
 #include "command_decoder.h"
 #include "uart.h"
+#include "mpu9250_m.h"
+
+
 
 /* Defines	------------------------------------------------------------------*/
 #define	NAME_str				"Zadajnik_v0.0.4"
@@ -39,6 +42,7 @@ tToken 						*psToken = asToken;
 UART_HandleTypeDef			huart4;
 TIM_HandleTypeDef			hTimer6;
 HAL_StatusTypeDef 			HAL_Status;
+SPI_HandleTypeDef			hspi3;
 
 uint8_t						fCalc 				= 0;
 uint8_t						fId 				= 0;
@@ -74,8 +78,9 @@ int main(void){
 	SystemClock_Config();
 	SystemCoreClockUpdate();
 	LED_Init();
-	ACC_Init();
-	UART_InitWithInt(19200);
+//	ACC_Init();
+	MPU9250_Init();
+	UART_InitWithInt(115200);
 	TIMER6_Base_Init();
 	//___________________________________
 	LED_StartSignal();
@@ -126,11 +131,11 @@ void SendPendingString(void){
 		else if(1 == fTest){
 			char pcTempString[50] = "";
 
-			AppendIntToString(pACC_XYZ_BUFF[0],pcTempString);
+			AppendHexIntToString(pACC_XYZ_BUFF[0],pcTempString);
 			AppendString(";",pcTempString);
-			AppendIntToString(pACC_XYZ_BUFF[1],pcTempString);
+			AppendHexIntToString(pACC_XYZ_BUFF[1],pcTempString);
 			AppendString(";",pcTempString);
-			AppendIntToString(pACC_XYZ_BUFF[2],pcTempString);
+			AppendHexIntToString(pACC_XYZ_BUFF[2],pcTempString);
 			AppendString(";",pcTempString);
 			Transmiter_SendString(pcTempString);
 			fTest = 0;
@@ -219,7 +224,7 @@ static void TIMER6_Base_Init(void){
 }
 
 static void ACC_Init(void){
-	GPIO_InitTypeDef GPIO_InitStructure;
+	//GPIO_InitTypeDef GPIO_InitStructure;
 	uint8_t AccControlDataTemp = 0;
 
 	BSP_ACCELERO_Init();			// Data rate - 12.5[Hz]; BW filter - 40[Hz]
