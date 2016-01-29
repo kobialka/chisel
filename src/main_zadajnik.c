@@ -20,7 +20,7 @@
 #include "command_decoder.h"
 #include "uart.h"
 #include "mpu9250_m.h"
-
+#include "mpu9250_m.h"
 
 
 /* Defines	------------------------------------------------------------------*/
@@ -35,6 +35,7 @@ extern unsigned char		ucTokenNr;		// ilosc nalezionych tokenow.
 
 uint8_t 					Hal_RxBuff[1];
 uint8_t						Hal_TxBuff[1];
+uint8_t						pSPI_RxBuff[1];
 uint8_t						pcMessageBuffer[UART_RECIEVER_SIZE];
 int16_t						pACC_XYZ_BUFF[ACC_XYZ_BUFF_SIZE];
 tToken 						*psToken = asToken;
@@ -78,7 +79,7 @@ int main(void){
 	SystemClock_Config();
 	SystemCoreClockUpdate();
 	LED_Init();
-//	ACC_Init();
+	ACC_Init();
 	MPU9250_Init();
 	UART_InitWithInt(115200);
 	TIMER6_Base_Init();
@@ -190,6 +191,9 @@ void ExecuteCommand(void){
 
 				case TEST:
 					BSP_ACCELERO_GetXYZ(pACC_XYZ_BUFF);
+					HAL_SPI_Transmit(&hspi3, &"jakis napis", 15, 1000);
+					/* Disble the selected SPI peripheral */
+				  __HAL_SPI_DISABLE(&hspi3);
 					fTest = 1;
 					break;
 

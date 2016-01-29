@@ -65,7 +65,6 @@ void ReplaceCharactersInString(char pcString[], char cOldChar, char cNewChar)
 
 
 
-
 //---------------------------------------------------------------------------------------
 void IntToHexStr (int16_t Value_i16, char pcStr[])
 {

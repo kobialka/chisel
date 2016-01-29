@@ -395,7 +395,8 @@ void LIS3DSH_ReadACC(int16_t *pData)
   /* Obtain the mg value for the three axis */
   for(i=0; i<3; i++)
   {
-    valueinfloat = ((buffer[2*i+1] << 8) + buffer[2*i]) * sensitivity;
+	// valueinfloat = ((buffer[2*i+1] << 8) + buffer[2*i]) * sensitivity;
+    valueinfloat = ((buffer[2*i+1] << 8) | (0x0ff & buffer[2*i]) ) * sensitivity;
     pData[i] = (int16_t)valueinfloat;
   }
 }

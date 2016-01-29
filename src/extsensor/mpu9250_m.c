@@ -24,7 +24,7 @@ extern SPI_HandleTypeDef	hspi3;
 // =======================================================================================================
 // funkcje prywatne
 
-static Init_SPI3(){
+static void Init_SPI3(void){
 
     if(HAL_SPI_GetState(&hspi3) == HAL_SPI_STATE_RESET){
     	hspi3.Instance = SPI3;
@@ -36,11 +36,11 @@ static Init_SPI3(){
 		hspi3.Init.CRCPolynomial = 7;
 		hspi3.Init.DataSize = SPI_DATASIZE_8BIT;
 		hspi3.Init.FirstBit = SPI_FIRSTBIT_MSB;
-		hspi3.Init.NSS = SPI_NSS_SOFT;
+		hspi3.Init.NSS = SPI_NSS_HARD_OUTPUT;
 		hspi3.Init.TIMode = SPI_TIMODE_DISABLED;
 		hspi3.Init.Mode = SPI_MODE_MASTER;
-
 		HAL_SPI_Init(&hspi3);
+
     }
 }
 

@@ -15,9 +15,9 @@
 #define COMMAND_DECODER_H_
 
 
-#define MAX_KEYWORD_STRING_LTH 25															// maksymalna dlugosc komendy.
-#define MAX_KEYWORD_NR 10																				// maksymalna dopuszczalna ilosc slow kluczowych.
-#define MAX_TOKEN_NR 3																				// maksymalna dopuszczalna ilosc tokenów.
+#define MAX_KEYWORD_STRING_LTH	25											// maksymalna dlugosc komendy.
+#define MAX_KEYWORD_NR 			10											// maksymalna dopuszczalna ilosc slow kluczowych.
+#define MAX_TOKEN_NR 			3											// maksymalna dopuszczalna ilosc tokenów.
 
 
 

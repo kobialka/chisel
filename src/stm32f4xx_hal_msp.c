@@ -190,20 +190,21 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef *hspi){
 		GPIO_InitTypeDef   GPIO_InitStructure;
 
 		/* Włącz taktowanie dla używanych pinów. */
+		__SPI3_CLK_ENABLE();
 		__GPIOA_CLK_ENABLE();
 		__GPIOB_CLK_ENABLE();
-		__SPI3_CLK_ENABLE();
 
-	  	/* Configure GPIO PIN for use SPI3 */
+	  	/* Configure SPI3 GPIO: SCK(3) MISO(4) MOSI(5) */
 	  	GPIO_InitStructure.Pin = (GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5);
-	  	GPIO_InitStructure.Mode = GPIO_MODE_OUTPUT_PP;
-	  	GPIO_InitStructure.Pull  = GPIO_NOPULL;
+	  	GPIO_InitStructure.Mode = GPIO_MODE_AF_PP;
+	  	GPIO_InitStructure.Pull  = GPIO_PULLDOWN;
 	  	GPIO_InitStructure.Speed = GPIO_SPEED_MEDIUM;
 	  	GPIO_InitStructure.Alternate = GPIO_AF6_SPI3;
 	  	HAL_GPIO_Init(GPIOB, &GPIO_InitStructure);
 
+	  	/* Configure SPI3 GPIO: NSS/CS (PA4) */
 	  	GPIO_InitStructure.Pin = GPIO_PIN_4;
-		GPIO_InitStructure.Mode = GPIO_MODE_OUTPUT_PP;
+		GPIO_InitStructure.Mode = GPIO_MODE_AF_PP;
 		GPIO_InitStructure.Pull  = GPIO_NOPULL;        // GPIO_PULLUP ??
 		GPIO_InitStructure.Speed = GPIO_SPEED_MEDIUM;
 		GPIO_InitStructure.Alternate = GPIO_AF6_SPI3;
