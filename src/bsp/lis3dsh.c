@@ -289,7 +289,7 @@ void LIS3DSH_DataRateCmd(uint8_t DataRateValue)
   ACCELERO_IO_Read(&tmpreg, LIS3DSH_CTRL_REG4_ADDR, 1);
   
   /* Set new data rate configuration from 100 to 400Hz */
-  tmpreg &= (uint8_t)~LIS3DSH_DATARATE_400; 
+  tmpreg &= (uint8_t)~0x0F; // było _400
   tmpreg |= DataRateValue;
   
   /* Write value to MEMS CTRL_REG4 register */

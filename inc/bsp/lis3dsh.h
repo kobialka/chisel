@@ -1088,10 +1088,10 @@ typedef struct
 /** @defgroup Anti-Aliasing_Filter_Bandwidth 
   * @{
   */
-#define LIS3DSH_FILTER_BW_800                ((uint8_t)0x00)  /* 800 Hz */
-#define LIS3DSH_FILTER_BW_40                 ((uint8_t)0x08)  /* 40 Hz  */
-#define LIS3DSH_FILTER_BW_200                ((uint8_t)0x10)  /* 200 Hz */
-#define LIS3DSH_FILTER_BW_50                 ((uint8_t)0x18)  /* 50 Hz  */
+#define LIS3DSH_FILTER_BW_800                ((uint8_t)0x00)  /* 800 Hz */		// 0x00
+#define LIS3DSH_FILTER_BW_400                ((uint8_t)0x40)  /* 400 Hz  */ 	// 0x08 (opis: było 40)
+#define LIS3DSH_FILTER_BW_200                ((uint8_t)0x80)  /* 200 Hz */		// 0x10
+#define LIS3DSH_FILTER_BW_50                 ((uint8_t)0xC0)  /* 50 Hz  */		// 0x18
 /**
   * @}
   */
