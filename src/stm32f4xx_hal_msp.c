@@ -47,9 +47,9 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
+#include "mpu9250_m.h"
+#include "uart.h"
 
-
-extern UART_HandleTypeDef huart4;
 
 
 /** @addtogroup STM32F4xx_HAL_Driver
@@ -186,36 +186,45 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
 
 void HAL_SPI_MspInit(SPI_HandleTypeDef *hspi){
 
-	if(hspi->Instance==SPI3) {
-		GPIO_InitTypeDef   GPIO_InitStructure;
+	if(hspi->Instance==MPU9250_SPI) {
+		 GPIO_InitTypeDef   GPIO_InitStructure;
 
-		/* Włącz taktowanie dla używanych pinów. */
-		__SPI3_CLK_ENABLE();
-		__GPIOA_CLK_ENABLE();
-		__GPIOB_CLK_ENABLE();
 
-	  	/* Configure SPI3 GPIO: SCK(3) MISO(4) MOSI(5) */
-	  	GPIO_InitStructure.Pin = (GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5);
-	  	GPIO_InitStructure.Mode = GPIO_MODE_AF_PP;
-	  	GPIO_InitStructure.Pull  = GPIO_PULLDOWN;
-	  	GPIO_InitStructure.Speed = GPIO_SPEED_MEDIUM;
-	  	GPIO_InitStructure.Alternate = GPIO_AF6_SPI3;
-	  	HAL_GPIO_Init(GPIOB, &GPIO_InitStructure);
+		// Włącz taktowanie dla używanych pinów.
+		MPU9250_SPI_CS_GPIO_CLK_ENABLE();
 
-	  	/* Configure SPI3 GPIO: NSS/CS (PA4) */
-	  	GPIO_InitStructure.Pin = GPIO_PIN_4;
-		GPIO_InitStructure.Mode = GPIO_MODE_AF_PP;
-		GPIO_InitStructure.Pull  = GPIO_NOPULL;        // GPIO_PULLUP ??
+		// Configure SPI3 GPIO: CS
+		GPIO_InitStructure.Pin = MPU9250_SPI_CS_PIN;
+		GPIO_InitStructure.Mode = GPIO_MODE_OUTPUT_PP;
+		GPIO_InitStructure.Pull  = GPIO_NOPULL;
 		GPIO_InitStructure.Speed = GPIO_SPEED_MEDIUM;
-		GPIO_InitStructure.Alternate = GPIO_AF6_SPI3;
-		HAL_GPIO_Init(GPIOA, &GPIO_InitStructure);
+		//GPIO_InitStructure.Alternate = MPU9250_SPI_AF;
+		HAL_GPIO_Init(MPU9250_SPI_CS_GPIO_PORT, &GPIO_InitStructure);
+		MPU9250_CS_HIGH();
+
+
+
+		// Włącz taktowanie dla używanych pinów.
+		MPU9250_SPI_CLK_ENABLE();
+		MPU9250_SPI_GPIO_CLK_ENABLE();
+
+	  	// Configure SPI3 GPIO: SCK MISO MOSI
+	  	GPIO_InitStructure.Pin = (MPU9250_SPI_MOSI_PIN | MPU9250_SPI_MISO_PIN | MPU9250_SPI_SCK_PIN);
+	  	GPIO_InitStructure.Mode = GPIO_MODE_AF_PP;
+	  	GPIO_InitStructure.Pull  = GPIO_NOPULL; //GPIO_PULLDOWN;
+	  	GPIO_InitStructure.Speed = GPIO_SPEED_MEDIUM;
+	  	GPIO_InitStructure.Alternate = MPU9250_SPI_AF;
+	  	HAL_GPIO_Init(MPU9250_SPI_GPIO_PORT, &GPIO_InitStructure);
 	}
 }
 
 void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi){
 
-	if(hspi->Instance==SPI1) {
-
+	if(hspi->Instance==MPU9250_SPI){
+		HAL_GPIO_DeInit(MPU9250_SPI_CS_GPIO_PORT, MPU9250_SPI_CS_PIN);
+		HAL_GPIO_DeInit(MPU9250_SPI_GPIO_PORT, MPU9250_SPI_MISO_PIN);
+		HAL_GPIO_DeInit(MPU9250_SPI_GPIO_PORT, MPU9250_SPI_MOSI_PIN);
+		HAL_GPIO_DeInit(MPU9250_SPI_GPIO_PORT, MPU9250_SPI_SCK_PIN);
+		MPU9250_SPI_CLK_DISABLE();
 	}
-
 }

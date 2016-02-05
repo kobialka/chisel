@@ -43,7 +43,7 @@ tToken 						*psToken = asToken;
 UART_HandleTypeDef			huart4;
 TIM_HandleTypeDef			hTimer6;
 HAL_StatusTypeDef 			HAL_Status;
-SPI_HandleTypeDef			hspi3;
+SPI_HandleTypeDef			hspi3_MPU9250;
 
 uint8_t						fCalc 				= 0;
 uint8_t						fId 				= 0;
@@ -65,14 +65,15 @@ static void ACC_Init(void);
 static void TIMER6_Base_Init(void);
 static void SendPendingString(void);
 static void ExecuteCommand(void);
-
+static void Sensor_MPU9250_Init();
 
 
 
 
 // =======================================================================================================
 int main(void){
-
+	uint8_t DUMMY = 0xAF;
+	GPIO_InitTypeDef   GPIO_InitStructure;
 	// 110, 150, 300, 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200, 230400, 460800, 921600
 	//___________________________________
 	HAL_Init();
@@ -80,12 +81,14 @@ int main(void){
 	SystemCoreClockUpdate();
 	LED_Init();
 	ACC_Init();
-	MPU9250_Init();
+	Sensor_MPU9250_Init();
 	UART_InitWithInt(115200);
 	TIMER6_Base_Init();
 	//___________________________________
 	LED_StartSignal();
 	BSP_LED_On(GREEN);
+
+
 
 
 	//___________________________________
@@ -100,6 +103,48 @@ int main(void){
 }
 // =======================================================================================================
 
+static void Sensor_MPU9250_Init(){
+	tsMPU9250_InitTypedef sMPU9250_Init;
+
+	// KONFIGURACJA. NIEISTOTNE PARAMETRY USTAWIĆ NA 0.
+		sMPU9250_Init.Clock_Source									=	MPU9250_CONF_CLOCK_SOURCE_INTERNAL_20MHz;
+		sMPU9250_Init.Sample_Rate_Divider							=	0;
+		sMPU9250_Init.External_Sync									=	MPU9250_CONF_EXT_SYNC_DISABLED;
+
+		sMPU9250_Init.sI2C.Bypass_Enable							=	MPU9250_CONF_I2C_BYPASS_PIN_NO;
+		sMPU9250_Init.sI2C.I2C_IF_DIS								=	MPU9250_CONF_I2C_DISABLE_MODULE_NO;
+		sMPU9250_Init.sI2C.I2C_MST_EN								=	MPU9250_CONF_I2C_MASTER_MODE_YES;
+		sMPU9250_Init.sI2C.I2C_MST_DELAY_CTRL						=	0;
+
+		sMPU9250_Init.sINTERRUPTS.INT_Pin_Logic_Level				=	0;
+		sMPU9250_Init.sINTERRUPTS.INT_Pin_PP_OD						=	0;
+		sMPU9250_Init.sINTERRUPTS.INT_Pin_Latch						=	0;
+		sMPU9250_Init.sINTERRUPTS.Clear_Status_On_Read				=	0;
+		sMPU9250_Init.sINTERRUPTS.FSYNC_Logic_Level					=	0;
+		sMPU9250_Init.sINTERRUPTS.FSYNC_INT_MODE_Enable				=	0;
+		sMPU9250_Init.sINTERRUPTS.Enable_Wake_Up_Int				=	0;
+		sMPU9250_Init.sINTERRUPTS.Enable_FIFO_Overflow_Int			=	0;
+		sMPU9250_Init.sINTERRUPTS.Enable_FSYNC_Int					=	0;
+		sMPU9250_Init.sINTERRUPTS.Enable_Raw_Data_Enable_Int		=	0;
+
+		sMPU9250_Init.sACC.Axis_Disable 							=	MPU9250_CONF_ACC_AXIS_ALL;
+		sMPU9250_Init.sACC.Full_Scale								=	MPU9250_CONF_ACC_FULLSCALE_4g;
+		sMPU9250_Init.sACC.Filter_Bypass							=	MPU9250_CONF_ACC_FILTER_BYPASS_NO;
+		sMPU9250_Init.sACC.Filter_BW								=	MPU9250_CONF_ACC_FILTER_BW_460Hz;
+		sMPU9250_Init.sACC.WakeOn_Threshold							=	0;
+
+		sMPU9250_Init.sGYRO.Axis_Disable							=	MPU9250_CONF_GYRO_AXIS_ALL;
+		sMPU9250_Init.sGYRO.Full_Scale								=	MPU9250_CONF_GYRO_FULLSCALE_250dps;
+		sMPU9250_Init.sGYRO.Filter_Bypass							=	MPU9250_CONF_GYRO_FILTER_BYPASS_NO;
+		sMPU9250_Init.sGYRO.Filter_BW								=	MPU9250_CONF_GYRO_FILTER_BW_20Hz;
+
+		sMPU9250_Init.sFIFO.Enable									=	MPU9250_CONF_FIFO_ENABLE_NO;
+		sMPU9250_Init.sFIFO.Overlap									=	0;
+		sMPU9250_Init.sFIFO.Source_Select							=	0;
+
+		MPU9250_Init(&sMPU9250_Init);
+
+}
 
 
 void SendPendingString(void){
@@ -190,10 +235,9 @@ void ExecuteCommand(void){
 					break;
 
 				case TEST:
-					BSP_ACCELERO_GetXYZ(pACC_XYZ_BUFF);
-					HAL_SPI_Transmit(&hspi3, &"jakis napis", 15, 1000);
+					//BSP_ACCELERO_GetXYZ(pACC_XYZ_BUFF);
+					MPU9250_ReadAcc(pACC_XYZ_BUFF);
 					/* Disble the selected SPI peripheral */
-				  __HAL_SPI_DISABLE(&hspi3);
 					fTest = 1;
 					break;
 
