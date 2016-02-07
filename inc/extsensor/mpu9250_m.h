@@ -16,30 +16,56 @@ extern SPI_HandleTypeDef			hspi3_MPU9250;
 // =======================================================================================================
 // Definicje
 
-// SPI
+
 /*
-	 * 	SPI3
-	 * 	SCK 		PB3	(I2S3_CK)
-	 * 	MISO 		PB4	(JTAG NJTRST)
-	 * 	MOSI 		PB5	(I2S3_SD)
-	 * 	NSS (CS) 	PA4	(I2S3_WS)
-	 */
+ *	SPI3
+ * 	SCK 		PB3	(I2S3_CK)
+ * 	MISO 		PB4	(JTAG NJTRST)
+ * 	MOSI 		PB5	(I2S3_SD)
+ * 	SS (CS) 	PA4	(I2S3_WS)
+ */
 
-
-#define MPU9250_SPI	                             	SPI3
 #define MPU9250_SPI_CLK_ENABLE()                 	__SPI3_CLK_ENABLE()
 #define MPU9250_SPI_CLK_DISABLE()                	__SPI3_CLK_DISABLE()
+#define MPU9250_SPI	                             	SPI3
 #define MPU9250_SPI_AF                           	GPIO_AF6_SPI3
-#define MPU9250_SPI_GPIO_PORT                    	GPIOB                      /* GPIOA */
+
 #define MPU9250_SPI_GPIO_CLK_ENABLE()            	__GPIOB_CLK_ENABLE()
 #define MPU9250_SPI_GPIO_CLK_DISABLE()           	__GPIOB_CLK_DISABLE()
-#define MPU9250_SPI_SCK_PIN                      	GPIO_PIN_3                 /* PA.05 */
-#define MPU9250_SPI_MISO_PIN                     	GPIO_PIN_4                 /* PA.06 */
-#define MPU9250_SPI_MOSI_PIN                     	GPIO_PIN_5                 /* PA.07 */
-#define MPU9250_SPI_CS_PIN							GPIO_PIN_4                 /* PA4 */
-#define MPU9250_SPI_CS_GPIO_PORT                 	GPIOA                      /* GPIOA */
+#define MPU9250_SPI_SCK_PIN                      	GPIO_PIN_3
+#define MPU9250_SPI_MISO_PIN                     	GPIO_PIN_4
+#define MPU9250_SPI_MOSI_PIN                     	GPIO_PIN_5
+#define MPU9250_SPI_GPIO_PORT                    	GPIOB
+
 #define MPU9250_SPI_CS_GPIO_CLK_ENABLE()          	__GPIOA_CLK_ENABLE()
 #define MPU9250_SPI_CS_GPIO_CLK_DISABLE()         	__GPIOA_CLK_DISABLE()
+#define MPU9250_SPI_CS_PIN							GPIO_PIN_4
+#define MPU9250_SPI_CS_GPIO_PORT                 	GPIOA
+
+
+/*
+ *	SPI3
+ * 	SCK 		PC10
+ * 	MISO 		PC11
+ * 	MOSI 		PC12
+ * 	SS (CS) 	PA4	(I2S3_WS)
+ */
+
+//#define MPU9250_SPI	                             	SPI3
+//#define MPU9250_SPI_CLK_ENABLE()                 	__SPI3_CLK_ENABLE()
+//#define MPU9250_SPI_CLK_DISABLE()                	__SPI3_CLK_DISABLE()
+//#define MPU9250_SPI_AF                           	GPIO_AF6_SPI3
+//#define MPU9250_SPI_GPIO_PORT                    	GPIOC
+//#define MPU9250_SPI_GPIO_CLK_ENABLE()            	__GPIOC_CLK_ENABLE()
+//#define MPU9250_SPI_GPIO_CLK_DISABLE()           	__GPIOC_CLK_DISABLE()
+//#define MPU9250_SPI_SCK_PIN                      	GPIO_PIN_10
+//#define MPU9250_SPI_MISO_PIN                     	GPIO_PIN_11
+//#define MPU9250_SPI_MOSI_PIN                     	GPIO_PIN_12
+//#define MPU9250_SPI_CS_PIN							GPIO_PIN_4
+//#define MPU9250_SPI_CS_GPIO_PORT                 	GPIOA
+//#define MPU9250_SPI_CS_GPIO_CLK_ENABLE()          	__GPIOA_CLK_ENABLE()
+//#define MPU9250_SPI_CS_GPIO_CLK_DISABLE()         	__GPIOA_CLK_DISABLE()
+
 
 #define MPU9250_CS_LOW()       HAL_GPIO_WritePin(MPU9250_SPI_CS_GPIO_PORT, MPU9250_SPI_CS_PIN, GPIO_PIN_RESET)
 #define MPU9250_CS_HIGH()      HAL_GPIO_WritePin(MPU9250_SPI_CS_GPIO_PORT, MPU9250_SPI_CS_PIN, GPIO_PIN_SET)
@@ -66,7 +92,7 @@ extern SPI_HandleTypeDef			hspi3_MPU9250;
 #define MPU9250_ADDR_CONFIG                  0x1A
 #define MPU9250_ADDR_GYRO_CONFIG             0x1B
 #define MPU9250_ADDR_ACCEL_CONFIG            0x1C
-#define MPU9250_ADDR_ACCEL_CONFIG_2           0x1D
+#define MPU9250_ADDR_ACCEL_CONFIG_2          0x1D
 #define MPU9250_ADDR_LP_ACCEL_ODR            0x1E
 #define MPU9250_ADDR_WOM_THR                 0x1F
 
@@ -186,88 +212,98 @@ extern SPI_HandleTypeDef			hspi3_MPU9250;
 // I2C MASTER Podział wewnętrznego zagara 8MHz
 #define MPU9250_CONF_I2C_MST_CLOCK_400kHz				((uint8_t)0x0d)
 
-#define MPU9250_CONF_I2C_DISABLE_MODULE_YES					((uint8_t)0x10)
-#define MPU9250_CONF_I2C_DISABLE_MODULE_NO					((uint8_t)0x00)
-#define MPU9250_CONF_I2C_MASTER_MODE_YES					((uint8_t)0x20)
+#define MPU9250_CONF_I2C_DISABLE_MODULE_YES				((uint8_t)0x10)
+#define MPU9250_CONF_I2C_DISABLE_MODULE_NO				((uint8_t)0x00)
+#define MPU9250_CONF_I2C_MASTER_MODE_YES				((uint8_t)0x20)
 #define MPU9250_CONF_I2C_MASTER_MODE_NO					((uint8_t)0x00)
-#define MPU9250_CONF_I2C_BYPASS_PIN_YES				((uint8_t)0x02)
-#define MPU9250_CONF_I2C_BYPASS_PIN_NO				((uint8_t)0x00)
+#define MPU9250_CONF_I2C_BYPASS_PIN_YES					((uint8_t)0x02)
+#define MPU9250_CONF_I2C_BYPASS_PIN_NO					((uint8_t)0x00)
 
 // FIFO aktywacja modułów
 #define	MPU9250_CONF_FIFO_SOURCE_TEMP_SENS				((uint8_t)0x80)
 #define MPU9250_CONF_FIFO_SOURCE_GYRO_X					((uint8_t)0x40)
 #define MPU9250_CONF_FIFO_SOURCE_GYRO_Y					((uint8_t)0x20)
 #define MPU9250_CONF_FIFO_SOURCE_GYRO_Z					((uint8_t)0x10)
-#define MPU9250_CONF_FIFO_SOURCE_ACC_ALL					((uint8_t)0x08)
-#define MPU9250_CONF_FIFO_SOURCE_I2C_SLAVE_2				((uint8_t)0x04)
-#define	MPU9250_CONF_FIFO_SOURCE_I2C_SLAVE_1				((uint8_t)0x02)
-#define MPU9250_CONF_FIFO_SOURCE_I2C_SLAVE_0				((uint8_t)0x01)	// See I2C_MST_CTRL register to enable this feature for SLAVE_3.
+#define MPU9250_CONF_FIFO_SOURCE_ACC_ALL				((uint8_t)0x08)
+#define MPU9250_CONF_FIFO_SOURCE_I2C_SLAVE_2			((uint8_t)0x04)
+#define	MPU9250_CONF_FIFO_SOURCE_I2C_SLAVE_1			((uint8_t)0x02)
+#define MPU9250_CONF_FIFO_SOURCE_I2C_SLAVE_0			((uint8_t)0x01)	// See I2C_MST_CTRL register to enable this feature for SLAVE_3.
 
 // FIFO nadpisywanie najstarszych wartości
 #define	MPU9250_CONF_FIFO_OVERLAP_YES					((uint8_t)0x00)
-#define	MPU9250_CONF_FIFO_OVERLAP_NO						((uint8_t)0x40)
+#define	MPU9250_CONF_FIFO_OVERLAP_NO					((uint8_t)0x40)
 #define	MPU9250_CONF_FIFO_ENABLE_YES					((uint8_t)0x40)
-#define	MPU9250_CONF_FIFO_ENABLE_NO					((uint8_t)0x00)
+#define	MPU9250_CONF_FIFO_ENABLE_NO						((uint8_t)0x00)
 // GYRO zakres
-#define	MPU9250_CONF_GYRO_FULLSCALE_250dps					((uint8_t)0x00)
-#define	MPU9250_CONF_GYRO_FULLSCALE_500dps					((uint8_t)0x08)
-#define	MPU9250_CONF_GYRO_FULLSCALE_1000dps					((uint8_t)0x10)
-#define	MPU9250_CONF_GYRO_FULLSCALE_2000dps					((uint8_t)0x18)
+#define	MPU9250_CONF_GYRO_FULLSCALE_250dps				((uint8_t)0x00)
+#define	MPU9250_CONF_GYRO_FULLSCALE_500dps				((uint8_t)0x08)
+#define	MPU9250_CONF_GYRO_FULLSCALE_1000dps				((uint8_t)0x10)
+#define	MPU9250_CONF_GYRO_FULLSCALE_2000dps				((uint8_t)0x18)
+#define	MPU9250_CONF_GYRO_FULLSCALE_MASK				((uint8_t)0x18)
+
 
 // GYRO częstotliwość graniczna cyfrowego filtru dolnoprzepustowego
-#define	MPU9250_CONF_GYRO_FILTER_BW_3600Hz						((uint8_t)0x07)
-#define MPU9250_CONF_GYRO_FILTER_BW_250Hz						((uint8_t)0x00)
-#define	MPU9250_CONF_GYRO_FILTER_BW_184Hz						((uint8_t)0x01)
-#define MPU9250_CONF_GYRO_FILTER_BW_92Hz						((uint8_t)0x02)
-#define	MPU9250_CONF_GYRO_FILTER_BW_41Hz						((uint8_t)0x03)
-#define	MPU9250_CONF_GYRO_FILTER_BW_20Hz						((uint8_t)0x04)
-#define	MPU9250_CONF_GYRO_FILTER_BW_10Hz						((uint8_t)0x05)
-#define	MPU9250_CONF_GYRO_FILTER_BW_5Hz						((uint8_t)0x06)
+#define	MPU9250_CONF_GYRO_FILTER_BW_3600Hz				((uint8_t)0x07)
+#define MPU9250_CONF_GYRO_FILTER_BW_250Hz				((uint8_t)0x00)
+#define	MPU9250_CONF_GYRO_FILTER_BW_184Hz				((uint8_t)0x01)
+#define MPU9250_CONF_GYRO_FILTER_BW_92Hz				((uint8_t)0x02)
+#define	MPU9250_CONF_GYRO_FILTER_BW_41Hz				((uint8_t)0x03)
+#define	MPU9250_CONF_GYRO_FILTER_BW_20Hz				((uint8_t)0x04)
+#define	MPU9250_CONF_GYRO_FILTER_BW_10Hz				((uint8_t)0x05)
+#define	MPU9250_CONF_GYRO_FILTER_BW_5Hz					((uint8_t)0x06)
 
 // GYRO obejście filtru DP FCHOICE_B (odwrócony FCHOICE)
-#define MPU9250_CONF_GYRO_FILTER_BYPASS_NO						((uint8_t)0x00)
-#define MPU9250_CONF_GYRO_FILTER_BYPASS_YES_BW_8800Hz			((uint8_t)0x01)
-#define MPU9250_CONF_GYRO_FILTER_BYPASS_YES_BW_3600Hz			((uint8_t)0x02)
+#define MPU9250_CONF_GYRO_FILTER_BYPASS_NO				((uint8_t)0x00)
+#define MPU9250_CONF_GYRO_FILTER_BYPASS_YES_BW_8800Hz	((uint8_t)0x01)
+#define MPU9250_CONF_GYRO_FILTER_BYPASS_YES_BW_3600Hz	((uint8_t)0x02)
 
 // GYRO aktywacja osi
 
 // ACC zakres
-#define MPU9250_CONF_ACC_FULLSCALE_2g							((uint8_t)0x00)
-#define MPU9250_CONF_ACC_FULLSCALE_4g							((uint8_t)0x08)
-#define MPU9250_CONF_ACC_FULLSCALE_8g							((uint8_t)0x10)
-#define MPU9250_CONF_ACC_FULLSCALE_16g							((uint8_t)0x18)
+#define MPU9250_CONF_ACC_FULLSCALE_2g					((uint8_t)0x00)
+#define MPU9250_CONF_ACC_FULLSCALE_4g					((uint8_t)0x08)
+#define MPU9250_CONF_ACC_FULLSCALE_8g					((uint8_t)0x10)
+#define MPU9250_CONF_ACC_FULLSCALE_16g					((uint8_t)0x18)
+#define MPU9250_CONF_ACC_FULLSCALE_MASK					((uint8_t)0x18)
+
+// CZUŁOŚĆ ACC W [mG]
+#define MPU9250_ACC_SENSITIVITY_FOR_2g_SCALE			(((float)2*2)/65536*1000)
+#define MPU9250_ACC_SENSITIVITY_FOR_4g_SCALE			(((float)2*4)/65536*1000)
+#define MPU9250_ACC_SENSITIVITY_FOR_8g_SCALE			(((float)2*8)/65536*1000)
+#define MPU9250_ACC_SENSITIVITY_FOR_16g_SCALE			(((float)2*16)/65536*1000)
+
 
 // ACC częstotliwość graniczna cyfrowego filtru dolnoprzepustowego
-#define MPU9250_CONF_ACC_FILTER_BW_460Hz					((uint8_t)0x00)
-#define	MPU9250_CONF_ACC_FILTER_BW_184Hz					((uint8_t)0x01)
-#define MPU9250_CONF_ACC_FILTER_BW_92Hz								((uint8_t)0x02)
-#define	MPU9250_CONF_ACC_FILTER_BW_41Hz								((uint8_t)0x03)
-#define	MPU9250_CONF_ACC_FILTER_BW_20Hz								((uint8_t)0x04)
-#define	MPU9250_CONF_ACC_FILTER_BW_10Hz								((uint8_t)0x05)
-#define	MPU9250_CONF_ACC_FILTER_BW_5Hz								((uint8_t)0x06)
-#define	MPU9250_CONF_ACC_FILTER_BW_460Hzb								((uint8_t)0x07)
+#define MPU9250_CONF_ACC_FILTER_BW_460Hz				((uint8_t)0x00)
+#define	MPU9250_CONF_ACC_FILTER_BW_184Hz				((uint8_t)0x01)
+#define MPU9250_CONF_ACC_FILTER_BW_92Hz					((uint8_t)0x02)
+#define	MPU9250_CONF_ACC_FILTER_BW_41Hz					((uint8_t)0x03)
+#define	MPU9250_CONF_ACC_FILTER_BW_20Hz					((uint8_t)0x04)
+#define	MPU9250_CONF_ACC_FILTER_BW_10Hz					((uint8_t)0x05)
+#define	MPU9250_CONF_ACC_FILTER_BW_5Hz					((uint8_t)0x06)
+#define	MPU9250_CONF_ACC_FILTER_BW_460Hzb				((uint8_t)0x07)
 
 // ACC obejście filtru DP
-#define MPU9250_CONF_ACC_FILTER_BYPASS_NO					((uint8_t)0x00)
-#define MPU9250_CONF_ACC_FILTER_BYPASS_YES					((uint8_t)0x08)
+#define MPU9250_CONF_ACC_FILTER_BYPASS_NO				((uint8_t)0x00)
+#define MPU9250_CONF_ACC_FILTER_BYPASS_YES				((uint8_t)0x08)
 
 // ACC osie
 #define MPU9250_CONF_ACC_AXIS_X							((uint8_t)0x20)
 #define MPU9250_CONF_ACC_AXIS_Y							((uint8_t)0x10)
 #define MPU9250_CONF_ACC_AXIS_Z							((uint8_t)0x08)
-#define MPU9250_CONF_ACC_AXIS_ALL						((uint8_t)0x0)
+#define MPU9250_CONF_ACC_AXIS_ALL						((uint8_t)0x00)
 
-#define MPU9250_CONF_GYRO_AXIS_X							((uint8_t)0x04)
-#define MPU9250_CONF_GYRO_AXIS_Y							((uint8_t)0x02)
-#define MPU9250_CONF_GYRO_AXIS_Z							((uint8_t)0x01)
-#define MPU9250_CONF_GYRO_AXIS_ALL						((uint8_t)0x00)
+#define MPU9250_CONF_GYRO_AXIS_X						((uint8_t)0x04)
+#define MPU9250_CONF_GYRO_AXIS_Y						((uint8_t)0x02)
+#define MPU9250_CONF_GYRO_AXIS_Z						((uint8_t)0x01)
+#define MPU9250_CONF_GYRO_AXIS_ALL_ON					((uint8_t)0x00)
 
 // RESET
 #define MPU9250_CONF_HARD_RESET							((uint8_t)0x80)
 
 // ZEGAR GŁÓWNY
-#define MPU9250_CONF_CLOCK_SOURCE_INTERNAL_20MHz			((uint8_t)0x00)
-#define MPU9250_CONF_CLOCK_SOURCE_AUTOSELECT				((uint8_t)0x01)
+#define MPU9250_CONF_CLOCK_SOURCE_INTERNAL_20MHz		((uint8_t)0x00)
+#define MPU9250_CONF_CLOCK_SOURCE_AUTOSELECT			((uint8_t)0x01)
 #define MPU9250_CONF_CLOCK_SOURCE_STOP					((uint8_t)0x07)
 
 // ZEWNĘTRZNA SYNCHRONIZACJA
@@ -275,7 +311,7 @@ extern SPI_HandleTypeDef			hspi3_MPU9250;
 // dopisać
 
 // PRZERWANIA
-#define MPU9250_CONF_INT_PIN_LOGIC_ACTIVE_LVL_HIGH	((uint8_t)0x00)
+#define MPU9250_CONF_INT_PIN_LOGIC_ACTIVE_LVL_HIGH		((uint8_t)0x00)
 #define MPU9250_CONF_INT_PIN_LOGIC_ACTIVE_LVL_LOW		((uint8_t)0x80)
 #define MPU9250_CONF_INT_PIN_PP							((uint8_t)0x00)
 #define MPU9250_CONF_INT_PIN_OD							((uint8_t)0x40)
@@ -376,10 +412,10 @@ typedef struct{
 
 // =======================================================================================================
 // funkcje
-void MPU9250_Init(tsMPU9250_InitTypedef * sMPU9250_Init);
+void Sensor_MPU9250_Init();
 void MPU9250_ReadGyro(void);
 void MPU9250_ReadAcc(int16_t *pDataXYZ);
 void MPU9250_ReadMag(void);
-void dummy(uint8_t);
+uint8_t MPU9250_WhoAmI(void);
 
 #endif /* EXTSENSOR_MPU9250_M_H_ */

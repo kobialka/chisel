@@ -20,12 +20,12 @@
 #include "command_decoder.h"
 #include "uart.h"
 #include "mpu9250_m.h"
-#include "mpu9250_m.h"
 
 
 /* Defines	------------------------------------------------------------------*/
-#define	NAME_str				"Zadajnik_v0.0.4"
 #define ACC_XYZ_BUFF_SIZE 3
+#define BUTTON_PIN			GPIO_PIN_0
+#define BUTTON_PORT			GPIOA
 
 
 //___________________________________
@@ -65,25 +65,29 @@ static void ACC_Init(void);
 static void TIMER6_Base_Init(void);
 static void SendPendingString(void);
 static void ExecuteCommand(void);
-static void Sensor_MPU9250_Init();
+static void BoardButton_Init(void);
 
 
 
 
 // =======================================================================================================
 int main(void){
-	uint8_t DUMMY = 0xAF;
-	GPIO_InitTypeDef   GPIO_InitStructure;
 	// 110, 150, 300, 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200, 230400, 460800, 921600
+
+
 	//___________________________________
 	HAL_Init();
 	SystemClock_Config();
 	SystemCoreClockUpdate();
+	HAL_InitTick(0);
 	LED_Init();
 	ACC_Init();
 	Sensor_MPU9250_Init();
 	UART_InitWithInt(115200);
 	TIMER6_Base_Init();
+	BoardButton_Init();
+
+
 	//___________________________________
 	LED_StartSignal();
 	BSP_LED_On(GREEN);
@@ -101,51 +105,26 @@ int main(void){
 		}
 	}
 }
+
+
+
+
+
+
 // =======================================================================================================
+void BoardButton_Init(void){
+	GPIO_InitTypeDef GPIO_InitStruct;
 
-static void Sensor_MPU9250_Init(){
-	tsMPU9250_InitTypedef sMPU9250_Init;
+	GPIO_InitStruct.Pin = BUTTON_PIN;
+	GPIO_InitStruct.Pull = GPIO_NOPULL;
+	GPIO_InitStruct.Speed = GPIO_SPEED_FAST;
+	GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+	HAL_GPIO_Init(BUTTON_PORT, &GPIO_InitStruct);
 
-	// KONFIGURACJA. NIEISTOTNE PARAMETRY USTAWIĆ NA 0.
-		sMPU9250_Init.Clock_Source									=	MPU9250_CONF_CLOCK_SOURCE_INTERNAL_20MHz;
-		sMPU9250_Init.Sample_Rate_Divider							=	0;
-		sMPU9250_Init.External_Sync									=	MPU9250_CONF_EXT_SYNC_DISABLED;
-
-		sMPU9250_Init.sI2C.Bypass_Enable							=	MPU9250_CONF_I2C_BYPASS_PIN_NO;
-		sMPU9250_Init.sI2C.I2C_IF_DIS								=	MPU9250_CONF_I2C_DISABLE_MODULE_NO;
-		sMPU9250_Init.sI2C.I2C_MST_EN								=	MPU9250_CONF_I2C_MASTER_MODE_YES;
-		sMPU9250_Init.sI2C.I2C_MST_DELAY_CTRL						=	0;
-
-		sMPU9250_Init.sINTERRUPTS.INT_Pin_Logic_Level				=	0;
-		sMPU9250_Init.sINTERRUPTS.INT_Pin_PP_OD						=	0;
-		sMPU9250_Init.sINTERRUPTS.INT_Pin_Latch						=	0;
-		sMPU9250_Init.sINTERRUPTS.Clear_Status_On_Read				=	0;
-		sMPU9250_Init.sINTERRUPTS.FSYNC_Logic_Level					=	0;
-		sMPU9250_Init.sINTERRUPTS.FSYNC_INT_MODE_Enable				=	0;
-		sMPU9250_Init.sINTERRUPTS.Enable_Wake_Up_Int				=	0;
-		sMPU9250_Init.sINTERRUPTS.Enable_FIFO_Overflow_Int			=	0;
-		sMPU9250_Init.sINTERRUPTS.Enable_FSYNC_Int					=	0;
-		sMPU9250_Init.sINTERRUPTS.Enable_Raw_Data_Enable_Int		=	0;
-
-		sMPU9250_Init.sACC.Axis_Disable 							=	MPU9250_CONF_ACC_AXIS_ALL;
-		sMPU9250_Init.sACC.Full_Scale								=	MPU9250_CONF_ACC_FULLSCALE_4g;
-		sMPU9250_Init.sACC.Filter_Bypass							=	MPU9250_CONF_ACC_FILTER_BYPASS_NO;
-		sMPU9250_Init.sACC.Filter_BW								=	MPU9250_CONF_ACC_FILTER_BW_460Hz;
-		sMPU9250_Init.sACC.WakeOn_Threshold							=	0;
-
-		sMPU9250_Init.sGYRO.Axis_Disable							=	MPU9250_CONF_GYRO_AXIS_ALL;
-		sMPU9250_Init.sGYRO.Full_Scale								=	MPU9250_CONF_GYRO_FULLSCALE_250dps;
-		sMPU9250_Init.sGYRO.Filter_Bypass							=	MPU9250_CONF_GYRO_FILTER_BYPASS_NO;
-		sMPU9250_Init.sGYRO.Filter_BW								=	MPU9250_CONF_GYRO_FILTER_BW_20Hz;
-
-		sMPU9250_Init.sFIFO.Enable									=	MPU9250_CONF_FIFO_ENABLE_NO;
-		sMPU9250_Init.sFIFO.Overlap									=	0;
-		sMPU9250_Init.sFIFO.Source_Select							=	0;
-
-		MPU9250_Init(&sMPU9250_Init);
+	HAL_NVIC_SetPriority(EXTI0_IRQn, 0x0F, 0);
+	HAL_NVIC_EnableIRQ(EXTI0_IRQn);
 
 }
-
 
 void SendPendingString(void){
 	if(eTransmiter_GetStatus() == FREE){
@@ -379,5 +358,4 @@ static void Error_Handler(void){
 	while(1){
 	}
 }
-
 

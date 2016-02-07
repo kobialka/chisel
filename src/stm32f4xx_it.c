@@ -43,6 +43,7 @@
 #include "stm32f4_discovery.h"
 #include "stm32f4_discovery_accelerometer.h"
 #include "uart.h"
+#include "mpu9250_m.h"
 
 #include "stm32f4xx_hal_uart.h"
 #ifdef _RTE_
@@ -234,7 +235,8 @@ void TIM6_DAC_IRQHandler(void){
   */
 void EXTI0_IRQHandler(void){
 	__HAL_GPIO_EXTI_CLEAR_IT(ACCELERO_INT1_PIN);
-	BSP_ACCELERO_GetXYZ(pACC_XYZ_BUFF);
+	BSP_LED_Toggle(ORANGE);
+	MPU9250_WhoAmI();
 }
 
 /**
