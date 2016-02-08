@@ -22,7 +22,7 @@
 /* Dummy Byte Send by the SPI Master device in order to generate the Clock to the Slave device */
 #define DUMMY_BYTE                        ((uint8_t)0x00)
 
-#define SPI_MPU9250_TIMEOUT_MAX                 	0x1000
+#define SPI_MPU9250_TIMEOUT_MAX                 	(0x1000)
 
 // =======================================================================================================
 // zmienne globalne
@@ -311,7 +311,7 @@ void Sensor_MPU9250_Init(){
 		sMPU9250_Init.sINTERRUPTS.Enable_Wake_Up_Int				=	0;
 		sMPU9250_Init.sINTERRUPTS.Enable_FIFO_Overflow_Int			=	0;
 		sMPU9250_Init.sINTERRUPTS.Enable_FSYNC_Int					=	0;
-		sMPU9250_Init.sINTERRUPTS.Enable_Raw_Data_Enable_Int		=	0x01;
+		sMPU9250_Init.sINTERRUPTS.Enable_Raw_Data_Enable_Int		=	0;
 
 		sMPU9250_Init.sACC.Axis_Disable 							=	MPU9250_CONF_ACC_AXIS_ALL;
 		sMPU9250_Init.sACC.Full_Scale								=	MPU9250_CONF_ACC_FULLSCALE_4g;
@@ -322,7 +322,7 @@ void Sensor_MPU9250_Init(){
 		sMPU9250_Init.sGYRO.Axis_Disable							=	MPU9250_CONF_GYRO_AXIS_ALL_ON;
 		sMPU9250_Init.sGYRO.Full_Scale								=	MPU9250_CONF_GYRO_FULLSCALE_250dps;
 		sMPU9250_Init.sGYRO.Filter_Bypass							=	MPU9250_CONF_GYRO_FILTER_BYPASS_NO;
-		sMPU9250_Init.sGYRO.Filter_BW								=	MPU9250_CONF_GYRO_FILTER_BW_20Hz;
+		sMPU9250_Init.sGYRO.Filter_BW								=	MPU9250_CONF_GYRO_FILTER_BW_5Hz;
 
 		sMPU9250_Init.sFIFO.Enable									=	MPU9250_CONF_FIFO_ENABLE_NO;
 		sMPU9250_Init.sFIFO.Overlap									=	0;
@@ -334,7 +334,46 @@ void Sensor_MPU9250_Init(){
 
 // =======================================================================================================
 // ===  ODCZYT DANYCH
-void MPU9250_ReadGyro(void){
+void MPU9250_ReadGyro(int16_t *pi16DataXYZ){
+	uint8_t		pu8Buffer[6];
+	uint8_t 	u8RegTempVal	=	0;
+	uint8_t 	u8ValueCounter	=	0;
+	float		fSensitivity	=	1;
+	float 		fTempValue 		=	0;
+
+	MPU9250_Rx(&u8RegTempVal, MPU9250_ADDR_GYRO_CONFIG, 1);
+	u8RegTempVal &= MPU9250_CONF_GYRO_FULLSCALE_MASK;	// FULL SCALE
+
+	MPU9250_Rx(&pu8Buffer[1], MPU9250_ADDR_GYRO_XOUT_H, 1);
+	MPU9250_Rx(&pu8Buffer[0], MPU9250_ADDR_GYRO_XOUT_L, 1);
+	MPU9250_Rx(&pu8Buffer[3], MPU9250_ADDR_GYRO_YOUT_H, 1);
+	MPU9250_Rx(&pu8Buffer[2], MPU9250_ADDR_GYRO_YOUT_L, 1);
+	MPU9250_Rx(&pu8Buffer[5], MPU9250_ADDR_GYRO_ZOUT_H, 1);
+	MPU9250_Rx(&pu8Buffer[4], MPU9250_ADDR_GYRO_ZOUT_L, 1);
+
+
+	switch (u8RegTempVal) {
+		case MPU9250_CONF_GYRO_FULLSCALE_250dps:
+			fSensitivity = MPU9250_GYRO_SENSITIVITY_FOR_250dps_SCALE;
+			break;
+		case MPU9250_CONF_GYRO_FULLSCALE_500dps:
+			fSensitivity = MPU9250_GYRO_SENSITIVITY_FOR_500dps_SCALE;
+			break;
+		case MPU9250_CONF_GYRO_FULLSCALE_1000dps:
+			fSensitivity = MPU9250_GYRO_SENSITIVITY_FOR_1000dps_SCALE;
+			break;
+		case MPU9250_CONF_GYRO_FULLSCALE_2000dps:
+			fSensitivity = MPU9250_GYRO_SENSITIVITY_FOR_2000dps_SCALE;
+			break;
+		default:
+			fSensitivity = MPU9250_GYRO_SENSITIVITY_FOR_250dps_SCALE;
+			break;
+	}
+
+	for(u8ValueCounter = 0; u8ValueCounter < 3; u8ValueCounter++){
+		fTempValue = (((int8_t)pu8Buffer[2*u8ValueCounter+1] << 8) | (0xff & (int8_t)pu8Buffer[2*u8ValueCounter]))*fSensitivity; // rzutowanie na float zachowuje znak!
+		pi16DataXYZ[u8ValueCounter] =(int16_t)fTempValue;
+	}
 
 }
 
@@ -352,7 +391,7 @@ void MPU9250_ReadAcc(int16_t *pi16DataXYZ){
 	uint8_t 	u8RegTempVal	=	0;
 	uint8_t 	u8ValueCounter	=	0;
 	float		fSensitivity	=	1;
-	float 	fTempValue 			=	0;
+	float 		fTempValue 		=	0;
 
 	MPU9250_Rx(&u8RegTempVal, MPU9250_ADDR_ACCEL_CONFIG, 1);
 	u8RegTempVal &= MPU9250_CONF_ACC_FULLSCALE_MASK;	// FULL SCALE
@@ -387,7 +426,6 @@ void MPU9250_ReadAcc(int16_t *pi16DataXYZ){
 		fTempValue = (((int8_t)pu8Buffer[2*u8ValueCounter+1] << 8) | (0xff & (int8_t)pu8Buffer[2*u8ValueCounter]))*fSensitivity; // rzutowanie na float zachowuje znak!
 		pi16DataXYZ[u8ValueCounter] =(int16_t)fTempValue;
 	}
-
 }
 
 void MPU9250_ReadMag(void){

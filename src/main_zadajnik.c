@@ -214,9 +214,9 @@ void ExecuteCommand(void){
 					break;
 
 				case TEST:
-					//BSP_ACCELERO_GetXYZ(pACC_XYZ_BUFF);
+//					BSP_ACCELERO_GetXYZ(pACC_XYZ_BUFF);
+//					MPU9250_ReadGyro(pACC_XYZ_BUFF);
 					MPU9250_ReadAcc(pACC_XYZ_BUFF);
-					/* Disble the selected SPI peripheral */
 					fTest = 1;
 					break;
 

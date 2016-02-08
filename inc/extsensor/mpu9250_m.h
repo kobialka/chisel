@@ -241,6 +241,11 @@ extern SPI_HandleTypeDef			hspi3_MPU9250;
 #define	MPU9250_CONF_GYRO_FULLSCALE_2000dps				((uint8_t)0x18)
 #define	MPU9250_CONF_GYRO_FULLSCALE_MASK				((uint8_t)0x18)
 
+#define MPU9250_GYRO_SENSITIVITY_FOR_250dps_SCALE		(((float)2*250)/65536*1000)	// 1[mdps]/LSB
+#define MPU9250_GYRO_SENSITIVITY_FOR_500dps_SCALE		(((float)2*500)/65536*1000)
+#define MPU9250_GYRO_SENSITIVITY_FOR_1000dps_SCALE		(((float)2*1000)/65536*1000)
+#define MPU9250_GYRO_SENSITIVITY_FOR_2000dps_SCALE		(((float)2*2000)/65536*1000)
+
 
 // GYRO częstotliwość graniczna cyfrowego filtru dolnoprzepustowego
 #define	MPU9250_CONF_GYRO_FILTER_BW_3600Hz				((uint8_t)0x07)
@@ -267,10 +272,15 @@ extern SPI_HandleTypeDef			hspi3_MPU9250;
 #define MPU9250_CONF_ACC_FULLSCALE_MASK					((uint8_t)0x18)
 
 // CZUŁOŚĆ ACC W [mG]
-#define MPU9250_ACC_SENSITIVITY_FOR_2g_SCALE			(((float)2*2)/65536*1000)
+#define MPU9250_ACC_SENSITIVITY_FOR_2g_SCALE			(((float)2*2)/65536*1000)		// 1[mg]/LSB
 #define MPU9250_ACC_SENSITIVITY_FOR_4g_SCALE			(((float)2*4)/65536*1000)
 #define MPU9250_ACC_SENSITIVITY_FOR_8g_SCALE			(((float)2*8)/65536*1000)
 #define MPU9250_ACC_SENSITIVITY_FOR_16g_SCALE			(((float)2*16)/65536*1000)
+
+//#define MPU9250_ACC_SENSITIVITY_FOR_2g_SCALE			(((float)2*2)/65536*1000000)		// 1[ug]/LSB
+//#define MPU9250_ACC_SENSITIVITY_FOR_4g_SCALE			(((float)2*4)/65536*1000000)
+//#define MPU9250_ACC_SENSITIVITY_FOR_8g_SCALE			(((float)2*8)/65536*1000000)
+//#define MPU9250_ACC_SENSITIVITY_FOR_16g_SCALE			(((float)2*16)/65536*1000000)
 
 
 // ACC częstotliwość graniczna cyfrowego filtru dolnoprzepustowego
@@ -413,7 +423,7 @@ typedef struct{
 // =======================================================================================================
 // funkcje
 void Sensor_MPU9250_Init();
-void MPU9250_ReadGyro(void);
+void MPU9250_ReadGyro(int16_t *pi16DataXYZ);
 void MPU9250_ReadAcc(int16_t *pDataXYZ);
 void MPU9250_ReadMag(void);
 uint8_t MPU9250_WhoAmI(void);
