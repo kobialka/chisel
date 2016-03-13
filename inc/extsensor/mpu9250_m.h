@@ -72,8 +72,68 @@ extern SPI_HandleTypeDef			hspi3_MPU9250;
 
 
 
+// ADRESY REJESTRÓW AK8963
+#define AK8963_ADDR_WIA						((uint8_t)0x00)		// Device ID		Who I am - 0x48
+#define AK8963_ADDR_INFO					((uint8_t)0x01)		// Information
+#define AK8963_ADDR_ST1						((uint8_t)0x02)		// Status 1
+#define AK8963_ADDR_HXL						((uint8_t)0x03)		//-----------------
+#define AK8963_ADDR_HXH						((uint8_t)0x04)		//
+#define AK8963_ADDR_HYL						((uint8_t)0x05)		// Measurement data, U2, Little endian
+#define AK8963_ADDR_HYH						((uint8_t)0x06)		//
+#define AK8963_ADDR_HZL						((uint8_t)0x07)		//
+#define AK8963_ADDR_HZH						((uint8_t)0x08)		//-----------------
+#define AK8963_ADDR_ST2						((uint8_t)0x09)		// Status 2. Musi zostać odczytany po odczytaniu rejestrów pomiarowych, dopiero po jego odczytaniu rozpoczyna się kolejny pomiar.
+#define AK8963_ADDR_CNTL1					((uint8_t)0x0a)		// Control 1. Tryby pracy
+#define AK8963_ADDR_CNTL2					((uint8_t)0x0b)		// Control
+#define AK8963_ADDR_ASTC					((uint8_t)0x0c)		// Self-test
+//#define AK8963_ADDR_TS1						((uint8_t)0x0d)		// DO NOT ACCESS
+//#define AK8963_ADDR_TS2						((uint8_t)0x0e)		// DO NOT ACCESS
+#define AK8963_ADDR_I2CDIS					((uint8_t)0x0f)		// I2C disable
+#define AK8963_ADDR_ASAX					((uint8_t)0x10)		// X sensitivity adjust. Fuse ROM. Acces only in fuse-access mode.
+#define AK8963_ADDR_ASAY					((uint8_t)0x11)		// Y sensitivity adjust. Fuse ROM. Acces only in fuse-access mode.
+#define AK8963_ADDR_ASAZ					((uint8_t)0x12)		// Z sensitivity adjust. Fuse ROM. Acces only in fuse-access mode.
+//#define AK8963_ADDR_RSV						((uint8_t)0x13)		// DO NOT ACCESS
 
-// MAPA REJESTRÓW MPU9250
+#define AK8963_BM_ST1_DRDY					((uint8_t)0x01)		// Data ready bit
+#define AK8963_BM_ST1_DOR					((uint8_t)0x02)		// Data overrun bit
+#define AK8963_BM_ST2_HOFL					((uint8_t)0x08)		// Bit przekroczenia zakresu pomiarowego. Gdy dojdzie do przekroczenia zakresu pomiarowego w odpowiednich trybach pracy zostanie ustawiony ten bit. Do przekroczenia zakresu może dojść nawet jeżeli rejestry z danymi pomiarowymi nie zostały zapisane największą wartością. Kiedy zacyna się kolejny pomiar bit ten jest ustawiany na 0.
+
+#define AK8963_CONF_MODE_BM					((uint8_t)0x0f)
+#define AK8963_CONF_MODE_POWER_DOWN			((uint8_t)0x00)
+#define AK8963_CONF_MODE_SINGLE_MEAS		((uint8_t)0x01)
+#define AK8963_CONF_MODE_CONTINUOUS_8Hz	((uint8_t)0x02)
+#define AK8963_CONF_MODE_CONTINUOUS_100Hz	((uint8_t)0x06)
+#define AK8963_CONF_MODE_EXTERNAL_TRIG		((uint8_t)0x04)
+#define AK8963_CONF_MODE_SELF_TEST			((uint8_t)0x08)
+#define AK8963_CONF_MODE_FUSE_ROM_ACCESS	((uint8_t)0x0f)		// ,,When each mode is set, AK8963 transits to the set mode. Refer to 6.3 for detailed information.
+#define AK8963_CONF_RESOLUTION_14bit		((uint8_t)0x00)		// 0.6[uT/LSB] +-0.03[uT]
+#define AK8963_CONF_RESOLUTION_16bit		((uint8_t)0x10)		// 0.15[uT/LSB] +-0.0075[uT]
+
+#define AK8963_BM_CNTL2_SRST				((uint8_t)0x01)		// autoclear
+#define AK8963_BM_ASTC_SELF					((uint8_t)0x40)		// generate magnetic field for self test. Do not write 1 to other bits in this register
+#define AK8963_BM_ST1_DOR					((uint8_t)0x02)
+#define AK8963_BM_ST1_DRDY					((uint8_t)0x01)
+#define AK8963_BM_ST2_BITM					((uint8_t)0x10)
+#define AK8963_BM_ST2_HOFL					((uint8_t)0x08)
+
+
+#define AK8963_CONF_DISABLE_I2C				((uint8_t)0x1b)
+#define AK8963_SINGLE_MEASUREMENT_DELAY		((uint8_t)0x09)		// 9[ms]
+#define AK8963_I2C_ADDR						((uint8_t)0x0c)		// Adres  fizyczny układu AK8963
+#define MPU9250_MAG_SENSITIVITY_14bit		((float)0.6)		// [uT/LSB]
+#define MPU9250_MAG_SENSITIVITY_16bit		((float)0.15)		// [uT/LSB]
+
+
+
+
+
+
+
+
+
+
+
+// ADRESY REJESTRÓW MPU9250
 #define MPU9250_ADDR_SELF_TEST_X_GYRO        0x00
 #define MPU9250_ADDR_SELF_TEST_Y_GYRO        0x01
 #define MPU9250_ADDR_SELF_TEST_Z_GYRO        0x02
@@ -212,12 +272,31 @@ extern SPI_HandleTypeDef			hspi3_MPU9250;
 // I2C MASTER Podział wewnętrznego zagara 8MHz
 #define MPU9250_CONF_I2C_MST_CLOCK_400kHz				((uint8_t)0x0d)
 
-#define MPU9250_CONF_I2C_DISABLE_MODULE_YES				((uint8_t)0x10)
-#define MPU9250_CONF_I2C_DISABLE_MODULE_NO				((uint8_t)0x00)
+#define MPU9250_CONF_I2C_SLAVE_INTERFACE_DISABLE_YES	((uint8_t)0x10)
+#define MPU9250_CONF_I2C_SLAVE_INTERFACE_DISABLE_NO		((uint8_t)0x00)
 #define MPU9250_CONF_I2C_MASTER_MODE_YES				((uint8_t)0x20)
 #define MPU9250_CONF_I2C_MASTER_MODE_NO					((uint8_t)0x00)
 #define MPU9250_CONF_I2C_BYPASS_PIN_YES					((uint8_t)0x02)
 #define MPU9250_CONF_I2C_BYPASS_PIN_NO					((uint8_t)0x00)
+#define MPU9250_CONF_I2C_DELAY_CTRL_SHADOWING_ON		((uint8_t)0x80)
+#define MPU9250_CONF_I2C_DELAY_CTRL_SHADOWING_OFF		((uint8_t)0x00)
+#define MPU9250_CONF_I2C_DELAY_CTRL_DELAY_SLV4_ON		((uint8_t)0x10)
+#define MPU9250_CONF_I2C_DELAY_CTRL_DELAY_SLV3_ON		((uint8_t)0x08)
+#define MPU9250_CONF_I2C_DELAY_CTRL_DELAY_SLV2_ON		((uint8_t)0x04)
+#define MPU9250_CONF_I2C_DELAY_CTRL_DELAY_SLV1_ON		((uint8_t)0x02)
+#define MPU9250_CONF_I2C_DELAY_CTRL_DELAY_SLV0_ON		((uint8_t)0x01)
+#define MPU9250_CONF_I2C_DELAY_CTRL_DELAY_SLV4_OFF		((uint8_t)0x00)
+#define MPU9250_CONF_I2C_DELAY_CTRL_DELAY_SLV3_OFF		((uint8_t)0x00)
+#define MPU9250_CONF_I2C_DELAY_CTRL_DELAY_SLV2_OFF		((uint8_t)0x00)
+#define MPU9250_CONF_I2C_DELAY_CTRL_DELAY_SLV1_OFF		((uint8_t)0x00)
+#define MPU9250_CONF_I2C_DELAY_CTRL_DELAY_SLV0_OFF		((uint8_t)0x00)
+#define MPU9250_CONF_I2C_MULTIMASTER_MODE_YES			((uint8_t)0x80)
+#define MPU9250_CONF_I2C_MULTIMASTER_MODE_NO			((uint8_t)0x00)
+#define MPU9250_CONF_I2C_NEXT_SLV_AFTER_STOP			((uint8_t)0x10)
+#define MPU9250_CONF_I2C_NEXT_SLV_AFTER_RESTART			((uint8_t)0x00)
+#define MPU9250_CONF_WAIT_FOR_EXT_SENS_DATA_YES			((uint8_t)0x40)
+#define MPU9250_CONF_WAIT_FOR_EXT_SENS_DATA_NO			((uint8_t)0x00)
+
 
 // FIFO aktywacja modułów
 #define	MPU9250_CONF_FIFO_SOURCE_TEMP_SENS				((uint8_t)0x80)
@@ -271,16 +350,7 @@ extern SPI_HandleTypeDef			hspi3_MPU9250;
 #define MPU9250_CONF_ACC_FULLSCALE_16g					((uint8_t)0x18)
 #define MPU9250_CONF_ACC_FULLSCALE_MASK					((uint8_t)0x18)
 
-// CZUŁOŚĆ ACC W [mG]
-#define MPU9250_ACC_SENSITIVITY_FOR_2g_SCALE			(((float)2*2)/65536*1000)		// 1[mg]/LSB
-#define MPU9250_ACC_SENSITIVITY_FOR_4g_SCALE			(((float)2*4)/65536*1000)
-#define MPU9250_ACC_SENSITIVITY_FOR_8g_SCALE			(((float)2*8)/65536*1000)
-#define MPU9250_ACC_SENSITIVITY_FOR_16g_SCALE			(((float)2*16)/65536*1000)
 
-//#define MPU9250_ACC_SENSITIVITY_FOR_2g_SCALE			(((float)2*2)/65536*1000000)		// 1[ug]/LSB
-//#define MPU9250_ACC_SENSITIVITY_FOR_4g_SCALE			(((float)2*4)/65536*1000000)
-//#define MPU9250_ACC_SENSITIVITY_FOR_8g_SCALE			(((float)2*8)/65536*1000000)
-//#define MPU9250_ACC_SENSITIVITY_FOR_16g_SCALE			(((float)2*16)/65536*1000000)
 
 
 // ACC częstotliwość graniczna cyfrowego filtru dolnoprzepustowego
@@ -309,7 +379,7 @@ extern SPI_HandleTypeDef			hspi3_MPU9250;
 #define MPU9250_CONF_GYRO_AXIS_ALL_ON					((uint8_t)0x00)
 
 // RESET
-#define MPU9250_CONF_HARD_RESET							((uint8_t)0x80)
+#define MPU9250_BM_PWR_MGMT_1_HARD_RESET				((uint8_t)0x80)
 
 // ZEGAR GŁÓWNY
 #define MPU9250_CONF_CLOCK_SOURCE_INTERNAL_20MHz		((uint8_t)0x00)
@@ -334,7 +404,22 @@ extern SPI_HandleTypeDef			hspi3_MPU9250;
 #define MPU9250_CONF_INT_FSYNC_INT_ENABLE_YES			((uint8_t)0x04)
 #define MPU9250_CONF_INT_FSYNC_INT_ENABLE_NO			((uint8_t)0x00)
 
+// CZUŁOŚĆ ACC W [mG]
+#define MPU9250_ACC_SENSITIVITY_FOR_2g_SCALE			(((float)2*2)/65536*1000)		// 1[mg]/LSB
+#define MPU9250_ACC_SENSITIVITY_FOR_4g_SCALE			(((float)2*4)/65536*1000)
+#define MPU9250_ACC_SENSITIVITY_FOR_8g_SCALE			(((float)2*8)/65536*1000)
+#define MPU9250_ACC_SENSITIVITY_FOR_16g_SCALE			(((float)2*16)/65536*1000)
 
+//#define MPU9250_ACC_SENSITIVITY_FOR_2g_SCALE			(((float)2*2)/65536*1000000)		// 1[ug]/LSB
+//#define MPU9250_ACC_SENSITIVITY_FOR_4g_SCALE			(((float)2*4)/65536*1000000)
+//#define MPU9250_ACC_SENSITIVITY_FOR_8g_SCALE			(((float)2*8)/65536*1000000)
+//#define MPU9250_ACC_SENSITIVITY_FOR_16g_SCALE			(((float)2*16)/65536*1000000)
+
+#define MPU9250_BM_I2C_SLV4_CTRL_I2C_SLV4_EN			((uint8_t)0x80)
+#define MPU9250_BM_I2C_MST_STATUS_I2C_SLV4_DONE			((uint8_t)0x40)
+#define MPU9250_BM_I2C_MST_STATUS_I2C_SLV4_NACK			((uint8_t)0x10)
+#define I2C_WRITE										((uint8_t)0x00)
+#define I2C_READ										((uint8_t)0x80)
 // =======================================================================================================
 // typy zmiennych
 
@@ -350,7 +435,10 @@ typedef struct{
 		uint8_t	I2C_MST_EN;
 		uint8_t	I2C_IF_DIS;
 		uint8_t Bypass_Enable;
-		uint8_t I2C_MST_DELAY_CTRL;
+		uint8_t Ext_Sens_Data_Shadowing;
+		uint8_t Ext_Sens_Read_Delay_Enable;
+		uint8_t Next_Slave_Mode;
+		uint8_t Multimaster_Enable;
 	}sI2C;
 
 	struct{
@@ -364,6 +452,7 @@ typedef struct{
 		uint8_t	Enable_FIFO_Overflow_Int;
 		uint8_t	Enable_FSYNC_Int;
 		uint8_t	Enable_Raw_Data_Enable_Int;
+		uint8_t Data_Ready_Waits_For_Ext_Sens;
 	}sINTERRUPTS;
 
 	struct{
@@ -389,26 +478,33 @@ typedef struct{
 	}sGYRO;
 
 	struct{
-		uint8_t DummyParam;
-
+		uint8_t Resolution;
+		uint8_t OperationalMode;
 	}sMAG;
 
-//	struct{
-//		uint8_t Addres;
-//		uint8_t Readout_Enable;
-//	}sI2C_Slave_0;
-//
-//	struct{
-//		uint8_t Addres;
-//	}sI2C_Slave_1;
-//
-//	struct{
-//		uint8_t Addres;
-//	}sI2C_Slave_2;
-//
-//	struct{
-//		uint8_t Addres;
-//	}sI2C_Slave_3;
+	struct{
+		uint8_t Physical_Address;
+		uint8_t Readout_Enable;
+		uint8_t Byte_Swap;
+		uint8_t No_Write;
+		uint8_t Grouping;
+		uint8_t	Data_Lenght;
+	}sI2C_Slave_0;
+
+	struct{
+		uint8_t Addres;
+	}sI2C_Slave_1;
+
+	struct{
+		uint8_t Addres;
+	}sI2C_Slave_2;
+
+	struct{
+		uint8_t Addres;
+	}sI2C_Slave_3;
+	struct{
+		uint8_t Address;
+	}sI2C_Slave_4;
 }tsMPU9250_InitTypedef;
 
 
@@ -422,10 +518,8 @@ typedef struct{
 
 // =======================================================================================================
 // funkcje
-void Sensor_MPU9250_Init();
-void MPU9250_ReadGyro(int16_t *pi16DataXYZ);
-void MPU9250_ReadAcc(int16_t *pDataXYZ);
-void MPU9250_ReadMag(void);
+void MPU9250_Init(tsMPU9250_InitTypedef * sMPU9250_Init);
+void MPU9250_ReadMeas9D(int16_t *pDataXYZ);
 uint8_t MPU9250_WhoAmI(void);
 
 #endif /* EXTSENSOR_MPU9250_M_H_ */

@@ -3,13 +3,11 @@
 /*	autor:		Michal Kobialka, mmkobialka@gmail.com
  * 	data: 		23.07.2015
  *
- *		Program powinien umożliwiać wykonanie rejestracji z czujników o określonej długości (liczba próbek?, milisekundy?)
- *
- *
  */
 
 
-/* Includes ------------------------------------------------------------------*/
+// =======================================================================================================
+// PLIKI NAGŁÓWKOWE
 #include <stdint.h>
 #include "stm32f4xx_hal.h"              // Keil::Device:STM32Cube HAL:Common
 #include "lib_LIS3DSH.h"
@@ -21,14 +19,14 @@
 #include "uart.h"
 #include "mpu9250_m.h"
 
-
-/* Defines	------------------------------------------------------------------*/
-#define ACC_XYZ_BUFF_SIZE 3
+// =======================================================================================================
+// DEFINICJE
+#define ACC_XYZ_BUFF_SIZE	9
 #define BUTTON_PIN			GPIO_PIN_0
 #define BUTTON_PORT			GPIOA
 
 
-//___________________________________
+// =======================================================================================================
 // ZMIENNE GLOBALNE:
 extern	tToken				asToken[MAX_TOKEN_NR];	// tablica tokenów.
 extern unsigned char		ucTokenNr;		// ilosc nalezionych tokenow.
@@ -55,47 +53,40 @@ uint8_t						fTest				= 0;
 
 
 
-//___________________________________
+// =======================================================================================================
+// FUNKCJE PRYWATNE
 static void Error_Handler(void);
-
 static void SystemClock_Config(void);
-static void LED_Init(void);
-static void LED_StartSignal(void);
-static void ACC_Init(void);
 static void TIMER6_Base_Init(void);
 static void SendPendingString(void);
 static void ExecuteCommand(void);
 static void BoardButton_Init(void);
-
+static void LED_Init(void);
+static void LED_StartSignal(void);
+static void ACC_Init(void);
+static void MPU9250_Init_9D(void);
 
 
 
 // =======================================================================================================
+// GŁÓWNA PĘTLA
 int main(void){
 	// 110, 150, 300, 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200, 230400, 460800, 921600
 
-
-	//___________________________________
 	HAL_Init();
 	SystemClock_Config();
 	SystemCoreClockUpdate();
 	HAL_InitTick(0);
 	LED_Init();
 	ACC_Init();
-	Sensor_MPU9250_Init();
+	MPU9250_Init_9D();
 	UART_InitWithInt(115200);
 	TIMER6_Base_Init();
 	BoardButton_Init();
 
-
-	//___________________________________
 	LED_StartSignal();
 	BSP_LED_On(GREEN);
 
-
-
-
-	//___________________________________
 	while(1){
 		SendPendingString();
 		if(eReciever_GetStatus() == READY){
@@ -107,12 +98,9 @@ int main(void){
 }
 
 
-
-
-
-
 // =======================================================================================================
-void BoardButton_Init(void){
+// DEFINICJE FUNKCJI
+static void BoardButton_Init(void){
 	GPIO_InitTypeDef GPIO_InitStruct;
 
 	GPIO_InitStruct.Pin = BUTTON_PIN;
@@ -126,7 +114,7 @@ void BoardButton_Init(void){
 
 }
 
-void SendPendingString(void){
+static void SendPendingString(void){
 	if(eTransmiter_GetStatus() == FREE){
 		if(1 == fId){
 			Transmiter_SendString("stm32f407VG\n");
@@ -168,7 +156,7 @@ void SendPendingString(void){
 	}
 }
 
-void ExecuteCommand(void){
+static void ExecuteCommand(void){
 	uint8_t u8_TempAccReg;
 
 
@@ -216,7 +204,8 @@ void ExecuteCommand(void){
 				case TEST:
 //					BSP_ACCELERO_GetXYZ(pACC_XYZ_BUFF);
 //					MPU9250_ReadGyro(pACC_XYZ_BUFF);
-					MPU9250_ReadAcc(pACC_XYZ_BUFF);
+//					MPU9250_ReadAcc(pACC_XYZ_BUFF);
+					MPU9250_ReadMeas9D(pACC_XYZ_BUFF);
 					fTest = 1;
 					break;
 
@@ -230,9 +219,68 @@ void ExecuteCommand(void){
 		}
 }
 
+static void MPU9250_Init_9D(){
+	tsMPU9250_InitTypedef sMPU9250_Init;
+
+	// KONFIGURACJA. NIEISTOTNE PARAMETRY USTAWIĆ NA 0.
+	sMPU9250_Init.Clock_Source                              =       MPU9250_CONF_CLOCK_SOURCE_AUTOSELECT;
+	sMPU9250_Init.Sample_Rate_Divider                       =       20;
+	sMPU9250_Init.External_Sync                             =       MPU9250_CONF_EXT_SYNC_DISABLED;
+
+	sMPU9250_Init.sI2C.I2C_IF_DIS                           =       MPU9250_CONF_I2C_SLAVE_INTERFACE_DISABLE_YES;
+	sMPU9250_Init.sI2C.I2C_MST_EN                           =       MPU9250_CONF_I2C_MASTER_MODE_YES;
+	sMPU9250_Init.sI2C.Bypass_Enable                        =       MPU9250_CONF_I2C_BYPASS_PIN_YES;				//  W przypadku używania i2c w trybie slave, ustawia piny pocnicze i2c w stan wysokiej impedancji lub łączy logicznie z pinami głównego i2c
+	sMPU9250_Init.sI2C.Ext_Sens_Data_Shadowing				=		MPU9250_CONF_I2C_DELAY_CTRL_SHADOWING_ON;
+	sMPU9250_Init.sI2C.Ext_Sens_Read_Delay_Enable			=		0;
+	sMPU9250_Init.sI2C.Next_Slave_Mode						=		MPU9250_CONF_I2C_NEXT_SLV_AFTER_STOP;
+	sMPU9250_Init.sI2C.Multimaster_Enable					=		MPU9250_CONF_I2C_MULTIMASTER_MODE_NO;
+	sMPU9250_Init.sI2C.Master_Clock							=		MPU9250_CONF_I2C_MST_CLOCK_400kHz;
 
 
+	// TODO: clean up MAG configuration
+	sMPU9250_Init.sI2C_Slave_0.Data_Lenght					=		8;
+	sMPU9250_Init.sI2C_Slave_0.Byte_Swap					=		0;
+	sMPU9250_Init.sI2C_Slave_0.Grouping						=		0;
+	sMPU9250_Init.sI2C_Slave_0.No_Write						=		0;
+	sMPU9250_Init.sI2C_Slave_0.Physical_Address				=		AK8963_I2C_ADDR | I2C_READ;
+	sMPU9250_Init.sI2C_Slave_0.Readout_Enable				=		1;
 
+	sMPU9250_Init.sMAG.Resolution							=		AK8963_CONF_RESOLUTION_16bit;
+	sMPU9250_Init.sMAG.OperationalMode						=		AK8963_CONF_MODE_CONTINUOUS_100Hz;
+
+	sMPU9250_Init.sACC.Axis_Disable                         =       MPU9250_CONF_ACC_AXIS_ALL;
+	sMPU9250_Init.sACC.Full_Scale                           =       MPU9250_CONF_ACC_FULLSCALE_4g;
+	sMPU9250_Init.sACC.Filter_Bypass                        =       MPU9250_CONF_ACC_FILTER_BYPASS_NO;
+	sMPU9250_Init.sACC.Filter_BW                            =       MPU9250_CONF_ACC_FILTER_BW_460Hz;
+	sMPU9250_Init.sACC.WakeOn_Threshold                     =       0;
+
+	sMPU9250_Init.sGYRO.Axis_Disable                        =       MPU9250_CONF_GYRO_AXIS_ALL_ON;
+	sMPU9250_Init.sGYRO.Full_Scale                          =       MPU9250_CONF_GYRO_FULLSCALE_250dps;
+	sMPU9250_Init.sGYRO.Filter_Bypass                       =       MPU9250_CONF_GYRO_FILTER_BYPASS_NO;
+	sMPU9250_Init.sGYRO.Filter_BW                           =       MPU9250_CONF_GYRO_FILTER_BW_5Hz;
+
+	sMPU9250_Init.sFIFO.Enable                              =       MPU9250_CONF_FIFO_ENABLE_NO;
+	sMPU9250_Init.sFIFO.Overlap                             =       0;
+	sMPU9250_Init.sFIFO.Source_Select                       =       0;
+
+	sMPU9250_Init.sINTERRUPTS.INT_Pin_Logic_Level           =       MPU9250_CONF_INT_PIN_LOGIC_ACTIVE_LVL_HIGH;
+	sMPU9250_Init.sINTERRUPTS.INT_Pin_PP_OD                 =       MPU9250_CONF_INT_PIN_PP;
+
+	sMPU9250_Init.sINTERRUPTS.Data_Ready_Waits_For_Ext_Sens	=		MPU9250_CONF_WAIT_FOR_EXT_SENS_DATA_YES;
+	sMPU9250_Init.sINTERRUPTS.INT_Pin_Latch                 =       MPU9250_CONF_INT_PIN_LATCH_NO_PULSE_50us;
+	sMPU9250_Init.sINTERRUPTS.Clear_Status_On_Read          =       MPU9250_CONF_INT_CLEAR_STATUS_RX_ANY;
+	sMPU9250_Init.sINTERRUPTS.FSYNC_Logic_Level             =       0;
+	sMPU9250_Init.sINTERRUPTS.FSYNC_INT_MODE_Enable         =       0;
+	sMPU9250_Init.sINTERRUPTS.Enable_Wake_Up_Int            =       0;
+	sMPU9250_Init.sINTERRUPTS.Enable_FIFO_Overflow_Int      =       0;
+	sMPU9250_Init.sINTERRUPTS.Enable_FSYNC_Int              =       0;
+	sMPU9250_Init.sINTERRUPTS.Enable_Raw_Data_Enable_Int	=       0;
+
+
+	MPU9250_Init(&sMPU9250_Init);
+
+	// prawdzenie działania magnetometru: inicjalizacja I2C
+}
 
 static void TIMER6_Base_Init(void){
 	TIM_Base_InitTypeDef 	Timer6_InitStruct;
@@ -290,8 +338,7 @@ static void LED_Init(void){
 	BSP_LED_Init(RED);
 }
 
-//___________________________________
-void SystemClock_Config(void){
+static void SystemClock_Config(void){
 	RCC_ClkInitTypeDef RCC_ClkInitStruct;
 	RCC_OscInitTypeDef RCC_OscInitStruct;
 
@@ -326,8 +373,7 @@ void SystemClock_Config(void){
 
 }
 
-//___________________________________
-void LED_StartSignal(void){
+static void LED_StartSignal(void){
 	uint32_t u32WaitTime_ms = 50;
 
 	BSP_LED_On(GREEN);
@@ -351,7 +397,6 @@ void LED_StartSignal(void){
 	BSP_LED_Off(GREEN);
 }
 
-//___________________________________
 static void Error_Handler(void){
 	BSP_LED_Off(GREEN);
 	BSP_LED_On(RED);

@@ -113,7 +113,6 @@ void Reciever_GetStringCopy(char * ucDestination)
 // =======================================================================================================
 void Transmiter_SendString( char cString[])
 {
-	char tmp =0;
 	CopyString(cString,sTransmiterBuffer.cData);
 	sTransmiterBuffer.eStatus = BUSY;
 	sTransmiterBuffer.fLastCharacter = 0;
