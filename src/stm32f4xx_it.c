@@ -70,7 +70,7 @@
 /* External variables --------------------------------------------------------*/
 extern UART_HandleTypeDef		 huart4;
 extern TIM_HandleTypeDef 		hTimer6;
-extern volatile int16_t			pACC_XYZ_BUFF[];
+
 
 /* Variables -----------------------------------------------------------------*/
 volatile  uint32_t u32_SampleCounter;						// nieoptymalizowana, zachowuje wartość.

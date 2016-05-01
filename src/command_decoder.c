@@ -15,16 +15,15 @@ typedef enum	tTokenFind_state{TOKEN, DELIMITER}tTokenFind_state;
 
 // =======================================================================================================
 // zmienne globalne
-unsigned char 		ucTokenNr;
-tToken 						asToken[MAX_TOKEN_NR];	// tablica tokenów.
-tKeyword 					asKeywordList[MAX_KEYWORD_NR] = 									// asKeywordList jest tablica struktur typu keyword. Czyli maja pole kodu typu KeywordCod i pole Stringa.
+unsigned char 	ucTokenNr;
+tToken 			asToken[MAX_TOKEN_NR];						// tablica tokenów.
+tKeyword 		asKeywordList[MAX_KEYWORD_NR] = 			// asKeywordList jest tablica struktur typu keyword. Czyli maja pole kodu typu KeywordCod i pole Stringa.
 {
-	{CALC,"calc"},
-	{ID,"id"},
-	{LIS3DSH_GETXYZ, "acc_get"},
-	{LIS3DSH_START, "acc_start"},
-	{LIS3DSH_STOP, "acc_stop"},
-	{TEST, "test"},
+	{MPU9250_READ_9D, 	"readall"},
+	{MPU9250_READ_GYRO,	"readgyro"},
+	{MPU9250_READ_ACC,	"readacc"},
+	{MPU9250_READ_MAG,	"readmag"},
+	{MPU9250_WHO_AM_I,	"readid"}
 };
 
 

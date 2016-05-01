@@ -16,8 +16,8 @@ extern UART_HandleTypeDef huart4;
 
 #define TERMINATOR				13
 //#define TERMINATOR				10
-#define UART_RECIEVER_SIZE		20
-#define UART_TRANSMITER_SIZE 	40
+#define UART_RECIEVER_SIZE		25
+#define UART_TRANSMITER_SIZE 	84
 
 
 

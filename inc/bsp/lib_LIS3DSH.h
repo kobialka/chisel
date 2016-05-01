@@ -13,6 +13,7 @@
 #define LIS3DSH_WHO_AM_I_ADDR 			(0x0F)
 
 /* CTRL_REG3 */
+
 #define LIS3DSH_CTRL3_ADDR				(0x23)
 #define LIS3DSH_CTRL3_DR_EN_BIT			(1 << 7)
 #define LIS3DSH_CTRL3_IEA_BIT			(1 << 6)

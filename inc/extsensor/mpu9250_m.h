@@ -98,16 +98,16 @@ extern SPI_HandleTypeDef			hspi3_MPU9250;
 #define AK8963_BM_ST1_DOR					((uint8_t)0x02)		// Data overrun bit
 #define AK8963_BM_ST2_HOFL					((uint8_t)0x08)		// Bit przekroczenia zakresu pomiarowego. Gdy dojdzie do przekroczenia zakresu pomiarowego w odpowiednich trybach pracy zostanie ustawiony ten bit. Do przekroczenia zakresu może dojść nawet jeżeli rejestry z danymi pomiarowymi nie zostały zapisane największą wartością. Kiedy zacyna się kolejny pomiar bit ten jest ustawiany na 0.
 
-#define AK8963_CONF_MODE_BM					((uint8_t)0x0f)
-#define AK8963_CONF_MODE_POWER_DOWN			((uint8_t)0x00)
-#define AK8963_CONF_MODE_SINGLE_MEAS		((uint8_t)0x01)
-#define AK8963_CONF_MODE_CONTINUOUS_8Hz	((uint8_t)0x02)
-#define AK8963_CONF_MODE_CONTINUOUS_100Hz	((uint8_t)0x06)
-#define AK8963_CONF_MODE_EXTERNAL_TRIG		((uint8_t)0x04)
-#define AK8963_CONF_MODE_SELF_TEST			((uint8_t)0x08)
-#define AK8963_CONF_MODE_FUSE_ROM_ACCESS	((uint8_t)0x0f)		// ,,When each mode is set, AK8963 transits to the set mode. Refer to 6.3 for detailed information.
-#define AK8963_CONF_RESOLUTION_14bit		((uint8_t)0x00)		// 0.6[uT/LSB] +-0.03[uT]
-#define AK8963_CONF_RESOLUTION_16bit		((uint8_t)0x10)		// 0.15[uT/LSB] +-0.0075[uT]
+#define AK8963_CONF_MAG_MODE_BM					((uint8_t)0x0f)
+#define AK8963_CONF_MAG_MODE_POWER_DOWN			((uint8_t)0x00)
+#define AK8963_CONF_MAG_MODE_SINGLE_MEAS		((uint8_t)0x01)
+#define AK8963_CONF_MAG_MODE_CONTINUOUS_8Hz	((uint8_t)0x02)
+#define AK8963_CONF_MAG_MODE_CONTINUOUS_100Hz	((uint8_t)0x06)
+#define AK8963_CONF_MAG_MODE_EXTERNAL_TRIG		((uint8_t)0x04)
+#define AK8963_CONF_MAG_MODE_SELF_TEST			((uint8_t)0x08)
+#define AK8963_CONF_MAG_MODE_FUSE_ROM_ACCESS	((uint8_t)0x0f)		// ,,When each mode is set, AK8963 transits to the set mode. Refer to 6.3 for detailed information.
+#define AK8963_CONF_MAG_RESOLUTION_14bit		((uint8_t)0x00)		// 0.6[uT/LSB] +-0.03[uT]
+#define AK8963_CONF_MAG_RESOLUTION_16bit		((uint8_t)0x10)		// 0.15[uT/LSB] +-0.0075[uT]
 
 #define AK8963_BM_CNTL2_SRST				((uint8_t)0x01)		// autoclear
 #define AK8963_BM_ASTC_SELF					((uint8_t)0x40)		// generate magnetic field for self test. Do not write 1 to other bits in this register
@@ -122,7 +122,7 @@ extern SPI_HandleTypeDef			hspi3_MPU9250;
 #define AK8963_I2C_ADDR						((uint8_t)0x0c)		// Adres  fizyczny układu AK8963
 #define MPU9250_MAG_SENSITIVITY_14bit		((float)0.6)		// [uT/LSB]
 #define MPU9250_MAG_SENSITIVITY_16bit		((float)0.15)		// [uT/LSB]
-
+#define MPU9250_BM_MAG_SENSITIVITY			((uint8_t)0x10)
 
 
 
@@ -294,7 +294,7 @@ extern SPI_HandleTypeDef			hspi3_MPU9250;
 #define MPU9250_CONF_I2C_MULTIMASTER_MODE_NO			((uint8_t)0x00)
 #define MPU9250_CONF_I2C_NEXT_SLV_AFTER_STOP			((uint8_t)0x10)
 #define MPU9250_CONF_I2C_NEXT_SLV_AFTER_RESTART			((uint8_t)0x00)
-#define MPU9250_CONF_WAIT_FOR_EXT_SENS_DATA_YES			((uint8_t)0x40)
+#define MPU9250_CONF_INT_WAIT_FOR_EXT_SENS_DATA_YES			((uint8_t)0x40)
 #define MPU9250_CONF_WAIT_FOR_EXT_SENS_DATA_NO			((uint8_t)0x00)
 
 
@@ -304,9 +304,11 @@ extern SPI_HandleTypeDef			hspi3_MPU9250;
 #define MPU9250_CONF_FIFO_SOURCE_GYRO_Y					((uint8_t)0x20)
 #define MPU9250_CONF_FIFO_SOURCE_GYRO_Z					((uint8_t)0x10)
 #define MPU9250_CONF_FIFO_SOURCE_ACC_ALL				((uint8_t)0x08)
+#define	MPU9250_CONF_FIFO_SOURCE_I2C_SLAVE_3			((uint16_t)0x20 << 8)
 #define MPU9250_CONF_FIFO_SOURCE_I2C_SLAVE_2			((uint8_t)0x04)
 #define	MPU9250_CONF_FIFO_SOURCE_I2C_SLAVE_1			((uint8_t)0x02)
 #define MPU9250_CONF_FIFO_SOURCE_I2C_SLAVE_0			((uint8_t)0x01)	// See I2C_MST_CTRL register to enable this feature for SLAVE_3.
+#define MPU9250_CONF_FIFO_SOURCE_NONE					((uint8_t)0x00)
 
 // FIFO nadpisywanie najstarszych wartości
 #define	MPU9250_CONF_FIFO_OVERLAP_YES					((uint8_t)0x00)
@@ -420,6 +422,10 @@ extern SPI_HandleTypeDef			hspi3_MPU9250;
 #define MPU9250_BM_I2C_MST_STATUS_I2C_SLV4_NACK			((uint8_t)0x10)
 #define I2C_WRITE										((uint8_t)0x00)
 #define I2C_READ										((uint8_t)0x80)
+
+// Brakuje niektórych definicji, takich, które są niekonieczne - m.in. dla selftestu żyroskopu  i akcelerometru.
+
+
 // =======================================================================================================
 // typy zmiennych
 
@@ -456,9 +462,9 @@ typedef struct{
 	}sINTERRUPTS;
 
 	struct{
-		uint8_t Overlap;
-		uint8_t	Enable;
-		uint8_t	Source_Select;
+		uint8_t 	Overlap;
+		uint8_t		Enable;
+		uint16_t	Source_Select; // 16 bitów ponieważ będzie zawierał również informację o włączeniu FIFO dla SLV3, który to bit znajduje się w innym rejestrze.
 	}sFIFO;
 
 
@@ -519,6 +525,9 @@ typedef struct{
 // =======================================================================================================
 // funkcje
 void MPU9250_Init(tsMPU9250_InitTypedef * sMPU9250_Init);
+void MPU9250_ReadAcc(int16_t *pDataXYZ);
+void MPU9250_ReadMag(int16_t *pDataXYZ);
+void MPU9250_ReadGyro(int16_t *pDataXYZ);
 void MPU9250_ReadMeas9D(int16_t *pDataXYZ);
 uint8_t MPU9250_WhoAmI(void);
 

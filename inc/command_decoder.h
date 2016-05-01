@@ -25,7 +25,9 @@
 // =======================================================================================================
 // typy zmiennych
 
-typedef enum		tKeywordCode{CALC, ID, LIS3DSH_GETXYZ, LIS3DSH_START, LIS3DSH_STOP, TEST} tKeywordCode;
+// typedef enum		tKeywordCode{CALC, ID, LIS3DSH_GETXYZ, LIS3DSH_START, LIS3DSH_STOP, TEST} tKeywordCode;
+typedef enum		tKeywordCode{MPU9250_READ_GYRO, MPU9250_READ_ACC, MPU9250_READ_MAG, MPU9250_READ_9D, MPU9250_WHO_AM_I} tKeywordCode;
+
 typedef struct		tKeyword
 {
 	tKeywordCode	eCode;
@@ -38,7 +40,7 @@ typedef enum		tTokenType{KEYWORD, NUMBER, STRING}tTokenType;
 typedef union 		tTokenValue
 {
 	tKeywordCode	eKeyword; 						// jezeli KEYWORD
-	uint32_t		u32_Number; 						// jezeli NUMBER
+	uint32_t		u32_Number; 					// jezeli NUMBER
 	char *			pcString; 						// jezeli STRING
 }tTokenValue;
 

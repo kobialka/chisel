@@ -49,7 +49,7 @@
 // ==================================================================================================================================================
 // zmienne prywatne
 static uint32_t u32SpiMPU9250Timeout = SPI_MPU9250_TIMEOUT_MAX;
-static uint8_t pfAK8963_CallibrationData[3] = {0.0, 0.0, 0.0};
+static float pfAK8963_CallibrationData[3] = {0.0, 0.0, 0.0};
 
 
 
@@ -62,9 +62,6 @@ static void		MPU9250_Rx(uint8_t *pu8RxBuff, uint8_t u8RxAddr, uint8_t u8ByteNr);
 static void 	MPU9250_Tx(uint8_t *pu8TxBuff, uint8_t u8TxAddr, uint8_t u8ByteNr);
 static uint8_t	MPU9250_Rx_FromAK8963(uint8_t *pu8RxBuff, uint8_t u8RxAddr, uint8_t u8ByteNr);
 static uint8_t 	MPU9250_Tx_ToAK8963(uint8_t *pu8TxBuff, uint8_t u8TxAddr, uint8_t u8ByteNr);
-static void 	MPU9250_ReadGyro(int16_t *pi16DataXYZ);
-static void 	MPU9250_ReadAcc(int16_t *pDataXYZ);
-static void 	MPU9250_ReadMag(int16_t *pDataXYZ);
 
 
 
@@ -88,7 +85,7 @@ static void Init_MPU9250_SPI(void){
 		HAL_SPI_Init(&hspi3_MPU9250);
 
 		/*
-		 * 	 Ta transakcja jest nieważna.
+		 * 	 Poniższa transakcja jest nieważna.
 		 * 	 Przy pierwszym transferze po inicjalizacji sciągnięcie lini zegarowej do poziomu niskiego
 		 * 	 jest widocznie opóźnione w stosunku do aktywacji odbiornika (sciągnięcia CS).
 		 *
@@ -286,7 +283,7 @@ static void MPU9250_SPI_Error(void){
 
 // ==================================================================================================================================================
 // ===  ODCZYT DANYCH POMIAROWYCH
-static void MPU9250_ReadGyro(int16_t *pi16DataXYZ){
+ void MPU9250_ReadGyro(int16_t *pi16DataXYZ){
 	uint8_t		pu8Buffer[6];
 	uint8_t 	u8RegTempVal	=	0;
 	uint8_t 	u8ValueCounter	=	0;
@@ -330,7 +327,7 @@ static void MPU9250_ReadGyro(int16_t *pi16DataXYZ){
 }
 
 
-static void MPU9250_ReadAcc(int16_t *pi16DataXYZ){
+ void MPU9250_ReadAcc(int16_t *pi16DataXYZ){
 	uint8_t		pu8Buffer[6];
 	uint8_t 	u8RegTempVal	=	0;
 	uint8_t 	u8ValueCounter	=	0;
@@ -372,7 +369,7 @@ static void MPU9250_ReadAcc(int16_t *pi16DataXYZ){
 	}
 }
 
-static void MPU9250_ReadMag(int16_t *pi16DataXYZ){
+void MPU9250_ReadMag(int16_t *pi16DataXYZ){
 	uint8_t 	pu8TempRxBuff[8] 	= 	{0,0,0,0,0,0,0,0};
 	uint8_t 	u8ValueCounter		=	0;
 	float		fSensitivity		=	1;
@@ -399,20 +396,20 @@ static void MPU9250_ReadMag(int16_t *pi16DataXYZ){
 	else{
 	// przeliczyć wartości
 
-		switch (pu8TempRxBuff[AK8963RxBuff_ST2] >> 4) {
-			case (AK8963_CONF_RESOLUTION_14bit >> 4):
+		switch (pu8TempRxBuff[AK8963RxBuff_ST2] & MPU9250_BM_MAG_SENSITIVITY) {
+			case (AK8963_CONF_MAG_RESOLUTION_14bit):
 				fSensitivity = MPU9250_MAG_SENSITIVITY_14bit;
 				break;
-			case (AK8963_CONF_RESOLUTION_16bit >> 4):
-							fSensitivity = MPU9250_MAG_SENSITIVITY_16bit;
-							break;
+			case (AK8963_CONF_MAG_RESOLUTION_16bit):
+				fSensitivity = MPU9250_MAG_SENSITIVITY_16bit;
+				break;
 			default:
 				fSensitivity = MPU9250_MAG_SENSITIVITY_14bit;
 				break;
 		}
 
 		for(u8ValueCounter = 0; u8ValueCounter < 3; u8ValueCounter++){
-			fTempValue = (((int8_t)pu8TempRxBuff[2*u8ValueCounter+1] << 8) | (0xff & (int8_t)pu8TempRxBuff[2*u8ValueCounter])) * fSensitivity * pfAK8963_CallibrationData[u8ValueCounter]; // rzutowanie na float zachowuje znak!
+			fTempValue = (((int8_t)pu8TempRxBuff[2*u8ValueCounter+2] << 8) | (0xff & (int8_t)pu8TempRxBuff[2*u8ValueCounter+1])) * fSensitivity * pfAK8963_CallibrationData[u8ValueCounter]; // rzutowanie na float zachowuje znak!
 			pi16DataXYZ[u8ValueCounter] =(int16_t)fTempValue;
 		}
 	}
@@ -420,12 +417,14 @@ static void MPU9250_ReadMag(int16_t *pi16DataXYZ){
 
 
 
+// ========================================================================================================
 
 void MPU9250_ReadMeas9D(int16_t *pDataXYZ){
 	uint8_t u8TestData = 0xaf;
 
-//	MPU9250_ReadGyro(pDataXYZ);
-	MPU9250_ReadMag(pDataXYZ);
+	MPU9250_ReadAcc(pDataXYZ);
+	MPU9250_ReadGyro(pDataXYZ+3);
+	MPU9250_ReadMag(pDataXYZ+6);
 //	MPU9250_Rx_FromAK8963(&u8TestData, AK8963_ADDR_WIA, 1);
 
 //	u8TestData = 0xAF;
@@ -443,6 +442,7 @@ void MPU9250_ReadMeas9D(int16_t *pDataXYZ){
 void MPU9250_Init(tsMPU9250_InitTypedef * sMPU9250_Init){
 	uint8_t		u8AK8963TxResult;
 	uint8_t		u8TempInitReg;
+	uint8_t		pu8TempAK8963CalibData[3] = {0, 0, 0};
 
 
 	Init_MPU9250_SPI();
@@ -487,7 +487,7 @@ void MPU9250_Init(tsMPU9250_InitTypedef * sMPU9250_Init){
 	MPU9250_Tx(&u8TempInitReg, MPU9250_ADDR_ACCEL_CONFIG_2, 1);
 
 
-	// === 0x1E - LP_ACCEL_ODR
+	// === 0x1E - LP_ACCEL_ODR - częstotliwość pomiarowa w stanie obniżonego poboru energii
 
 	// === 0x1F - WOM_THR
 	u8TempInitReg = 	sMPU9250_Init->sACC.WakeOn_Threshold;
@@ -496,14 +496,14 @@ void MPU9250_Init(tsMPU9250_InitTypedef * sMPU9250_Init){
 
 
 	// === 0x23 - FIFO_EN
-	u8TempInitReg = 	sMPU9250_Init->sFIFO.Source_Select;
+	u8TempInitReg = 	(uint8_t)(sMPU9250_Init->sFIFO.Source_Select & 0xFF); // odcinamy starszy bajt z konfiguracją dla SLV3. // nie testowane.
 
 	MPU9250_Tx(&u8TempInitReg, MPU9250_ADDR_FIFO_EN, 1);
 
 	// === 0x24 I2C_MST_CTRL
-	u8TempInitReg = (	sMPU9250_Init->sI2C.Multimaster_Enable		|	\
-//						sMPU9250_Init->sFIFO.SLV3
-						sMPU9250_Init->sI2C.Next_Slave_Mode			|	\
+	u8TempInitReg = (	sMPU9250_Init->sI2C.Multimaster_Enable						|	\
+			 (uint8_t)((sMPU9250_Init->sFIFO.Source_Select >> 8) & 0x20)			|	\
+						sMPU9250_Init->sI2C.Next_Slave_Mode							|	\
 						sMPU9250_Init->sINTERRUPTS.Data_Ready_Waits_For_Ext_Sens	|	\
 						sMPU9250_Init->sI2C.Master_Clock);
 
@@ -567,21 +567,26 @@ void MPU9250_Init(tsMPU9250_InitTypedef * sMPU9250_Init){
 	HAL_Delay(100);
 
 //	Dostęp i odczyt danych kalibracyjnych
-	u8TempInitReg = AK8963_CONF_MODE_POWER_DOWN;
+	u8TempInitReg = AK8963_CONF_MAG_MODE_POWER_DOWN;
 	MPU9250_Tx_ToAK8963(&u8TempInitReg,AK8963_ADDR_CNTL1, 1);
 
-	u8TempInitReg = AK8963_CONF_MODE_FUSE_ROM_ACCESS;
+	u8TempInitReg = AK8963_CONF_MAG_MODE_FUSE_ROM_ACCESS;
+	MPU9250_Tx_ToAK8963(&u8TempInitReg,AK8963_ADDR_CNTL1, 1);
+	HAL_Delay(10);
+
+	MPU9250_Rx_FromAK8963(pu8TempAK8963CalibData, AK8963_ADDR_ASAX, 1);
+	MPU9250_Rx_FromAK8963(pu8TempAK8963CalibData+1, AK8963_ADDR_ASAY, 1);
+	MPU9250_Rx_FromAK8963(pu8TempAK8963CalibData+2, AK8963_ADDR_ASAZ, 1);
+//	MPU9250_Rx_FromAK8963(pu8TempAK8963CalibData, AK8963_ADDR_ASAX, 3);				// Czasami trzeci bajt jest odczytywany jako zero, są tu jakieś zależności czasowe, może trzeba wprowadzić opuźnienia.
+
+	pfAK8963_CallibrationData[0] = (((pu8TempAK8963CalibData[0] - 128) * 0.5) / 128) + 1;
+	pfAK8963_CallibrationData[1] = (((pu8TempAK8963CalibData[1] - 128) * 0.5) / 128) + 1;
+	pfAK8963_CallibrationData[2] = (((pu8TempAK8963CalibData[2] - 128) * 0.5) / 128) + 1;
+
+	u8TempInitReg = AK8963_CONF_MAG_MODE_POWER_DOWN;
 	MPU9250_Tx_ToAK8963(&u8TempInitReg,AK8963_ADDR_CNTL1, 1);
 
-	MPU9250_Rx_FromAK8963(pfAK8963_CallibrationData, AK8963_ADDR_ASAX, 3);
-	pfAK8963_CallibrationData[0] = (((pfAK8963_CallibrationData[0] - 128) * 0.5) / 128) + 1;
-	pfAK8963_CallibrationData[1] = (((pfAK8963_CallibrationData[1] - 128) * 0.5) / 128) + 1;
-	pfAK8963_CallibrationData[2] = (((pfAK8963_CallibrationData[2] - 128) * 0.5) / 128) + 1;
-
-	u8TempInitReg = AK8963_CONF_MODE_POWER_DOWN;
-	MPU9250_Tx_ToAK8963(&u8TempInitReg,AK8963_ADDR_CNTL1, 1);
-
-	u8TempInitReg = AK8963_CONF_MODE_CONTINUOUS_100Hz | sMPU9250_Init->sMAG.Resolution;
+	u8TempInitReg = sMPU9250_Init->sMAG.OperationalMode | sMPU9250_Init->sMAG.Resolution;
 	MPU9250_Tx_ToAK8963(&u8TempInitReg, AK8963_ADDR_CNTL1, 1);
 
 
@@ -601,6 +606,8 @@ void MPU9250_Init(tsMPU9250_InitTypedef * sMPU9250_Init){
 	u8TempInitReg = 0x09;
 	MPU9250_Tx(&u8TempInitReg, MPU9250_ADDR_I2C_SLV4_CTRL, 1);
 
+	// Read WIA
+	MPU9250_Rx(u8TempInitReg,MPU9250_ADDR_WHO_AM_I, 1);
 
 
 
