@@ -15,6 +15,10 @@ extern SPI_HandleTypeDef			hspi3_MPU9250;
 
 // =======================================================================================================
 // Definicje
+#define MPU9250_DATA_BUFF_SIZE	(13)			// 3axis x 3 sensor + temperature + timestamp
+// definicje dotyczące ramki
+#define FRAME_9D_MEAS_ID		(0xAF)
+#define FRAME_9D_MEAS_DATA_LEN	(20)	// Bufor + ID i DataLength
 
 
 /*

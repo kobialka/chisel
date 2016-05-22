@@ -199,7 +199,9 @@ void SysTick_Handler(void)
   */
 void UART4_IRQHandler(void){
 //	HAL_UART_IRQHandler(&huart4);
+
 	uint32_t tmp1 = 0, tmp2 = 0;
+
 
 	/* UART Receiver INT ---------------------------------------------------*/
 	tmp1 = __HAL_UART_GET_FLAG(&huart4, UART_FLAG_RXNE);			// czy flaga jest ustawiona
@@ -208,13 +210,23 @@ void UART4_IRQHandler(void){
 	if((tmp1 != RESET) && (tmp2 != RESET)){
 		Reciever_PutCharacterToBuffer(huart4.Instance->DR);
 	}
+
+
 	/* UART Transmitter INT ------------------------------------------------*/
 	tmp1 = __HAL_UART_GET_FLAG(&huart4, UART_FLAG_TXE);				// czy flaga jest ustawiona. Flaga TXE jest ustawiona zawsze gdy TDR jest puste, więc zgłaszane będzie przerwanie. Dlatego po wysłaniu ostatniego bajtu wyłączamy przerwanie TXE(IE).
 	tmp2 = __HAL_UART_GET_IT_SOURCE(&huart4, UART_IT_TXE);			// czy przerwanie TXE jest włączone
-	if((tmp1 != RESET) && (tmp2 != RESET)){
-		char cCharacter = Transmiter_GetCharacterFromBuffer ();
 
-		if ( 0 != cCharacter ){
+	if((tmp1 != RESET) && (tmp2 != RESET)){
+		char cCharacter;
+
+		if(0 == Transmiter_GetFrameID()){
+			cCharacter = Transmiter_GetCharacterFromBuffer();
+			if ( 0 != cCharacter ){
+				huart4.Instance->DR = cCharacter;
+			}
+		}
+		else{
+			cCharacter = Transmiter_GetRawByteFromBuffer();
 			huart4.Instance->DR = cCharacter;
 		}
 	}

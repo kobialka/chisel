@@ -18,9 +18,10 @@
 
 // =======================================================================================================
 // DEFINICJE
-#define MPU9250_DATA_BUFF_SIZE	11			// 3axis x 3 sensor + temperature + timestamp
 #define BUTTON_PIN			GPIO_PIN_0
 #define BUTTON_PORT			GPIOA
+
+
 
 
 // =======================================================================================================
@@ -32,7 +33,7 @@ uint8_t 					Hal_RxBuff[1];
 uint8_t						Hal_TxBuff[1];
 uint8_t						pSPI_RxBuff[1];
 uint8_t						pcMessageBuffer[UART_RECIEVER_SIZE];
-int16_t						pMPU950_DATA_BUFF[MPU9250_DATA_BUFF_SIZE];
+int16_t						pMPU950_DATA_BUFF[MPU9250_DATA_BUFF_SIZE];	// Bufor + ID i DataLength
 /*
  * Przyjęta struktura danych w buforze pMPU950_DATA_BUFF, zawartość bajtów:
  *
@@ -156,40 +157,49 @@ static void ExecuteCommand(void){
 static void SendPendingString(void){
 	if(eTransmiter_GetStatus() == FREE){
 		if(1 == flag_Data_3D){
-			char pcTempString[50] = "";
+			uint8_t pu8TempString[50] = "";
 
-			AppendHexIntToString(pMPU950_DATA_BUFF[0],pcTempString);
-			AppendString(";",pcTempString);
-			AppendHexIntToString(pMPU950_DATA_BUFF[1],pcTempString);
-			AppendString(";",pcTempString);
-			AppendHexIntToString(pMPU950_DATA_BUFF[2],pcTempString);
+			AppendHexIntToString(pMPU950_DATA_BUFF[0],pu8TempString);
+			AppendString(";",pu8TempString);
+			AppendHexIntToString(pMPU950_DATA_BUFF[1],pu8TempString);
+			AppendString(";",pu8TempString);
+			AppendHexIntToString(pMPU950_DATA_BUFF[2],pu8TempString);
 
-			Transmiter_SendString(pcTempString);
+			// Transmiter_SendFrame(pu8TempString);
+			Transmiter_SendString(pu8TempString);
 			flag_Data_3D = 0;
 		}
 		else if(1 == flag_Data_9D){
-			char pcTempString[84] = "";
+			uint8_t  pcFrame[20] = "";
 
-			AppendHexIntToString(pMPU950_DATA_BUFF[0],pcTempString);	// acc x
-			AppendString(";",pcTempString);
-			AppendHexIntToString(pMPU950_DATA_BUFF[1],pcTempString);	// acc y
-			AppendString(";",pcTempString);
-			AppendHexIntToString(pMPU950_DATA_BUFF[2],pcTempString);	// acc z
-			AppendString(";",pcTempString);
-			AppendHexIntToString(pMPU950_DATA_BUFF[3],pcTempString);	// gyro x
-			AppendString(";",pcTempString);
-			AppendHexIntToString(pMPU950_DATA_BUFF[4],pcTempString);	// gyro y
-			AppendString(";",pcTempString);
-			AppendHexIntToString(pMPU950_DATA_BUFF[5],pcTempString);	// gyro z
-			AppendString(";",pcTempString);
-			AppendHexIntToString(pMPU950_DATA_BUFF[6],pcTempString);	// mag x
-			AppendString(";",pcTempString);
-			AppendHexIntToString(pMPU950_DATA_BUFF[7],pcTempString);	// mag y
-			AppendString(";",pcTempString);
-			AppendHexIntToString(pMPU950_DATA_BUFF[8],pcTempString);	// mag z
-			AppendString(";",pcTempString);
+			pcFrame[0] 	= FRAME_9D_MEAS_ID;
+			pcFrame[1] 	= FRAME_9D_MEAS_DATA_LEN;
 
-			Transmiter_SendString(pcTempString);
+			// ACC X Y Z
+			pcFrame[2] 	= (0x0FF & 	pMPU950_DATA_BUFF[0]);
+			pcFrame[3] 	= (0x0FF & (pMPU950_DATA_BUFF[0] >> 8));
+			pcFrame[4] 	= (0x0FF & 	pMPU950_DATA_BUFF[1]);
+			pcFrame[5] 	= (0x0FF & (pMPU950_DATA_BUFF[1] >> 8));
+			pcFrame[6] 	= (0x0FF & 	pMPU950_DATA_BUFF[2]);
+			pcFrame[7] 	= (0x0FF & (pMPU950_DATA_BUFF[2] >> 8));
+
+			// GYRO X Y Z
+			pcFrame[8] 	= (0x0FF & 	pMPU950_DATA_BUFF[4]);
+			pcFrame[9] 	= (0x0FF & (pMPU950_DATA_BUFF[4] >> 8));
+			pcFrame[10] = (0x0FF & 	pMPU950_DATA_BUFF[5]);
+			pcFrame[11] = (0x0FF & (pMPU950_DATA_BUFF[5] >> 8));
+			pcFrame[12] = (0x0FF & 	pMPU950_DATA_BUFF[6]);
+			pcFrame[13] = (0x0FF & (pMPU950_DATA_BUFF[6] >> 8));
+
+			// MAG X Y Z
+			pcFrame[14] = (0x0FF & 	pMPU950_DATA_BUFF[7]);
+			pcFrame[15] = (0x0FF & (pMPU950_DATA_BUFF[7] >> 8));
+			pcFrame[16] = (0x0FF & 	pMPU950_DATA_BUFF[8]);
+			pcFrame[17] = (0x0FF & (pMPU950_DATA_BUFF[8] >> 8));
+			pcFrame[18] = (0x0FF & 	pMPU950_DATA_BUFF[9]);
+			pcFrame[19] = (0x0FF & (pMPU950_DATA_BUFF[9] >> 8));
+
+			Transmiter_SendFrame(pcFrame);
 			flag_Data_9D = 0;
 		}
 		else if(1 == flag_UnknownCommand ){
@@ -237,7 +247,7 @@ static void MPU9250_Init_9D(void){
 	sMPU9250_Init.sACC.Axis_Disable                         =       MPU9250_CONF_ACC_AXIS_ALL;
 	sMPU9250_Init.sACC.Full_Scale                           =       MPU9250_CONF_ACC_FULLSCALE_4g;
 	sMPU9250_Init.sACC.Filter_Bypass                        =       MPU9250_CONF_ACC_FILTER_BYPASS_NO;
-	sMPU9250_Init.sACC.Filter_BW                            =       MPU9250_CONF_ACC_FILTER_BW_460Hz;
+	sMPU9250_Init.sACC.Filter_BW                            =       MPU9250_CONF_ACC_FILTER_BW_5Hz;
 	sMPU9250_Init.sACC.WakeOn_Threshold                     =       0;
 
 	sMPU9250_Init.sGYRO.Axis_Disable                        =       MPU9250_CONF_GYRO_AXIS_ALL_ON;
