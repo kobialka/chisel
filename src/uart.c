@@ -159,6 +159,12 @@ void Transmiter_SendString( char cString[])
 }
 
 void Transmiter_SendFrame(char * pu8Frame){
+	/**
+	 * Funkcja wysyła pakiet danych.
+	 * Pierwszy bajt to numer ramki
+	 * Drugi bajt to liczba bajtów danych
+	 * Kolejne bajty to dane w kodzie binarnym
+	 */
 	uint8_t	u8ByteCounter;
 
 	sTransmiterBuffer.cCharCtr 			= 0;

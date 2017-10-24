@@ -28,12 +28,15 @@
 // ZMIENNE GLOBALNE:
 extern	tToken				asToken[MAX_TOKEN_NR];	// tablica tokenów.
 extern unsigned char		ucTokenNr;		// ilosc nalezionych tokenow.
+extern tsRecieverBuffer		sRecieverBuffer;
+
 
 uint8_t 					Hal_RxBuff[1];
 uint8_t						Hal_TxBuff[1];
 uint8_t						pSPI_RxBuff[1];
 uint8_t						pcMessageBuffer[UART_RECIEVER_SIZE];
 int16_t						pMPU950_DATA_BUFF[MPU9250_DATA_BUFF_SIZE];	// Bufor + ID i DataLength
+
 /*
  * Przyjęta struktura danych w buforze pMPU950_DATA_BUFF, zawartość bajtów:
  *
@@ -61,6 +64,7 @@ SPI_HandleTypeDef			hspi3_MPU9250;
 uint8_t						flag_WAI 				= 0;
 uint8_t						flag_Data_3D			= 0;
 uint8_t						flag_Data_9D			= 0;
+uint8_t						flag_MeasurementStarted	= 0;
 uint8_t						flag_UnknownCommand 	= 0;
 
 
@@ -99,12 +103,35 @@ int main(void){
 	BSP_LED_On(GREEN);
 
 	while(1){
-		SendPendingString();
-		if(eReciever_GetStatus() == READY){
-			Reciever_GetStringCopy(pcMessageBuffer);
-			DecodeMsg(pcMessageBuffer);
-			ExecuteCommand();
+		if(0 == flag_MeasurementStarted){
+			SendPendingString();
+			if(eReciever_GetStatus() == READY){
+				// odebrano string, dotarł znak terminujący.
+				Reciever_GetStringCopy(pcMessageBuffer);
+				DecodeMsg(pcMessageBuffer);
+				ExecuteCommand();
+			}
 		}
+		else if(1 == flag_MeasurementStarted){
+			MPU9250_ReadAcc(pMPU950_DATA_BUFF);
+			//MPU9250_ReadMag(pMPU950_DATA_BUFF); w pokoju to nie ma racji bytu raczej. Kompas wariuje,
+			flag_Data_3D = 1;
+			SendPendingString();
+			if(eReciever_GetStatus() == READY){
+				// odebrano string, dotarł znak terminujący.
+				Reciever_GetStringCopy(pcMessageBuffer);
+				DecodeMsg(pcMessageBuffer);
+				if(MPU9250_READ_STOP == psToken->uValue.eKeyword){
+					flag_MeasurementStarted = 0;
+				}
+			}
+			while(BUSY == eTransmiter_GetStatus()){}; // czekamy aż dane zostaną wysłane po UARTcie
+		}
+		else{
+			flag_MeasurementStarted = 0;
+		}
+
+
 	}
 }
 
@@ -116,6 +143,14 @@ int main(void){
 static void ExecuteCommand(void){
 	if((0 != ucTokenNr) && (KEYWORD == psToken->eType) ){
 		switch(psToken->uValue.eKeyword){
+
+		case MPU9250_READ_START:
+			flag_MeasurementStarted = 1;
+			break;
+
+		case MPU9250_READ_STOP:
+			flag_MeasurementStarted = 0;
+			break;
 
 		case MPU9250_READ_GYRO:
 			MPU9250_ReadGyro( pMPU950_DATA_BUFF+3);
@@ -164,6 +199,7 @@ static void SendPendingString(void){
 			AppendHexIntToString(pMPU950_DATA_BUFF[1],pu8TempString);
 			AppendString(";",pu8TempString);
 			AppendHexIntToString(pMPU950_DATA_BUFF[2],pu8TempString);
+			AppendString("\n",pu8TempString);
 
 			// Transmiter_SendFrame(pu8TempString);
 			Transmiter_SendString(pu8TempString);

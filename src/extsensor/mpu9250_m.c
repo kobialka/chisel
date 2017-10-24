@@ -12,9 +12,6 @@
 // ==================================================================================================================================================
 // Typy danych
 
-
-
-
 // ==================================================================================================================================================
 // Definicje
 
@@ -42,16 +39,10 @@
 // ==================================================================================================================================================
 // zmienne globalne
 
-
-
-
-
 // ==================================================================================================================================================
 // zmienne prywatne
 static uint32_t u32SpiMPU9250Timeout = SPI_MPU9250_TIMEOUT_MAX;
 static float pfAK8963_CallibrationData[3] = {0.0, 0.0, 0.0};
-
-
 
 // ==================================================================================================================================================
 // funkcje prywatne
@@ -63,9 +54,7 @@ static void 	MPU9250_Tx(uint8_t *pu8TxBuff, uint8_t u8TxAddr, uint8_t u8ByteNr);
 static uint8_t	MPU9250_Rx_FromAK8963(uint8_t *pu8RxBuff, uint8_t u8RxAddr, uint8_t u8ByteNr);
 static uint8_t 	MPU9250_Tx_ToAK8963(uint8_t *pu8TxBuff, uint8_t u8TxAddr, uint8_t u8ByteNr);
 
-
-
-
+// ==================================================================================================================================================
 static void Init_MPU9250_SPI(void){
 	uint32_t u32Temp = 0;
 
@@ -128,6 +117,7 @@ static void MPU9250_Rx(uint8_t *pu8RxBuff, uint8_t u8RxAddr, uint8_t u8ByteNr){
 	MPU9250_CS_HIGH();
 	u32Cycles = (uint32_t)SystemCoreClock/1000000/7;
 
+	// nie pamiętam po co to dokładnie jest. Były jakieś problemy z pierwszą transakcją SPI, może to dlatego.
 	while(u32Cycles--){
 		__asm("nop;");
 	};

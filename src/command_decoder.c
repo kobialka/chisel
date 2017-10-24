@@ -23,7 +23,10 @@ tKeyword 		asKeywordList[MAX_KEYWORD_NR] = 			// asKeywordList jest tablica stru
 	{MPU9250_READ_GYRO,	"readgyro"},
 	{MPU9250_READ_ACC,	"readacc"},
 	{MPU9250_READ_MAG,	"readmag"},
-	{MPU9250_WHO_AM_I,	"readid"}
+	{MPU9250_WHO_AM_I,	"readid"},
+	{MPU9250_READ_START,"readstart"},
+	{MPU9250_READ_STOP, "readstop"},
+	{MPU9250_CALIB,	"calib"}
 };
 
 

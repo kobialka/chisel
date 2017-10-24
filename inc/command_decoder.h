@@ -26,7 +26,7 @@
 // typy zmiennych
 
 // typedef enum		tKeywordCode{CALC, ID, LIS3DSH_GETXYZ, LIS3DSH_START, LIS3DSH_STOP, TEST} tKeywordCode;
-typedef enum		tKeywordCode{MPU9250_READ_GYRO, MPU9250_READ_ACC, MPU9250_READ_MAG, MPU9250_READ_9D, MPU9250_WHO_AM_I} tKeywordCode;
+typedef enum		tKeywordCode{MPU9250_READ_GYRO, MPU9250_READ_ACC, MPU9250_READ_MAG, MPU9250_READ_9D, MPU9250_WHO_AM_I, MPU9250_READ_START, MPU9250_READ_STOP, MPU9250_CALIB} tKeywordCode;
 
 typedef struct		tKeyword
 {

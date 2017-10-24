@@ -46,20 +46,17 @@ typedef struct TransmiterBuffer{
 
 // =======================================================================================================
 // funkcje
-void UART_InitWithInt(uint32_t u32BaudRate);
-void Reciever_PutCharacterToBuffer(char cCharacter);
-teRecieverStatus eReciever_GetStatus(void);
-void Reciever_GetStringCopy(char * ucDestination);
-
-uint8_t	Transmiter_GetFrameID(void);
-uint8_t Transmiter_GetFrameDataLen(void);
-
-uint8_t Transmiter_CheckIfDataLeft(void);
-
-char Transmiter_GetCharacterFromBuffer(void);
-uint8_t Transmiter_GetRawByteFromBuffer(void);
-void Transmiter_SendString( char cString[]);
-void Transmiter_SendFrame(char * pu8Frame);
+void 					UART_InitWithInt(uint32_t u32BaudRate);
+void 					Reciever_PutCharacterToBuffer(char cCharacter);
+teRecieverStatus 		eReciever_GetStatus(void);
+void 					Reciever_GetStringCopy(char * ucDestination);
+uint8_t					Transmiter_GetFrameID(void);
+uint8_t 				Transmiter_GetFrameDataLen(void);
+uint8_t 				Transmiter_CheckIfDataLeft(void);
+char 					Transmiter_GetCharacterFromBuffer(void);
+uint8_t		 			Transmiter_GetRawByteFromBuffer(void);
+void 					Transmiter_SendString( char cString[]);
+void 					Transmiter_SendFrame(char * pu8Frame);
 enum eTransmiterStatus eTransmiter_GetStatus(void);
 
 
